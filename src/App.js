@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function getListUser(){
     axios.get('./php/show/showAllUsers.php')
-        .then(response => console.log(data.response))
+        .then(response => console.log(response.data))
 }
 
 function App() {
