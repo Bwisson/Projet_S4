@@ -1,4 +1,5 @@
 <?php
+include("function_rs_to_table.php");
 function createUser($conn, $login, $mdp, $nom, $prenom, $mail, $admin)
 {
     $sql = "INSERT INTO `User` (`login`, `mdp`, `nom`, `prenom`, `mail`, `admin`) VALUES ($login, $mdp, $nom, $prenom, $mail, $admin)";
@@ -11,9 +12,9 @@ function deleteUser($conn, $id)
     $res = mysqli_query($conn, $sql);
     return $res;
 }
-function updateUser($conn, $id, $firstname, $lastname, $mail, $photo, $password, $roles)
+function updateUser($conn, $id, $login, $mdp, $nom, $prenom, $mail, $admin)
 {
-    $sql = "UPDATE `User` SET `firstname`='$firstname', `lastname`='$lastname', `mail`='$mail', `photo`='$photo', `password`='$password', `roles`='$roles' WHERE `id` = $id";
+    $sql = "UPDATE `User` SET `login,`='$login', `mdp`='$mdp', `nom`='$nom', `prenom`='$prenom', `prenom`='$prenom', `mail`='$mail', `admin`=$admin WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);
     return $res;
 }
@@ -32,11 +33,3 @@ function selectUser($conn, $id)
 }
 
 
-function rs_to_table($rs)
-{
-    $tab = [];
-    while ($row = mysqli_fetch_assoc($rs)) {
-        $tab[] = $row;
-    }
-    return $tab;
-}
