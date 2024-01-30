@@ -1,10 +1,13 @@
-import './css/App.scss';
-import Button from './components/Button';
+/* Librairy import */
 import React from "react";
 import axios from 'axios';
 
+/* CSS import */
+import './css/App.scss';
+import Button from './components/Button';
+
 function getListUser(){
-    axios.get('./php/show/showAllUsers.php')
+    axios.get('./php/list/listAllUsers.php')
         .then(response => console.log(response.data))
 }
 
