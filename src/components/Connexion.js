@@ -5,7 +5,6 @@ function sendConnection(event){
     event.preventDefault()
 
     let form = event.currentTarget
-
     let login = form.elements.login.value
     let mdp = form.elements.mdp.value
 
@@ -13,7 +12,7 @@ function sendConnection(event){
     form_data.append("login", login)
     form_data.append("mdp", mdp)
 
-    axios.post("./php/Connection/Connection.php", form_data)
+    axios.post("./php/Connection/connection.php", form_data)
         .then(response => {
             console.log("data response:", response.data)
         })
