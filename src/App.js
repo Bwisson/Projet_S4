@@ -6,7 +6,7 @@ import axios from 'axios';
 import './css/App.scss';
 
 /* Components import */
-import Button from './components/Button';
+import Connexion from "./components/Connexion";
 
 function getListUser(){
     axios.get('./php/list/listAllUsers.php')
@@ -16,8 +16,7 @@ function getListUser(){
 function App() {
   return (
     <div className="App">
-        {getListUser()}
-        <Button text={"stylé ça mère"}></Button>
+        <Connexion></Connexion>
     </div>
   );
 }

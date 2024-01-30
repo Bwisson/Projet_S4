@@ -1,18 +1,39 @@
 import Button from "./Button";
+import axios from "axios";
+
+function sendConnection(event){
+    event.preventDefault()
+
+    let form = event.currentTarget
+
+    let login = form.elements.login.value
+    let mdp = form.elements.mdp.value
+
+    let form_data = new FormData
+    form_data.append("login", login)
+    form_data.append("mdp", mdp)
+
+    axios.post("./php/Connection/Connection.php", form_data)
+        .then(response => {
+            console.log("data response:", response.data)
+        })
+    form.reset()
+}
 
 function Connexion(){
+
     return (
-        <form className={"connectionForm"} action="" method="post">
+        <form className={"connectionForm"} method="post" onSubmit={sendConnection}>
             <div className={"divConnForm"}>
-                <label htmlFor="login">Login:</label>
-                <input type="text" id="login" name="user_login"/>
+                <label htmlFor="login">Login :</label>
+                <input type="text" id="login" name="user_login" required={true}/>
             </div>
 
             <div className={"divConnForm"}>
-                <label htmlFor="mdp">E-mail&nbsp;:</label>
-                <input type="password" id="mdp" name="user_mdp"/>
+                <label htmlFor="mdp">E-mail :</label>
+                <input type="password" id="mdp" name="user_mdp" required={true}/>
             </div>
-            <Button text={"Connexion"}></Button>
+            <Button type="submit" text={"Connexion"}></Button>
         </form>
     )
 }
