@@ -19,7 +19,7 @@ function sendConnection(event){
     form.reset()
 }
 
-function Connexion(){
+function Connection(){
 
     return (
         <form className={"connectionForm"} method="post" onSubmit={sendConnection}>
@@ -37,4 +37,4 @@ function Connexion(){
     )
 }
 
-export default Connexion;
+export default Connection;

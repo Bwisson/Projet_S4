@@ -6,12 +6,12 @@ import axios from 'axios';
 import './css/App.scss';
 
 /* Components import */
-import Connexion from "./components/Connexion";
+import Connection from "./components/Connection";
 
 function App() {
   return (
     <div className="App">
-        <Connexion></Connexion>
+        <Connection></Connection>
     </div>
   );
 }
