@@ -22,14 +22,14 @@ function sendConnection(event){
 function Connection(){
 
     return (
-        <form className={"connectionForm"} method="post" onSubmit={sendConnection}>
-            <div className={"divConnForm"}>
+        <form className={"form"} method="post" onSubmit={sendConnection}>
+            <div className={"divForm"}>
                 <label htmlFor="login">Login :</label>
                 <input type="text" id="login" name="user_login" required={true}/>
             </div>
 
-            <div className={"divConnForm"}>
-                <label htmlFor="mdp">E-mail :</label>
+            <div className={"divForm"}>
+                <label htmlFor="mdp">Mot de passe :</label>
                 <input type="password" id="mdp" name="user_mdp" required={true}/>
             </div>
             <Button type="submit" text={"Connexion"}></Button>

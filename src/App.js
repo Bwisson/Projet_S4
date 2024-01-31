@@ -7,11 +7,13 @@ import './css/App.scss';
 
 /* Components import */
 import Connection from "./components/connection/Connection";
+import Inscription from "./components/connection/Inscription";
 
 function App() {
   return (
     <div className="App">
         <Connection></Connection>
+        <Inscription></Inscription>
     </div>
   );
 }
