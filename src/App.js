@@ -6,7 +6,7 @@ import axios from 'axios';
 import './css/App.scss';
 
 /* Components import */
-import Connection from "./components/Connection";
+import Connection from "./components/connection/Connection";
 
 function App() {
   return (
