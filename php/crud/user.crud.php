@@ -25,9 +25,9 @@ function listUser($conn)
     $res = mysqli_query($conn, $sql);
     return rs_to_table($res);
 }
-function selectUser($conn, $id)
+function selectUser($conn, $login)
 {
-    $sql = "SELECT * FROM `User`  WHERE `id` = '$id'";
+    $sql = "SELECT * FROM `User`  WHERE `login` = '$login'";
     $res = mysqli_query($conn, $sql);
     return rs_to_table($res)[0];
 }

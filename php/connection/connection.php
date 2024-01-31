@@ -2,17 +2,16 @@
 
 session_start();
 include("../db/db_connect.php");
-include("../Crud/User.Crud.php");
+include("../crud/user.crud.php");
 header("Content-Type: application/json");
 
-
 if (isset($_POST['login']) && isset($_POST['mdp'])) {
-    $password = htmlspecialchars($_POST['mdp']);
+    $mdp = htmlspecialchars($_POST['mdp']);
     $login = htmlspecialchars($_POST['login']);
 
     $row = selectUser($conn, $login);
-     var_dump($row);
-    if ($row && password_verify($password, $row['password'])) {
+
+    if ($row && password_verify($mdp, $row['mdp'])) {
         $_SESSION["login"] = $row["login"];
         echo json_encode($row);
     } else {
