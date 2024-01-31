@@ -25,11 +25,20 @@ function listUser($conn)
     $res = mysqli_query($conn, $sql);
     return rs_to_table($res);
 }
+function listUserLogin($conn)
+{
+    $sql = "SELECT `login` FROM `User`";
+    $res = mysqli_query($conn, $sql);
+    return rs_to_table($res);
+}
+
 function selectUser($conn, $login)
 {
     $sql = "SELECT * FROM `User`  WHERE `login` = '$login'";
     $res = mysqli_query($conn, $sql);
     return rs_to_table($res)[0];
 }
+
+
 
 
