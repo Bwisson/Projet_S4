@@ -2,7 +2,7 @@
 include("function_rs_to_table.php");
 function createUser($conn, $login, $mdp, $nom, $prenom, $mail, $admin)
 {
-    $sql = "INSERT INTO `User` (`login`, `mdp`, `nom`, `prenom`, `mail`, `admin`) VALUES ($login, $mdp, $nom, $prenom, $mail, $admin)";
+    $sql = "INSERT INTO `User` (`login`, `mdp`, `nom`, `prenom`, `mail`, `admin`) VALUES ('$login', '$mdp', '$nom', '$prenom', '$mail', $admin)";
     $res = mysqli_query($conn, $sql);
     return $res;
 }

@@ -13,7 +13,7 @@ if (isset($_POST['login'], $_POST['mdp'], $_POST['nom'], $_POST['prenom'], $_POS
     $admin = $_POST['admin'];
 
     $listUserLogin = listUserLogin($conn);
-    if (in_array($login, $listUserLogin, $strict = true)){
+    if (!in_array($login, $listUserLogin, $strict = true)){
         $res = createUser($conn, $login, $mdp, $nom, $prenom, $mail, $admin);
         if ($res) {
             echo json_encode(true);
@@ -23,7 +23,6 @@ if (isset($_POST['login'], $_POST['mdp'], $_POST['nom'], $_POST['prenom'], $_POS
     } else {
         echo json_encode("Erreur : login déjà existant");
     }
-
 } else {
-    echo json_encode(false);
+    echo json_encode("$_POST : non défini");
 }
