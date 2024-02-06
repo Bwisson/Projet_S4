@@ -1,18 +1,18 @@
 import Button from "../Button";
 import axios from "axios";
 
-function Disconnection({connecte}){
+function Disconnection({ connecte, setConnecte }){
     function sendDeconnection(){
         axios.get("./php/connection/disconnect.php")
-            .then(response => console.log("deconnexion : ", response.data))
+            .then(response => {
+                console.log("deconnexion : ", response.data)
+                setConnecte(false)
+            })
     }
 
-    function testOnClick(){
-        console.log("click !")
-    }
-    if(connecte) {
-        return <Button onClick={testOnClick} text={"Déconnexion"}></Button>
-    }
+    return (
+        <Button type="button" onSmash={sendDeconnection} text={"Déconnexion"}></Button>
+    )
 }
 
 

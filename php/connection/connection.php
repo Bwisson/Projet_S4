@@ -1,4 +1,5 @@
 <?php
+global $conn;
 
 session_start();
 include("../db/db_connect.php");
@@ -13,10 +14,10 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
 
     if ($row && password_verify($mdp, $row['mdp'])) {
         $_SESSION["login"] = $row["login"];
-        echo json_encode($row);
-    } else {
+        echo json_encode(true);
+    }else {
         echo json_encode(false);
     }
-} else {
+}else{
     echo json_encode(false);
 }

@@ -1,5 +1,5 @@
 /* Librairy import */
-import React from "react";
+import React, { useState } from "react";
 import axios from 'axios';
 
 /* CSS import */
@@ -10,21 +10,28 @@ import Connection from "./components/connection/Connection";
 import Inscription from "./components/connection/Inscription";
 import Disconnection from "./components/connection/Disconnection";
 
-function App() {
-    async function isConnect(){
-        let isConnect = false
-        axios.get("./php/connection/isConnect.php")
-            .then(response =>
-                isConnect = response.data)
+async function isConnect(){
+    let connecte = false
+    axios.get("./php/connection/isConnect.php")
+        .then(response =>
+            connecte = response.data)
 
-        return isConnect
-    }
-    let connecte = isConnect()
+    return connecte
+}
+
+function App() {
+    let isConnecte = isConnect()
+
+    const [connecte, setConnecte] = useState(false)
     console.log(connecte)
+
   return (
     <div className="App">
-        <Connection />
-        <Disconnection connecte={connecte}/>
+        { !connecte ?
+            <Connection connecte={connecte} setConnecte={setConnecte}/>
+            :
+            <Disconnection connecte={connecte} setConnecte={setConnecte}/>
+        }
     </div>
   );
 }

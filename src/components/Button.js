@@ -1,8 +1,7 @@
 import '../css/Button.scss';
-function Button(props) {
-    let text = props.text;
+function Button({ text, onSmash }) {
     return (
-        <button className={"Button"}>{ text }</button>
+        <button onClick={onSmash} className={"Button"}>{ text }</button>
     );
 }
 

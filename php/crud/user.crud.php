@@ -36,9 +36,13 @@ function selectUser($conn, $login)
 {
     $sql = "SELECT * FROM `User`  WHERE `login` = '$login'";
     $res = mysqli_query($conn, $sql);
-    return rs_to_table($res)[0];
-}
+    $res_table = null;
 
+    if (mysqli_num_rows($res) > 0){
+        $res_table = rs_to_table($res)[0];
+    }
+    return $res_table;
+}
 
 
 

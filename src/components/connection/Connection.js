@@ -1,25 +1,28 @@
 import Button from "../Button";
 import axios from "axios";
 
-function sendConnection(event){
-    event.preventDefault()
 
-    let form = event.currentTarget
-    let login = form.elements.login.value
-    let mdp = form.elements.mdp.value
 
-    let form_data = new FormData
-    form_data.append("login", login)
-    form_data.append("mdp", mdp)
+function Connection({ connecte, setConnecte }){
 
-    axios.post("./php/Connection/connection.php", form_data)
-        .then(response => {
-            console.log("data response:", response.data)
-        })
-    form.reset()
-}
+    function sendConnection(event){
+        event.preventDefault()
 
-function Connection(){
+        let form = event.currentTarget
+        let login = form.elements.login.value
+        let mdp = form.elements.mdp.value
+
+        let form_data = new FormData
+        form_data.append("login", login)
+        form_data.append("mdp", mdp)
+
+        axios.post("./php/connection/connection.php", form_data)
+            .then(response => {
+                let data = response.data
+                setConnecte(data)
+            })
+        form.reset()
+    }
 
     return (
         <form className={"form"} method="post" onSubmit={sendConnection}>
