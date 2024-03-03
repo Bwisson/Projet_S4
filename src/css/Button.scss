@@ -1,0 +1,14 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+
+.Button {
+  min-width: 100px;
+  min-height: 50px;
+  border-radius: 5px;
+  border: none;
+  background: $mauve;
+  color: white;
+  font-size: 1.1em;
+}
