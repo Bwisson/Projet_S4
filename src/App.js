@@ -7,14 +7,15 @@ import './css/App.scss';
 
 /* Components import */
 import Connection from "./components/connection/Connection";
-import Inscription from "./components/connection/Inscription";
-import Disconnection from "./components/connection/Disconnection";
+// import Inscription from "./components/connection/Inscription";
+import NavBar from "./components/NavBar";
+import ViewUsers from "./components/viewsAdmin/ViewUsers";
 
 async function isConnect(){
-    let connecte = false
-    axios.get("./php/connection/isConnect.php")
-        .then(response =>
-            connecte = response.data)
+    let connecte= true
+    // axios.get("./php/connection/isConnect.php")
+    //     .then(response =>
+    //         connecte = response.data)
 
     return connecte
 }
@@ -22,7 +23,7 @@ async function isConnect(){
 function App() {
     let isConnecte = isConnect()
 
-    const [connecte, setConnecte] = useState(false)
+    const [connecte, setConnecte] = useState(true) /* todo : passer à false quand upload sur le serv */
     console.log(connecte)
 
   return (
@@ -30,7 +31,10 @@ function App() {
         { !connecte ?
             <Connection connecte={connecte} setConnecte={setConnecte}/>
             :
-            <Disconnection connecte={connecte} setConnecte={setConnecte}/>
+            <div className={"pageContent"}>
+                <NavBar connecte={connecte} setConnecte={setConnecte}/>
+                <ViewUsers />
+            </div>
         }
     </div>
   );

@@ -6,7 +6,17 @@ $mauve : #c4a6ff;
 $rose : #ffd2ff;
 $blanc : #ffffff;
 
-body {
+* {
   margin: 0;
-  font-family: 'Lato', sans-serif;
+  padding: 0;
 }
+
+body {
+  font-family: 'Lato', sans-serif;
+
+  #root{
+    height: 100vh;
+  }
+}
+
+
