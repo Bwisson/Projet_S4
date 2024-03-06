@@ -1,5 +1,6 @@
 /* Librairy import */
 import React, { useState } from "react";
+import {Routes, Route} from "react-router-dom";
 import axios from 'axios';
 
 /* CSS import */
@@ -22,9 +23,7 @@ async function isConnect(){
 
 function App() {
     let isConnecte = isConnect()
-
     const [connecte, setConnecte] = useState(true) /* todo : passer à false quand upload sur le serv */
-    console.log(connecte)
 
   return (
     <div className="App">
@@ -33,7 +32,11 @@ function App() {
             :
             <div className={"pageContent"}>
                 <NavBar connecte={connecte} setConnecte={setConnecte}/>
-                <ViewUsers />
+                <Routes>
+                    <Route path="/AdminViewUsers" element={<ViewUsers />}/>
+                </Routes>
+
+
             </div>
         }
     </div>

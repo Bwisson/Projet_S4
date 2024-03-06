@@ -1,0 +1,39 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+
+.PopUpUser{
+  z-index: 2;
+  width: 70vw;
+  min-height: 38vh;
+  max-height: 70vh;
+  border-radius: 5px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 68%;
+  transform: translate(-68%, -50%);
+  overflow: auto;
+
+  table{
+    width: 100%;
+
+    td{
+      text-align: center
+    }
+
+    td:last-of-type{
+      border-right: none;
+    }
+  }
+
+  button{
+    min-width: 50px;
+    position: absolute;
+    border-radius: 0 0 0 5px;
+    top: 0;
+    right: 0;
+    padding: 0;
+  }
+}

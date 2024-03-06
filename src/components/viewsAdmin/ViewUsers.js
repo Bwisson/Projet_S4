@@ -1,8 +1,12 @@
+/* Librairy import */
+import React, { useState } from "react";
+
 /* css imports */
-import '../../css/ViewUsers.scss'
+import '../../css/cssViewsAdmin/ViewUsers.scss'
 
 /* components imports */
 import Button from '../Button'
+import PopUpUser from "./PopUpUser"
 
 /* SELECT id, nom, prenom, login, mail FROM 'User' */
 const users = [
@@ -10,21 +14,32 @@ const users = [
     {"id" : 1, "nom": "roi", "prenom": "Nathan", "login": "pupuce", "mail": "pupuce@gmail.com"}
 ]
 
-function List(){
-    const list_users = users.map(user =>
-        <tr>
-            <td id={"userLastName"}>{user.nom}</td>
-            <td>{user.prenom}</td>
-            <td>{user.login}</td>
-            <td>{user.mail}</td>
-            <td id={user.id}><Button text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
-        </tr>
-);
 
-    return list_users
-}
+
 
 function ViewUsers() {
+    const [showPopUp, setShowPopUp] = useState(false)
+
+    function showingPopUp(){
+        return setShowPopUp(true)
+    }
+    function hidePopUp(){
+        return setShowPopUp(false)
+    }
+
+    function List(){
+        const list_users = users.map(user =>
+            <tr>
+                <td id={"userLastName"}>{user.nom}</td>
+                <td>{user.prenom}</td>
+                <td>{user.login}</td>
+                <td>{user.mail}</td>
+                <td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
+            </tr>
+        );
+
+        return list_users
+    }
 
     return (
         <div className="ViewUsers">
@@ -42,6 +57,12 @@ function ViewUsers() {
                     <List/>
                 </tbody>
             </table>
+            {showPopUp?
+                <>
+                    <div onClick={hidePopUp} className="foreground"></div>
+                    <PopUpUser showPopUp={showPopUp} setShowPopUp={setShowPopUp}/>
+                </>
+                 : null}
         </div>
 
     )
