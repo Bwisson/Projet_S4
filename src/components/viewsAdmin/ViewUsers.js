@@ -1,15 +1,23 @@
+/* css imports */
+import '../../css/ViewUsers.scss'
+
+/* components imports */
+import Button from '../Button'
+
+/* SELECT id, nom, prenom, login, mail FROM 'User' */
 const users = [
-    {"nom": "chatelain", "prenom": "Timéo", "login": "Tim", "mail": "timtim@gmail.com"},
-    {"nom": "roi", "prenom": "Nathan", "login": "pupuce", "mail": "pupuce@gmail.com"}
+    {"id" : 2, "nom": "chatelain", "prenom": "Timéo", "login": "Tim", "mail": "timtim@gmail.com"},
+    {"id" : 1, "nom": "roi", "prenom": "Nathan", "login": "pupuce", "mail": "pupuce@gmail.com"}
 ]
 
 function List(){
     const list_users = users.map(user =>
         <tr>
-            <td scope={"row"}>{user.nom}</td>
+            <td id={"userLastName"}>{user.nom}</td>
             <td>{user.prenom}</td>
             <td>{user.login}</td>
             <td>{user.mail}</td>
+            <td id={user.id}><Button text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
         </tr>
 );
 

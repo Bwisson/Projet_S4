@@ -4,11 +4,17 @@ $mauve : #c4a6ff;
 $rose : #ffd2ff;
 
 .Button {
+  font-family: 'Lato', sans-serif;
   min-width: 100px;
   min-height: 50px;
   border-radius: 5px;
   border: none;
-  background: $mauve;
+  padding: 5%;
   color: white;
   font-size: 1.1em;
+
+  &:hover{
+    cursor: pointer;
+  }
+
 }
