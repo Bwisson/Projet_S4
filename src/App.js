@@ -11,6 +11,7 @@ import Connection from "./components/connection/Connection";
 // import Inscription from "./components/connection/Inscription";
 import NavBar from "./components/NavBar";
 import ViewUsers from "./components/viewsAdmin/ViewUsers";
+import ViewObjects from "./components/viewsAdmin/ViewObjects"
 
 async function isConnect(){
     let connecte= true
@@ -34,6 +35,7 @@ function App() {
                 <NavBar connecte={connecte} setConnecte={setConnecte}/>
                 <Routes>
                     <Route path="/AdminViewUsers" element={<ViewUsers />}/>
+                    <Route path="/AdminViewObjects" element={<ViewObjects />}/>
                 </Routes>
 
 

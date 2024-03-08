@@ -24,7 +24,7 @@ function NavBar(connecte, setConnecte) {
                     <>
                         <div id="divider"></div>
                         <ul>
-                            <li>OBJETS</li>
+                            <li><Link to={"/AdminViewObjects"}>OBJETS</Link></li>
                             <li><Link to={"/AdminViewUsers"}>UTILISATEURS</Link></li>
                         </ul>
                     </>
