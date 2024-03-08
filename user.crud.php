@@ -68,8 +68,12 @@ function listUserLogin($conn)
 
 function selectUser($conn, $login)
 {
-    $sql = "SELECT * FROM `User`  WHERE `login` = '$login'";
-    $res = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM `User`  WHERE `login` = ':login'";
+    $sth = $base-> prepare($sql);
+
+    $sth -> bindParam(`:login`,$login);
+    
+    $res = $sth -> execute();
     $res_table = null;
 
     if (mysqli_num_rows($res) > 0){
