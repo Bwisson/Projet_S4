@@ -1,0 +1,48 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+
+.ViewUsers{
+  width: 100%;
+
+  table{
+    width: 100%;
+    border-collapse: collapse;
+
+    thead{
+      height: 10vh;
+      background-color: $mauve;
+      color: white;
+    }
+
+    td{
+      border: 1px solid rgb(227, 227, 227);
+      border-left: none;
+      padding: 1.8em 1.2em;
+
+      button{
+        font-size: 0.9em;
+        font-weight: 600;
+      }
+    }
+
+    #userLastName{
+      text-transform: uppercase;
+    }
+
+    td:last-of-type{
+      text-align: center;
+      border-right: none;
+    }
+  }
+
+  .foreground{
+    width: 89.25%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 0;
+    overflow: clip;
+  }
+}

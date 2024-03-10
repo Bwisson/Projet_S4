@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 
-function Connection({ connecte, setConnecte }){
+function Connection({ setAdmin, setConnecte }){
 
     function sendConnection(event){
         event.preventDefault()
@@ -12,15 +12,17 @@ function Connection({ connecte, setConnecte }){
         let login = form.elements.login.value
         let mdp = form.elements.mdp.value
 
-        let form_data = new FormData
+        let form_data = new FormData()
         form_data.append("login", login)
         form_data.append("mdp", mdp)
 
         axios.post("./php/connection/connection.php", form_data)
             .then(response => {
                 let data = response.data
-                setConnecte(data)
+                setConnecte(data.connecte)
+                setAdmin(data.admin)
             })
+
         form.reset()
     }
 

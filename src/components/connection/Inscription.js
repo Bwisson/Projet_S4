@@ -12,7 +12,7 @@ function sendInscription(event){
     let mail = form.elements.mail.value
     let admin = form.elements.admin.checked
 
-    let form_data = new FormData
+    let form_data = new FormData()
     form_data.append("login", login)
     form_data.append("mdp", mdp)
     form_data.append("nom", nom)
@@ -25,6 +25,7 @@ function sendInscription(event){
         .then(response => {
             console.log("data response:", response.data)
         })
+
     form.reset()
 }
 
