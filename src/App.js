@@ -19,6 +19,7 @@ function App() {
     console.log("connecte : ", connecte, "; admin : ", admin)
   return (
     <div className="App">
+
         { !connecte ?
             <Connection setAdmin={setAdmin} setConnecte={setConnecte}/>
             :
@@ -28,8 +29,6 @@ function App() {
                     <Route path="info7/AdminViewUsers" element={<ViewUsers />}/>
                     <Route path="info7/AdminViewObjects" element={<ViewObjects />}/>
                 </Routes>
-
-
             </div>
         }
     </div>

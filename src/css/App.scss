@@ -1,11 +1,14 @@
 .App{
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 
   .pageContent{
-    height: 100%;
+    width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 
     a{
       color: black;
