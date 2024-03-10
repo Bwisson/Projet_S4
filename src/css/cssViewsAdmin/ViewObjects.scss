@@ -1,4 +1,10 @@
 .ViewObjects {
   width: 88%;
   text-align: center;
+
+  table{
+    thead{
+      height: 8vh;
+    }
+  }
 }
