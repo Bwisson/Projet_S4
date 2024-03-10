@@ -1,13 +1,16 @@
-/* Librairy import */
+/* Librairy imports */
 import React, { useState, useEffect } from "react"
 import axios from 'axios'
-
-/* css imports */
-import '../../css/cssViewsAdmin/ViewUsers.scss'
 
 /* components imports */
 import Button from '../Button'
 import PopUpUser from "./PopUpUser"
+
+/* css imports */
+import '../../css/cssViewsAdmin/ViewUsers.scss'
+import '../../css/cssViewsAdmin/tableAdmin.scss'
+
+
 
 function ViewUsers() {
     const [showPopUp, setShowPopUp] = useState(false)
