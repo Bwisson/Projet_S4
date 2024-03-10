@@ -1,7 +1,11 @@
-import Button from "../Button";
+/* Librairy imports */
 import axios from "axios";
 
+/* components imports */
+import Button from "../Button";
 
+/* css imports */
+import "../../css/cssConnection/Connection.scss"
 
 function Connection({ setAdmin, setConnecte }){
 
