@@ -9,12 +9,6 @@ import '../../css/cssViewsAdmin/ViewUsers.scss'
 import Button from '../Button'
 import PopUpUser from "./PopUpUser"
 
-/* SELECT id, nom, prenom, login, mail FROM 'User' */
-// const users = [
-//     {"id" : 2, "nom": "chatelain", "prenom": "Timéo", "login": "Tim", "mail": "timtim@gmail.com"},
-//     {"id" : 1, "nom": "roi", "prenom": "Nathan", "login": "pupuce", "mail": "pupuce@gmail.com"}
-// ]
-
 function ViewUsers() {
     const [showPopUp, setShowPopUp] = useState(false)
     const [users, setUsers] = useState(null)
@@ -38,7 +32,7 @@ function ViewUsers() {
     }
 
     function List(){
-        let list_users = "aucun utilisateurs"
+        let list_users = null
         if(users != null){
             list_users = users.map(user =>
                 <tr>
@@ -49,6 +43,7 @@ function ViewUsers() {
                     <td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
                 </tr>
             );
+
         }
 
         return list_users
@@ -67,9 +62,10 @@ function ViewUsers() {
                     </tr>
                 </thead>
                 <tbody>
-                    <List/>
+                {<List/> != null ? <List/> : null}
                 </tbody>
             </table>
+            {<List/> == null ? <i>Aucun utilisateurs</i> : null}
             {showPopUp?
                 <>
                     <div onClick={hidePopUp} className="foreground"></div>
@@ -82,4 +78,3 @@ function ViewUsers() {
 }
 
 export default ViewUsers;
-/* TODO : faire le back si possible sinon fair la pop-up affichage des résas */
