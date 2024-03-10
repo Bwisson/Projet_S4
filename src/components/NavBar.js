@@ -1,5 +1,5 @@
 /* Librairy import */
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom"
 
 /* css import */
@@ -8,8 +8,8 @@ import '../css/NavBar.scss';
 /* components import */
 import Disconnection from "../components/connection/Disconnection";
 
-function NavBar(connecte, setConnecte) {
-    let isAdmin= false
+function NavBar({ admin, connecte, setConnecte }) {
+
     return (
         <div className="NavBar">
             <nav>
@@ -20,16 +20,15 @@ function NavBar(connecte, setConnecte) {
                     <li>MODÈLES</li>
                     <li>ATELIERS</li>
                 </ul>
-                {isAdmin ?
+                {admin ?
                     <>
                         <div id="divider"></div>
                         <ul>
-                            <li><Link to={"/AdminViewObjects"}>OBJETS</Link></li>
-                            <li><Link to={"/AdminViewUsers"}>UTILISATEURS</Link></li>
+                            <li><Link to={"info7/AdminViewObjects"}>OBJETS</Link></li>
+                            <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
                         </ul>
                     </>
-                    :
-                    null}
+                    : null}
 
             </nav>
 
