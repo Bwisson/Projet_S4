@@ -15,7 +15,7 @@ function createUser($conn, $login, $mdp, $nom, $prenom, $mail, $admin)
         $sth -> bindParam(`:admin`,$admin);
 
         $res = $sth -> execute();
-    } catch  {
+    } catch (PDOException $e) {
         echo("Error :".$e->getMessage());
     }
     
@@ -29,7 +29,7 @@ function deleteUser($conn, $id)
         $sth -> bindParam(`:id`,$id);
 
         $res = $sth -> execute();
-    }catch{
+    } catch (PDOException $e) {
         echo("Error :".$e->getMessage());
     }
 }
@@ -48,8 +48,8 @@ function updateUser($conn, $id, $login, $mdp, $nom, $prenom, $mail, $admin)
         $sth -> bindParam(`:admin`,$admin);
 
         $res = $sth -> execute();
-    }catch{
-        echo("Error :".$e->getMessage())
+    } catch (PDOException $e) {
+        echo("Error :".$e->getMessage());
     }
 }
 
