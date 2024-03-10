@@ -1,5 +1,6 @@
 /* Librairy import */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"
+import axios from 'axios'
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewUsers.scss'
@@ -9,16 +10,25 @@ import Button from '../Button'
 import PopUpUser from "./PopUpUser"
 
 /* SELECT id, nom, prenom, login, mail FROM 'User' */
-const users = [
-    {"id" : 2, "nom": "chatelain", "prenom": "Timéo", "login": "Tim", "mail": "timtim@gmail.com"},
-    {"id" : 1, "nom": "roi", "prenom": "Nathan", "login": "pupuce", "mail": "pupuce@gmail.com"}
-]
-
-
-
+// const users = [
+//     {"id" : 2, "nom": "chatelain", "prenom": "Timéo", "login": "Tim", "mail": "timtim@gmail.com"},
+//     {"id" : 1, "nom": "roi", "prenom": "Nathan", "login": "pupuce", "mail": "pupuce@gmail.com"}
+// ]
 
 function ViewUsers() {
     const [showPopUp, setShowPopUp] = useState(false)
+    const [users, setUsers] = useState(null)
+
+    useEffect(() => {
+        function getUsers() {
+            axios.get("./php/list/listAllUsers.php")
+                .then(response => {
+                    let datas = response.data
+                    setUsers(datas)
+                })
+        }
+        getUsers()
+    }, []);
 
     function showingPopUp(){
         return setShowPopUp(true)
@@ -28,15 +38,18 @@ function ViewUsers() {
     }
 
     function List(){
-        const list_users = users.map(user =>
-            <tr>
-                <td id={"userLastName"}>{user.nom}</td>
-                <td>{user.prenom}</td>
-                <td>{user.login}</td>
-                <td>{user.mail}</td>
-                <td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
-            </tr>
-        );
+        let list_users = "aucun utilisateurs"
+        if(users != null){
+            list_users = users.map(user =>
+                <tr>
+                    <td id={"userLastName"}>{user.nom}</td>
+                    <td>{user.prenom}</td>
+                    <td>{user.login}</td>
+                    <td>{user.mail}</td>
+                    <td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
+                </tr>
+            );
+        }
 
         return list_users
     }
