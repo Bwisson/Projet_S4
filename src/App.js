@@ -24,7 +24,7 @@ async function isConnect(){
 
 function App() {
     let isConnecte = isConnect()
-    const [connecte, setConnecte] = useState(true) /* todo : passer à false quand upload sur le serv */
+    const [connecte, setConnecte] = useState(false)
 
   return (
     <div className="App">

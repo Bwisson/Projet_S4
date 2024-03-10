@@ -9,7 +9,7 @@ import '../css/NavBar.scss';
 import Disconnection from "../components/connection/Disconnection";
 
 function NavBar(connecte, setConnecte) {
-    let isAdmin = true /* todo : mettre à false pr la mise en prod */
+    let isAdmin= false
     return (
         <div className="NavBar">
             <nav>
