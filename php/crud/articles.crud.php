@@ -20,3 +20,10 @@ function updateArticle($conn, $code_barre, $nom, $categorie, $couleur, $taille)
     $res = mysqli_query($conn, $sql);
     return $res;
 }
+
+function listArticle($conn)
+{
+    $sql = "SELECT * FROM `Article`";
+    $res = mysqli_query($conn, $sql);
+    return rs_to_table($res);
+}
