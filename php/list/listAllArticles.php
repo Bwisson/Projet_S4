@@ -1,8 +1,8 @@
 <?php
 include("../db/db_connect.php");
-include("../crud/user.crud.php");
+include("../crud/article.crud.php");
 
-$listObjets = listObjet($conn);
+$listObjets = listArticle($conn);
 $strListObjets = json_encode($listObjets);
 
 echo $strListObjets;

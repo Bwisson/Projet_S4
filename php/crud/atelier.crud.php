@@ -11,7 +11,7 @@ function deleteAtelier($conn, $id) {
     $res = mysqli_query($conn, $sql);
     return $res;
 }
-function updateAtelier($conn, $id,$id, $nom, $type) {
+function updateAtelier($conn, $id, $nom, $type) {
     $sql = "UPDATE `Atelier` SET `id`='$id', `nom`='$nom', `type`='$type' WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);
     return $res;
