@@ -62,11 +62,12 @@ function ViewObjects() {
                 </tr>
             );
         }
+
         return list_modeles
     }
 
     function ListAteliers(){
-        let list_ateliers = null
+        let list_ateliers= null
         if(ateliers != null){
             list_ateliers = ateliers.map(atelier =>
                 <tr>
@@ -76,11 +77,11 @@ function ViewObjects() {
                 </tr>
             );
         }
+
         return list_ateliers
     }
 
     function ListArticles(){
-        console.log(articles)
         let list_articles = null
         if(articles != null){
             list_articles = articles.map(article =>
@@ -94,6 +95,7 @@ function ViewObjects() {
                 </tr>
             );
         }
+
         return list_articles
     }
 
@@ -113,13 +115,13 @@ function ViewObjects() {
                 </tr>
                 </thead>
                 <tbody>
-                {<ListModeles/> != null ? <ListModeles/> : null}
+                <ListModeles/>
                 </tbody>
             </table>
-            {<ListModeles/> == null ? <i>Aucun utilisateurs</i> : null}
+            {modeles == null ? <i>Aucun modèles</i> : null}
 
             <table>
-                <caption>
+            <caption>
                     Ateliers
                 </caption>
                 <thead>
@@ -129,12 +131,13 @@ function ViewObjects() {
                 </tr>
                 </thead>
                 <tbody>
-                {<ListAteliers/> != null ? <ListAteliers/> : null}
+                <ListAteliers/>
                 </tbody>
             </table>
-            {<ListAteliers/> == null ? <i>Aucun utilisateurs</i> : null}
+            {ateliers == null ? <i>Aucun ateliers</i> : null}
+
             <table>
-                <caption>
+            <caption>
                     Articles
                 </caption>
                 <thead>
@@ -147,10 +150,10 @@ function ViewObjects() {
                 </tr>
                 </thead>
                 <tbody>
-                {<ListArticles/> != null ? <ListArticles/> : null}
+                <ListArticles/>
                 </tbody>
             </table>
-            {<ListArticles/> == null ? <i>Aucun utilisateurs</i> : null}
+            {articles == null ? <i>Aucun articles</i> :null}
 
         </div>
     )

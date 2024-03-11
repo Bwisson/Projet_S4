@@ -20,5 +20,10 @@ function listArticle($conn) {
     $sql = "SELECT * FROM `Article`";
     $res = mysqli_query($conn, $sql);
     $rs = rs_to_table($res);
+
+    if(mysqli_num_rows($res) == 0){
+        $rs = null;
+    }
+
     return $rs;
 }

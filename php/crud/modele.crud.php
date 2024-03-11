@@ -20,5 +20,10 @@ function updateModele($conn, $id, $nom, $prenom, $genre, $tarif_horaire) {
 function listModele($conn) {
     $sql = "SELECT * FROM `Modele`"; $res = mysqli_query($conn, $sql);
     $rs = rs_to_table($res);
+
+    if(mysqli_num_rows($res) == 0){
+        $rs = null;
+    }
+
     return $rs;
 }
