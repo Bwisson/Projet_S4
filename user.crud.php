@@ -1,6 +1,4 @@
 <?php
-include("function_rs_to_table.php");
-include("pdo_connect.php");
 
 function createUser($base, $login, $mdp, $nom, $prenom, $mail, $admin)
 {
@@ -80,7 +78,7 @@ function selectUser($base, $login)
     $sth -> bindParam(':login',$login);
     
     $sth -> execute();
-    return $sth -> fetch(PDO::FETCH_ASSOC);
+    return $sth -> fetch(PDO::FETCH_NUM);
 }
 
 
