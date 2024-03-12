@@ -29,6 +29,7 @@ function NavBar({ admin, connecte, setConnecte }) {
                         </ul>
                     </>
                     : null}
+                <li><Link to={"info7/Calendar"}>Calendrier</Link></li>
 
             </nav>
 

@@ -12,6 +12,7 @@ import Connection from "./components/connection/Connection";
 import NavBar from "./components/NavBar";
 import ViewUsers from "./components/viewsAdmin/ViewUsers";
 import ViewObjects from "./components/viewsAdmin/ViewObjects"
+import Calendar from "./components/calendar/Calendar"
 
 function App() {
     const [connecte, setConnecte] = useState(false)
@@ -28,6 +29,7 @@ function App() {
                 <Routes>
                     <Route path="info7/AdminViewUsers" element={<ViewUsers />}/>
                     <Route path="info7/AdminViewObjects" element={<ViewObjects />}/>
+                    <Route path="info7/Calendar" element={<Calendar />}/>
                 </Routes>
             </div>
         }
