@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("../db/db_connect.php");
-include("../crud/articles.crud.php");
+include("../crud/article.crud.php");
 header("Content-Type: application/json");
 
 if (isset($_POST['code_barre'], $_POST['nom'], $_POST['categorie'], $_POST['couleur'], $_POST['taille'])) {
