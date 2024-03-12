@@ -2,59 +2,57 @@
 include("function_rs_to_table.php");
 include("pdo_connect.php");
 
-function createModele($id, $nom, $prenom, $genre, $tarif_horaire) {
+function createModele($base, $id, $nom, $prenom, $genre, $tarif_horaire) {
   try{
     $sql = "INSERT INTO `Modele` (`id`, `nom`, `prenom`, `genre`, `tarif_horaire`) VALUES (:id, :nom, :prenom, :genre, :tarif_horaire)";
     $sth = $base -> prepare($sql);
 
-    $sth -> bindParam(:id;$id);
-    $sth -> bindParam(:nom;$nom);
-    $sth -> bindParam(:prenom;$prenom);
-    $sth -> bindParam(:genre;$genre);
-    $sth -> bindParam(:tarif_horaire;$tarif_horaire);
+    $sth -> bindParam(':id',$id);
+    $sth -> bindParam(':nom',$nom);
+    $sth -> bindParam(':prenom',$prenom);
+    $sth -> bindParam(':genre',$genre);
+    $sth -> bindParam(':tarif_horaire',$tarif_horaire);
 
     $res = $sth -> execute();
   }catch (PDOException $th){
     echo("Erreur :".$th->getMessage());
   }
+  return $res;
 }
 
-function deleteModele($id) {
+function deleteModele($base, $id) {
   try{
     $sql = "DELETE FROM `Modele` WHERE `id`=:id";
     $sth = $base -> prepare($sql);
 
-    $sth -> bindParam(:id;$id);
+    $sth -> bindParam(':id',$id);
     
     $res = $sth -> execute();
   }catch (PDOException $th){
     echo("Erreur : ".$th->getMessage());
   }
+  return $res;
 }
-function updateModele($id, $nom, $prenom, $genre, $tarif_horaire) {
+function updateModele($base, $id, $nom, $prenom, $genre, $tarif_horaire) {
     try{
       $sql = "UPDATE `Modele` SET `id`='$id', `nom`='$nom', `prenom`='$prenom', `genre`='$genre', `tarif_horaire`='$tarif_horaire' WHERE `id` = $id";
       $sth = $base -> prepare($sql);
   
-      $sth -> bindParam(:id;$id);
-      $sth -> bindParam(:nom;$nom);
-      $sth -> bindParam(:prenom;$prenom);
-      $sth -> bindParam(:genre;$genre);
-      $sth -> bindParam(:tarif_horaire;$tarif_horaire);
+      $sth -> bindParam(':id',$id);
+      $sth -> bindParam(':nom',$nom);
+      $sth -> bindParam(':prenom',$prenom);
+      $sth -> bindParam(':genre',$genre);
+      $sth -> bindParam(':tarif_horaire',$tarif_horaire);
 
       $res = $sth -> execute();
     }catch (PDOException $th){
       echo("Erreur :".$th->getMessage());
     }
+    return $res;
 }
-function listModele($conn) {
+function listModele($base) {
     $sql = "SELECT * FROM `Modele`";
-    $res = mysqli_query($conn,$sql);
-    $rs = rs_to_table($res);
-
-    if(mysqli_num_rows($res) == 0){
-        $rs = null;
-    }
-
-    return $rs;
+    $sth = $base -> prepare($sql);
+    $sth -> execute();
+    return $sth -> fetch(PDO::FETCH_ASSOC);
 }

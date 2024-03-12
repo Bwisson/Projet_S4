@@ -1,85 +1,86 @@
 <?php
 include("function_rs_to_table.php");
 include("pdo_connect.php");
-function createUser($conn, $login, $mdp, $nom, $prenom, $mail, $admin)
+
+function createUser($base, $login, $mdp, $nom, $prenom, $mail, $admin)
 {
     try {
         $sql = "INSERT INTO `User` (`login`, `mdp`, `nom`, `prenom`, `mail`, `admin`) VALUES (:login, :mdp, :nom, :prenom, :mail, :admin)";
         $sth = $base->prepare($sql);
 
-        $sth -> bindParam(`:login`,$login);
-        $sth -> bindParam(`:mdp`,$mdp);
-        $sth -> bindParam(`:nom`,$nom);
-        $sth -> bindParam(`:prenom`,$prenom);
-        $sth -> bindParam(`:mail`,$mail);
-        $sth -> bindParam(`:admin`,$admin);
+        $sth -> bindParam(':login',$login);
+        $sth -> bindParam(':mdp',$mdp);
+        $sth -> bindParam(':nom',$nom);
+        $sth -> bindParam(':prenom',$prenom);
+        $sth -> bindParam(':mail',$mail);
+        $sth -> bindParam(':admin',$admin);
 
         $res = $sth -> execute();
     } catch (PDOException $e) {
         echo("Error :".$e->getMessage());
     }
+    return $res;
     
 }
-function deleteUser($conn, $id)
+function deleteUser($base, $id)
 {
     try{
         $sql = "DELETE FROM `User` WHERE `id`=:id";
         $sth = $base -> prepare($sql);
 
-        $sth -> bindParam(`:id`,$id);
+        $sth -> bindParam(':id',$id);
 
         $res = $sth -> execute();
     } catch (PDOException $e) {
         echo("Error :".$e->getMessage());
     }
+    return $res;
 }
 
-function updateUser($conn, $id, $login, $mdp, $nom, $prenom, $mail, $admin)
+function updateUser($base, $id, $login, $mdp, $nom, $prenom, $mail, $admin)
 {
     try{
         $sql = "UPDATE `User` SET `login,`=':login', `mdp`=':mdp', `nom`=':nom', `prenom`=':prenom', `prenom`=':prenom', `mail`=':mail', `admin`=:admin WHERE `id` = :id";
         $sth = $base->prepare($sql);
 
-        $sth -> bindParam(`:login`,$login);
-        $sth -> bindParam(`:mdp`,$mdp);
-        $sth -> bindParam(`:nom`,$nom);
-        $sth -> bindParam(`:prenom`,$prenom);
-        $sth -> bindParam(`:mail`,$mail);
-        $sth -> bindParam(`:admin`,$admin);
+        $sth -> bindParam(':login',$login);
+        $sth -> bindParam(':mdp',$mdp);
+        $sth -> bindParam(':nom',$nom);
+        $sth -> bindParam(':prenom',$prenom);
+        $sth -> bindParam(':mail',$mail);
+        $sth -> bindParam(':admin',$admin);
 
         $res = $sth -> execute();
     } catch (PDOException $e) {
         echo("Error :".$e->getMessage());
     }
+    return $res;
 }
 
-function listUser($conn)
+function listUser($base)
 {
     $sql = "SELECT * FROM `User`";
-    $res = mysqli_query($conn, $sql);
-    return rs_to_table($res);
+    $sth = $base -> prepare($sql);
+    $sth -> execute();
+    return $sth->fetch(PDO::FETCH_ASSOC);
 }
-function listUserLogin($conn)
+function listUserLogin($base)
 {
     $sql = "SELECT `login` FROM `User`";
-    $res = mysqli_query($conn, $sql);
-    return rs_to_table($res);
+    $sth = $base -> prepare($sql);
+    $sth -> execute();
+    return $sth -> fetch(PDO::FETCH_ASSOC);
 }
 
-function selectUser($conn, $login)
+function selectUser($base, $login)
 {
     $sql = "SELECT * FROM `User`  WHERE `login` = ':login'";
     $sth = $base-> prepare($sql);
 
-    $sth -> bindParam(`:login`,$login);
+    $sth -> bindParam(':login',$login);
     
-    $res = $sth -> execute();
-    $res_table = null;
-
-    if (mysqli_num_rows($res) > 0){
-        $res_table = rs_to_table($res)[0];
-    }
-    return $res_table;
+    $sth -> execute();
+    return $sth -> fetch(PDO::FETCH_ASSOC);
 }
 
 
