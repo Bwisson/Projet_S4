@@ -41,6 +41,7 @@ function selectUser($conn, $login)
     if (mysqli_num_rows($res) > 0){
         $res_table = rs_to_table($res)[0];
     }
+
     return $res_table;
 }
 

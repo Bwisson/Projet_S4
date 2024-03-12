@@ -1,0 +1,18 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+
+.ViewUsers{
+  width: 88%;
+  text-align: center;
+
+  .foreground{
+    width: 89.25%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 0;
+    overflow: clip;
+  }
+}

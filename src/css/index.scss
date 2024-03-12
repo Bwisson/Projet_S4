@@ -4,9 +4,14 @@ $bleu1 : #0068e7;
 $bleu2 : #2882ff;
 $mauve : #c4a6ff;
 $rose : #ffd2ff;
-$blanc : #ffffff;
+
+* {
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  margin: 0;
   font-family: 'Lato', sans-serif;
 }
+
+

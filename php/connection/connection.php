@@ -14,7 +14,14 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
 
     if ($row && password_verify($mdp, $row['mdp'])) {
         $_SESSION["login"] = $row["login"];
-        echo json_encode(true);
+        $_SESSION["connecte"] = true;
+        if ($row["admin"]){
+            $_SESSION["admin"] = true;
+        }else {
+            $_SESSION["admin"] = false;
+        }
+
+        echo json_encode($_SESSION);
     }else {
         echo json_encode(false);
     }

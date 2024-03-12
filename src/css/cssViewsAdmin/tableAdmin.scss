@@ -1,0 +1,46 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 5%;
+
+  caption{
+    caption-side: top;
+    font-weight: bold;
+    font-size: 1.8em;
+    text-align: start;
+    margin-left: 1%;
+    margin-bottom: 1.5%;
+  }
+
+  thead{
+    height: 10vh;
+    background-color: $mauve;
+    color: white;
+  }
+
+  td{
+    border: 1px solid $gris;
+    border-left: none;
+    padding: 1.8em 1.2em;
+
+    button{
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+  }
+
+  #userLastName{
+    text-transform: uppercase;
+  }
+
+  td:last-of-type{
+    text-align: center;
+    border-right: none;
+  }
+}
