@@ -22,16 +22,34 @@ function ViewObjects() {
     useEffect(() => {
         function getModeles() {
             axios.get("./php/list/listAllModeles.php")
-                .then(response => { setModeles(response.data) })
+                .then(response => {
+                    let dataResponse = response.data
+                    if (dataResponse != null){
+                        dataResponse.reverse()
+                    }
+                    setModeles(dataResponse)
+                    setNewData(false)
+                })
         }
         function getAteliers() {
             axios.get("./php/list/listAllAteliers.php")
-                .then(response => { setAteliers(response.data) })
+                .then(response => {
+                    let dataResponse = response.data
+                    if (dataResponse != null){
+                        dataResponse.reverse()
+                    }
+                    setAteliers(dataResponse)
+                    setNewData(false)
+                })
         }
         function getArticles() {
             axios.get("./php/list/listAllArticles.php")
                 .then(response => {
-                    setArticles(response.data)
+                    let dataResponse = response.data
+                    if (dataResponse != null){
+                        dataResponse.reverse()
+                    }
+                    setArticles(dataResponse)
                     setNewData(false)
                 })
         }
@@ -136,6 +154,7 @@ function ViewObjects() {
             {ateliers == null && <i>Aucun ateliers</i>}
 
             <div className="tableForm">
+                {showingFormAddArticle && <CreateArticle setNewData={setNewData}/>}
                 <table>
                     <caption>
                         Articles <Button onSmash={showFormCreateArticle} text={"+"} bgColor={"#2882ff"}/>
@@ -153,9 +172,9 @@ function ViewObjects() {
                     <ListArticles/>
                     </tbody>
                 </table>
-                {showingFormAddArticle && <CreateArticle setNewData={setNewData}/>}
+                {articles == null && <i>Aucun articles</i>}
             </div>
-            {articles == null && <i>Aucun articles</i>}
+
 
 
         </div>
