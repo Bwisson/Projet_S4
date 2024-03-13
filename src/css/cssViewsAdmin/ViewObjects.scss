@@ -1,24 +1,28 @@
 .ViewObjects {
   width: 88%;
   text-align: center;
-}
 
-.tableForm{
-  position: relative;
-  table{
+  .tableForm{
     position: relative;
-    caption{
-      button{
-        position: absolute;
-        right: 0;
-        min-width: 50px;
-        padding: 0;
+
+    table{
+      position: relative;
+      caption{
+        button{
+          position: absolute;
+          right: 0;
+          min-width: 50px;
+          padding: 0;
+        }
+      }
+      thead{
+        height: 8vh;
       }
     }
-    thead{
-      height: 8vh;
+    form {
+      position: absolute;
     }
+
   }
 }
 
-}
