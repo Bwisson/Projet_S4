@@ -17,6 +17,8 @@ function ViewObjects() {
 
     const [newData, setNewData] = useState(false)
 
+    const [showingFormAddArticle, setShowingFormAddArticle] = useState(false)
+
     useEffect(() => {
         function getModeles() {
             axios.get("./php/list/listAllModeles.php")
@@ -56,7 +58,6 @@ function ViewObjects() {
 
         return list_modeles
     }
-
     function ListAteliers(){
         let list_ateliers= null
         if(ateliers != null){
@@ -71,7 +72,6 @@ function ViewObjects() {
 
         return list_ateliers
     }
-
     function ListArticles(){
         let list_articles = null
         if(articles != null){
@@ -90,62 +90,74 @@ function ViewObjects() {
         return list_articles
     }
 
+    function showFormCreateArticle() {
+        setShowingFormAddArticle(!showingFormAddArticle)
+    }
+
     return (
         <div className="ViewObjects">
-            <table>
-                <caption>
-                    Modèles
-                </caption>
-                <thead>
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Âge</th>
-                    <th scope="col">Tarif horaire</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ListModeles/>
-                </tbody>
-            </table>
-            {modeles == null ? <i>Aucun modèles</i> : null}
+            <div className="tableForm">
+                <table>
+                    <caption>
+                        Modèles
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Âge</th>
+                        <th scope="col">Tarif horaire</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ListModeles/>
+                    </tbody>
+                </table>
+            </div>
+            {modeles == null && <i>Aucun modèles</i>}
 
-            <table>
-            <caption>
-                    Ateliers
-                </caption>
-                <thead>
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Type</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ListAteliers/>
-                </tbody>
-            </table>
-            {ateliers == null ? <i>Aucun ateliers</i> : null}
+            <div className="tableForm">
+                <table>
+                    <caption>
+                        Ateliers
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Type</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ListAteliers/>
+                    </tbody>
+                </table>
+            </div>
+            {ateliers == null && <i>Aucun ateliers</i>}
 
-            <table>
-            <caption>
-                    Articles
-                </caption>
-                <thead>
-                <tr>
-                    <th scope="col">Code barre</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Catégorie</th>
-                    <th scope="col">Couleur</th>
-                    <th scope="col">Taille</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ListArticles/>
-                </tbody>
-            </table>
-            {articles == null ? <i>Aucun articles</i> :null}
-            <CreateArticle setNewData={setNewData}/>
+            <div className="tableForm">
+                <table>
+                    <caption>
+                        Articles <Button onSmash={showFormCreateArticle} text={"+"} bgColor={"#2882ff"}/>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Code barre</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Couleur</th>
+                        <th scope="col">Taille</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ListArticles/>
+                    </tbody>
+                </table>
+                {showingFormAddArticle && <CreateArticle setNewData={setNewData}/>}
+            </div>
+            {articles == null && <i>Aucun articles</i>}
+
+
         </div>
     )
 }
