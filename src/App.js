@@ -27,12 +27,12 @@ function App() {
             <div className={"pageContent"}>
                 <NavBar admin={admin} connecte={connecte} setConnecte={setConnecte} />
                 <Routes>
-                    {/*<Route path="info7/AdminViewUsers" element={<ViewUsers />}/>*/} {/* TODO : changer avant de push */}
-                    <Route path="/AdminViewUsers" element={<ViewUsers />}/>
-                    {/*<Route path="info7/AdminViewObjects" element={<ViewObjects />}/>*/}
-                    <Route path="/AdminViewObjects" element={<ViewObjects />}/>
-                    {/*<Route path="info7/Calendar" element={<Calendar />}/>*/}
-                    <Route path="/Calendar" element={<Calendar />}/>
+                    <Route path="info7/AdminViewUsers" element={<ViewUsers />}/>  TODO : changer avant de push
+                    {/*<Route path="/AdminViewUsers" element={<ViewUsers />}/>*/}
+                    <Route path="info7/AdminViewObjects" element={<ViewObjects />}/>
+                    {/*<Route path="/AdminViewObjects" element={<ViewObjects />}/>*/}
+                    <Route path="info7/Calendar" element={<Calendar />}/>
+                    {/*<Route path="/Calendar" element={<Calendar />}/>*/}
                 </Routes>
             </div>
         }

@@ -24,12 +24,12 @@ function NavBar({ admin, connecte, setConnecte }) {
                     <>
                         <div id="divider"></div>
                         <ul>
-                            <li><Link to={"/AdminViewObjects"}>OBJETS</Link></li> {/* TODO : rajouter info7/ avant de push */}
-                            <li><Link to={"/AdminViewUsers"}>UTILISATEURS</Link></li>
+                            <li><Link to={"info7/AdminViewObjects"}>OBJETS</Link></li> {/* TODO : rajouter info7/ avant de push */}
+                            <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
                         </ul>
                     </>
                     : null}
-                <li><Link to={"/Calendar"}>Calendrier</Link></li>
+                <li><Link to={"info7/Calendar"}>Calendrier</Link></li>
 
             </nav>
 
