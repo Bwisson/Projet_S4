@@ -3,7 +3,8 @@ include("function_rs_to_table.php");
 
 function createArticle($conn, $code_barre, $nom, $categorie, $couleur, $taille) {
     $sql = "INSERT INTO `Article` (`code_barre`, `nom`, `categorie`, `couleur`, `taille`) VALUES ('$code_barre', '$nom', '$categorie', '$couleur', '$taille')";
-    $res = mysqli_query($conn, $sql); return $res;
+    $res = mysqli_query($conn, $sql);
+    return $res;
 }
 
 function deleteArticle($conn, $id) {

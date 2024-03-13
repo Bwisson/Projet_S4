@@ -1,33 +1,21 @@
 /* Librairy imports */
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 /* components imports */
 import Button from "../Button";
+import CreateArticle from "./CreateArticle"
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
-import axios from "axios";
-
-// const modeles = [
-//     {"nom" : "tcha", "prenom" : "jonathan", "genre" : "homme", "age" : 20, "tarif_horaire" : 50},
-//     {"nom" : "tcha", "prenom" : "jonathan", "genre" : "homme", "age" : 20, "tarif_horaire" : 20}
-// ]
-//
-// const ateliers = [
-//     {"nom" : "chartreuse", "type" : "photographie"},
-//     {"nom" : "nivolet", "type" : "sculpture"}
-// ]
-//
-// const Articles = [
-//     {"code_barre" : "0025873", "nom" : "pinceau", "categorie" : "pinceaux_outils", "couleur" : "marron", "taille" : "petit"},
-//     {"code_barre" : "0025873", "nom" : "chevalet", "categorie" : "pinceaux_outils", "couleur" : "jaune", "taille" : "grand"}
-// ]
 
 function ViewObjects() {
     const [modeles, setModeles] = useState(null)
     const [ateliers, setAteliers] = useState(null)
     const [articles, setArticles] = useState(null)
+
+    const [newData, setNewData] = useState(false)
 
     useEffect(() => {
         function getModeles() {
@@ -40,13 +28,16 @@ function ViewObjects() {
         }
         function getArticles() {
             axios.get("./php/list/listAllArticles.php")
-                .then(response => { setArticles(response.data) })
+                .then(response => {
+                    setArticles(response.data)
+                    setNewData(false)
+                })
         }
 
         getModeles();
         getAteliers();
         getArticles();
-    }, [])
+    }, [newData])
 
     function ListModeles(){
         let list_modeles = null
@@ -154,7 +145,7 @@ function ViewObjects() {
                 </tbody>
             </table>
             {articles == null ? <i>Aucun articles</i> :null}
-
+            <CreateArticle setNewData={setNewData}/>
         </div>
     )
 }
