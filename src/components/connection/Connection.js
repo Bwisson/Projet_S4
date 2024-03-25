@@ -10,20 +10,18 @@ import "../../css/cssConnection/Connection.scss"
 
 
 function Connection({ setAdmin, setConnecte }){
-    const [loginIsOk, setLoginIsOk] = useState( true)
-    const [mdpIsOk, setMdpIsOk] = useState(true)
+    const [login, setLogin] = useState( '')
+    const [mdp, setMdp] = useState('')
 
     function verifInputs(login, mdp){
         let res = true
 
         if (login.length < 3 && login.length > 10){
             res = false
-            setLoginIsOk(false)
         }
 
         if (mdp.length < 8 && mdp.length > 10){
             res = false
-            setMdpIsOk(false)
         }
 
         return res
@@ -31,12 +29,9 @@ function Connection({ setAdmin, setConnecte }){
 
     function sendConnection(event){
         event.preventDefault()
-
         let form = event.currentTarget
-        let login = form.elements.login.value
-        let mdp = form.elements.mdp.value
 
-        if (verifInputs(login, mdp)){
+        if ((login.length >= 3 && login.length <= 10)){
             let form_data = new FormData()
             form_data.append("login", login)
             form_data.append("mdp", mdp)
@@ -57,14 +52,14 @@ function Connection({ setAdmin, setConnecte }){
         <form className={"form"} method="post" onSubmit={sendConnection}>
             <div className={"divForm"}>
                 <label htmlFor="login">Login :</label>
-                <input type="text" id="login" name="user_login" required={true}/>
-                {!loginIsOk && <p>Login incorrect !</p>}
+                <input type="text" id="login" name="user_login" required={true} value={login} onChange={e => setLogin(e.target.value)}/>
+                {(login.length < 3 || login.length > 10) && <p className={"formError"}>Attention le login est compris entre 3 et 10 charactères !</p>}
             </div>
 
             <div className={"divForm"}>
                 <label htmlFor="mdp">Mot de passe :</label>
-                <input type="password" id="mdp" name="user_mdp" required={true}/>
-                {!mdpIsOk && <p>Mot de passe incorrect !</p>}
+                <input type="password" id="mdp" name="user_mdp" required={true} value={mdp} onChange={e => setMdp(e.target.value)}/>
+                {(mdp.length < 8) && <p className={"formError"}>Attention le mot de passe doit faire minimum 8 charactères !</p>}
             </div>
             <Button type="submit" text={"Connexion"}></Button>
         </form>
