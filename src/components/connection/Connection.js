@@ -58,13 +58,13 @@ function Connection({ setAdmin, setConnecte }){
             <div className={"divForm"}>
                 <label htmlFor="login">Login :</label>
                 <input type="text" id="login" name="user_login" required={true}/>
-                {loginIsOk && <p>Login incorrect !</p>}
+                {!loginIsOk && <p>Login incorrect !</p>}
             </div>
 
             <div className={"divForm"}>
                 <label htmlFor="mdp">Mot de passe :</label>
                 <input type="password" id="mdp" name="user_mdp" required={true}/>
-                {mdpIsOk && <p>Mot de passe incorrect !</p>}
+                {!mdpIsOk && <p>Mot de passe incorrect !</p>}
             </div>
             <Button type="submit" text={"Connexion"}></Button>
         </form>
