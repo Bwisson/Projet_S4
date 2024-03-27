@@ -12,18 +12,21 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
 
     $row = selectUser($conn, $login);
 
-    if ($row && password_verify($mdp, $row['mdp'])) {
-        $_SESSION["login"] = $row["login"];
-        $_SESSION["connecte"] = true;
-        if ($row["admin"]){
-            $_SESSION["admin"] = true;
+    if ($row){
+        if (password_verify($mdp, $row['mdp'])) {
+            $_SESSION["login"] = $row["login"];
+            $_SESSION["connecte"] = true;
+            if ($row["admin"]){
+                $_SESSION["admin"] = true;
+            }else {
+                $_SESSION["admin"] = false;
+            }
+            echo json_encode($_SESSION);
         }else {
-            $_SESSION["admin"] = false;
+            echo json_encode(["mdp" => false]);
         }
-
-        echo json_encode($_SESSION);
-    }else {
-        echo json_encode(false);
+    } else {
+        echo json_encode(["login" => false]);
     }
 }else{
     echo json_encode(false);
