@@ -32,10 +32,6 @@ form{
       border: 1px solid $bleu2;
     }
 
-    .formError{
-      color: red;
-      font-size: 0.7em;
-    }
   }
 
   a{
@@ -44,4 +40,9 @@ form{
       width: 1%;
     }
   }
+}
+
+.formError{
+  color: red;
+  font-size: 0.7em;
 }

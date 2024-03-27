@@ -16,20 +16,8 @@ function Connection({ setAdmin, setConnecte }){
     const [invalidLogin, setInvalidLogin] = useState(false)
     const [invalidMdp, setInvalidMdp] = useState(false)
 
-    function verifInputs(login, mdp){
-        let res = true
-
-        if (login.length < 3 && login.length > 10){
-            res = false
-        }
-
-        if (mdp.length < 8 && mdp.length > 10){
-            res = false
-        }
-
-        return res
-    }
-
+    const [wrongLogin, setWrongLogin] = useState(false)
+    const [wrongMdp, setWrongMdp] = useState(false)
     function sendConnection(event){
         event.preventDefault()
         let form = event.currentTarget
@@ -44,6 +32,9 @@ function Connection({ setAdmin, setConnecte }){
                     let data = response.data
                     setConnecte(data.connecte)
                     setAdmin(data.admin)
+                    setWrongLogin(!(data.login))
+                    setWrongMdp(!(data.mdp))
+                    console.log(data)
                 })
 
             form.reset()
@@ -80,6 +71,8 @@ function Connection({ setAdmin, setConnecte }){
                 <input type="password" id="mdp" name="user_mdp" required={true} value={mdp} onBlur={showTextInvalidMdp} onChange={e => setMdp(e.target.value)}/>
                 {invalidMdp && <p className={"formError"}>Attention le mot de passe doit faire minimum 8 charactères !</p>}
             </div>
+            {wrongLogin && <p className={"formError"}>Login inexistant</p>}
+            {wrongMdp && <p className={"formError"}>Mauvais mot de passe</p>}
             <Button type="submit" text={"Connexion"}></Button>
         </form>
     )

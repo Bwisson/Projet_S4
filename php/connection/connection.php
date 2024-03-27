@@ -23,10 +23,10 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
             }
             echo json_encode($_SESSION);
         }else {
-            echo json_encode(["mdp" => false]);
+            echo json_encode(["login" => true, "mdp" => false]);
         }
     } else {
-        echo json_encode(["login" => false]);
+        echo json_encode(["login" => false, "mdp" => true]);
     }
 }else{
     echo json_encode(false);
