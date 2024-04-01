@@ -6,6 +6,7 @@ import axios from "axios";
 import Button from "../Button";
 import CreateArticle from "./CreateArticle"
 import CreateAtelier from "./CreateAtelier"
+import CreateModele from "./CreateModele";
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
@@ -71,7 +72,7 @@ function ViewObjects() {
                     <td>{modele.prenom}</td>
                     <td>{modele.genre}</td>
                     <td>{modele.age}</td>
-                    <td>{modele.tarif_horaire} €</td>
+                    <td>{modele.tarif_horaire} €/h</td>
                     {/*<td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>*/}
                 </tr>
             );
@@ -124,9 +125,10 @@ function ViewObjects() {
     return (
         <div className="ViewObjects">
             <div className="tableForm">
+                {showingFormAddModele && <CreateModele setNewData={setNewData} setShowingFormAddModele={setShowingFormAddModele}/>}
                 <table>
                     <caption>
-                        Modèles
+                        Modèles <Button onSmash={showFormCreateModele} text={"+"} bgColor={"#2882ff"}/>
                     </caption>
                     <thead>
                     <tr>
