@@ -8,10 +8,10 @@
     table{
       position: relative;
       caption{
+        word-spacing: 1em;
         button{
-          position: absolute;
-          right: 0;
-          min-width: 50px;
+          width: 1.1em;
+          height: 1.1em;
           padding: 0;
         }
       }

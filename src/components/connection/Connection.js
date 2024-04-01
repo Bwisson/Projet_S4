@@ -9,7 +9,7 @@ import Button from "../Button";
 import "../../css/cssConnection/Connection.scss"
 
 
-function Connection({ setAdmin, setConnecte }){
+function Connection({ setAdmin,  setConnecte }){
     const [login, setLogin] = useState( '')
     const [mdp, setMdp] = useState('')
 

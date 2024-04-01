@@ -2,4 +2,9 @@
 session_start();
 header("Content-Type: application/json");
 
-echo json_encode($_SESSION["admin"]);
+if ($_SESSION){
+    echo json_encode($_SESSION["admin"]);
+}else {
+    false;
+}
+
