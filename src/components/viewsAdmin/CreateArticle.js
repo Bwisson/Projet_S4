@@ -1,8 +1,14 @@
-import Button from "../Button";
+/*Librairy imports */
 import axios from "axios";
 
+/*components imports */
+import Button from "../Button";
 
-function CreateArticle({ setNewData }){
+/* css imports */
+import "../../css/cssViewsAdmin/CreateArticle.scss"
+
+
+function CreateArticle({ setNewData, setShowingFormAddArticle }){
 
     function createArticle(event){
         event.preventDefault()
@@ -25,6 +31,7 @@ function CreateArticle({ setNewData }){
             .then(response => setNewData(response.data))
 
         form.reset()
+        setShowingFormAddArticle(false)
     }
 
     return (

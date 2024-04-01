@@ -5,6 +5,7 @@ import axios from "axios";
 /* components imports */
 import Button from "../Button";
 import CreateArticle from "./CreateArticle"
+import CreateAtelier from "./CreateAtelier"
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
@@ -18,6 +19,8 @@ function ViewObjects() {
     const [newData, setNewData] = useState(false)
 
     const [showingFormAddArticle, setShowingFormAddArticle] = useState(false)
+    const [showingFormAddAtelier, setShowingFormAddAtelier] = useState(false)
+    const [showingFormAddModele, setShowingFormAddModele] = useState(false)
 
     useEffect(() => {
         function getModeles() {
@@ -111,6 +114,12 @@ function ViewObjects() {
     function showFormCreateArticle() {
         setShowingFormAddArticle(!showingFormAddArticle)
     }
+    function showFormCreateAtelier() {
+        setShowingFormAddAtelier(!showingFormAddAtelier)
+    }
+    function showFormCreateModele() {
+        setShowingFormAddModele(!showingFormAddModele)
+    }
 
     return (
         <div className="ViewObjects">
@@ -136,9 +145,10 @@ function ViewObjects() {
             {modeles == null && <i>Aucun modèles</i>}
 
             <div className="tableForm">
+                {showingFormAddAtelier && <CreateAtelier setNewData={setNewData} setShowingFormAddAtelier={setShowingFormAddAtelier}/>}
                 <table>
                     <caption>
-                        Ateliers
+                        Ateliers <Button onSmash={showFormCreateAtelier} text={"+"} bgColor={"#2882ff"}/>
                     </caption>
                     <thead>
                     <tr>
@@ -154,7 +164,7 @@ function ViewObjects() {
             {ateliers == null && <i>Aucun ateliers</i>}
 
             <div className="tableForm">
-                {showingFormAddArticle && <CreateArticle setNewData={setNewData}/>}
+                {showingFormAddArticle && <CreateArticle setNewData={setNewData} setShowingFormAddArticle={setShowingFormAddArticle}/>}
                 <table>
                     <caption>
                         Articles <Button onSmash={showFormCreateArticle} text={"+"} bgColor={"#2882ff"}/>
