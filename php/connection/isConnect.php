@@ -2,10 +2,8 @@
 session_start();
 header("Content-Type: application/json");
 
-if ($_SESSION) {
-    $res = true;
+if (isset($_SESSION['login'])) {
+    echo json_encode(true);
 } else {
-    $res = false;
+    echo json_encode(false);
 }
-
-echo json_encode($res);

@@ -1,5 +1,5 @@
 /* Librairy imports */
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 /* components imports */
@@ -9,7 +9,7 @@ import Button from "../Button";
 import "../../css/cssConnection/Connection.scss"
 
 
-function Connection({ setAdmin,  setConnecte }){
+function Connection({ setAdmin,  setIsConnect }){
     const [login, setLogin] = useState( '')
     const [mdp, setMdp] = useState('')
 
@@ -19,13 +19,8 @@ function Connection({ setAdmin,  setConnecte }){
     const [wrongLogin, setWrongLogin] = useState(false)
     const [wrongMdp, setWrongMdp] = useState(false)
 
-    const [isConnect, setIsConnect] = useState(false)
-
     function sendConnection(event){
         event.preventDefault()
-        if(!isConnect){
-
-        }
         let form = event.currentTarget
 
         if ((login.length >= 3 && login.length <= 10)){
@@ -36,7 +31,7 @@ function Connection({ setAdmin,  setConnecte }){
             axios.post("./php/connection/connection.php", form_data)
                 .then(response => {
                     let data = response.data
-                    setConnecte(data.connecte)
+                    setIsConnect(data.connecte)
                     setAdmin(data.admin)
                     setWrongLogin(!(data.login))
                     setWrongMdp(!(data.mdp))

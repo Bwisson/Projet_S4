@@ -8,12 +8,12 @@ import '../css/NavBar.scss';
 /* components import */
 import Disconnection from "../components/connection/Disconnection";
 
-function NavBar({ admin, connecte, setConnecte }) {
+function NavBar({ admin, setDeconnection }) {
 
     return (
         <div className="NavBar">
             <nav>
-                <Disconnection connecte={connecte} setConnecte={setConnecte}/>
+                <Disconnection setDeconnection={setDeconnection}/>
                 <ul>
                     <li>CHEVALETS</li>
                     <li>PEINTURE</li>
