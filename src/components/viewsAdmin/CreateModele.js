@@ -35,7 +35,7 @@ function CreateAtelier({ setNewData, setShowingFormAddModele }){
     }
 
     return (
-        <form className={"form"} method="post" onSubmit={createAtelier}>
+        <form className={"formAddObject"} method="post" onSubmit={createAtelier}>
             <div className={"divForm"}>
                 <label htmlFor="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" required={true}/>

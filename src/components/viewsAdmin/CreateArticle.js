@@ -35,7 +35,7 @@ function CreateArticle({ setNewData, setShowingFormAddArticle }){
     }
 
     return (
-        <form className={"form"} method="post" onSubmit={createArticle}>
+        <form className={"formAddObject"} method="post" onSubmit={createArticle}>
             <div className={"divForm"}>
                 <label htmlFor="code_barre">Code barre :</label>
                 <input type="text" id="code_barre" name="code_barre" required={true}/>
