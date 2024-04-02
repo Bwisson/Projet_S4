@@ -23,6 +23,8 @@ function ViewObjects() {
     const [showingFormAddAtelier, setShowingFormAddAtelier] = useState(false)
     const [showingFormAddModele, setShowingFormAddModele] = useState(false)
 
+    const svgPlus = '<svg width=\"800px\" height=\"800px\" viewBox=\"0 0 24 24\" fill=\"none\"\n xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M6 12H18M12 6V18\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round\stroke-linejoin=\"round\"/></svg>'
+
     useEffect(() => {
         function getModeles() {
             axios.get("./php/list/listAllModeles.php")
@@ -151,6 +153,7 @@ function ViewObjects() {
                 <table>
                     <caption>
                         Ateliers <Button onSmash={showFormCreateAtelier} text={"+"} bgColor={"#2882ff"}/>
+
                     </caption>
                     <thead>
                     <tr>
