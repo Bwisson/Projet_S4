@@ -5,7 +5,7 @@ import axios from "axios";
 import Button from "../Button";
 
 /* css imports */
-import "../../css/cssViewsAdmin/CreateArticle.scss"
+import "../../css/cssViewsAdmin/formAddObject.scss"
 
 
 function CreateAtelier({ setNewData, setShowingFormAddAtelier }){

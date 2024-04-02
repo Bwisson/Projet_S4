@@ -18,8 +18,14 @@ function Connection({ setAdmin,  setConnecte }){
 
     const [wrongLogin, setWrongLogin] = useState(false)
     const [wrongMdp, setWrongMdp] = useState(false)
+
+    const [isConnect, setIsConnect] = useState(false)
+
     function sendConnection(event){
         event.preventDefault()
+        if(!isConnect){
+
+        }
         let form = event.currentTarget
 
         if ((login.length >= 3 && login.length <= 10)){
