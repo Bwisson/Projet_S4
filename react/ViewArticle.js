@@ -53,7 +53,7 @@ return (
       //<ImageProduct />
     </span>
     <span id="title">
-      <titleArticle />
+      <Title />
     </span>
     <span id="desc">
       //<descArticle />
