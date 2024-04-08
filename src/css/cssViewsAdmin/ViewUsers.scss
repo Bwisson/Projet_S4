@@ -7,6 +7,15 @@ $rose : #ffd2ff;
   width: 88vw;
   text-align: center;
 
+  .formAddUser{
+    height: 80vh;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background-color: white;
+    overflow: auto;
+  }
+
   #btnAddUser{
     position: fixed;
     right: 20px;

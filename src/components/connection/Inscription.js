@@ -49,7 +49,7 @@ function Inscription(){
     }
 
     return (
-        <form className={"form"} method="post" onSubmit={sendInscription}>
+        <form className={"formAddUser"} method="post" onSubmit={sendInscription}>
             <div className={"divForm"}>
                 <label htmlFor="login">Login :</label>
                 <input type="text" id="login_insc" name="user_login" required={true}/>
