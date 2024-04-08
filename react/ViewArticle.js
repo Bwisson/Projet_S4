@@ -27,7 +27,7 @@ function ViewArticle() {
   let image_product = null
   if(product != null){
     image_product = product.map(prod =>
-      <span>{prod.i}*/
+      <span>{prod.i}</span>*/
 
 function Title() {
   let title_article = null
