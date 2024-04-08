@@ -37,10 +37,8 @@ function Connection({ setAdmin,  setIsConnect }){
                     setWrongMdp(!(data.mdp))
                     console.log(data)
                 })
-
             form.reset()
         }
-
     }
 
     function showTextInvalidLogin(){

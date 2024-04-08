@@ -54,7 +54,6 @@ function ViewUsers() {
             );
 
         }
-
         return list_users
     }
 
