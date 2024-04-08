@@ -68,6 +68,7 @@ function ViewUsers() {
                 {<List/> != null ? <List/> : null}
                 </tbody>
             </table>
+            <Button text={"+"} bgColor={"#2882ff"}/>
             {<List/> == null ? <i>Aucun utilisateurs</i> : null}
             {showPopUp?
                 <>

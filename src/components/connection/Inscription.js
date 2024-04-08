@@ -24,7 +24,7 @@ function Inscription(){
         let mail = form.elements.mail.value
         let admin = form.elements.admin.checked
 
-        if ((login.length >= 3 && login.length <= 10) && (mdp.length >= 8 && mdp.length <= 30) && nom.length > 0 && prenom.length > 0 && mail.length >= 3){
+        if ((login.length >= 3 && login.length <= 10) && (mdp.length >= 8 && mdp.length <= 30) && nom.length > 0 && prenom.length > 0){
             let form_data = new FormData()
             form_data.append("login", login)
             form_data.append("mdp", mdp)
