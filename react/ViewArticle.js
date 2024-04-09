@@ -7,7 +7,7 @@ import Button from '../Button'
 import PopUpUser from "./PopUpUser"
 
 /* css imports */
-import '../../css/cssViewsAdmin/ViewUsers.scss'
+import '../../css/cssViewsAdmin/ViewArticle.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
 
 
