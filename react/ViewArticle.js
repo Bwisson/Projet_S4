@@ -20,14 +20,18 @@ function ViewArticle() {
               .then(response => {setArticle(respose.data)})
               }
     getArticle();
-  }, )
+  }, [])
 }
 
 /*function Image() {
   let image_product = null
   if(product != null){
     image_product = product.map(prod =>
-      <span>{prod.i}</span>*/
+      <span>{prod.i}</span>
+      );
+      }
+      return image_article
+      }*/
 
 function Title() {
   let title_article = null
@@ -45,10 +49,12 @@ function Title() {
     desc_article = article.map(art =>
       <p>{art.desc}</p>
     );
+  }
+  return desc_article
   }*/
     
 return (
-  <div className="ViewProduct">
+  <div className="ViewArticle">
     <span id="image">
       //<ImageProduct />
     </span>
@@ -65,3 +71,5 @@ return (
   </div>
   )
 }
+
+export default ViewArticle;
