@@ -35,8 +35,8 @@ function Cards() {
   if(articles != null){
     cards_articles = articles.map(art =>
       <div className="card">
-        <span>{art.img}</span>
-        <span>{art.nom}</span>
+        <span id="image">{art.img}</span>
+        <span id="title">{art.nom}</span>
         <button>Réserver</button>
       </div>
     );
