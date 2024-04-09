@@ -6,7 +6,7 @@ import Button from "../Button";
 
 /* css imports */
 import "../../css/cssViewsAdmin/formAddObject.scss"
-
+import "../../css/form.scss"
 
 function CreateAtelier({ setNewData, setShowingFormAddAtelier }){
 

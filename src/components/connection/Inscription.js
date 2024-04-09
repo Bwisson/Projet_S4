@@ -5,12 +5,16 @@ import React, { useState } from "react";
 /* components import */
 import Button from "../Button";
 
+/* css imports */
+import "../../css/form.scss"
+
 function Inscription(){
     const [login, setLogin] = useState( '')
     const [mdp, setMdp] = useState('')
     const [nom, setNom] = useState('')
     const [prenom, setPrenom] = useState('')
     const [mail, setMail] = useState('')
+    const [admin, setAdmin] = useState(false)
 
     const [loginIsOk, setLoginIsOk] = useState(false)
     const [mdpIsOk, setMdpIsOk] = useState(false)
@@ -18,7 +22,7 @@ function Inscription(){
     function sendInscription(event){
         event.preventDefault()
         let form = event.currentTarget
-        let admin = form.elements.admin.checked
+        // let admin = form.elements.admin.checked
 
         if ((login.length >= 3 && login.length <= 10) && (mdp.length >= 8 && mdp.length <= 30)){
             let form_data = new FormData()
@@ -31,8 +35,13 @@ function Inscription(){
 
             axios.post("./php/connection/inscription.php", form_data)
                 .then(response => {console.log("data response:", response.data)})
-
-            form.reset()
+            this.setState({
+                login: "",
+                mdp: "",
+                nom: "",
+                prenom: "",
+                mail: ""
+            })
         }
     }
 
@@ -83,7 +92,7 @@ function Inscription(){
 
             <div className={"divForm"}>
                 <label htmlFor="admin">Admin :</label>
-                <input type="checkbox" id="admin" name="user_admin"/>
+                <input type="checkbox" id="admin" name="user_admin" onChange={e => setAdmin(e.target.checked)}/>
             </div>
 
             <Button type="submit" text={"Inscription"}></Button>

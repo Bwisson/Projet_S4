@@ -7,6 +7,7 @@ import Button from "../Button";
 
 /* css imports */
 import "../../css/cssConnection/Connection.scss"
+import "../../css/form.scss"
 
 
 function Connection({ setAdmin,  setIsConnect }){
