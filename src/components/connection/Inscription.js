@@ -22,7 +22,6 @@ function Inscription(){
     function sendInscription(event){
         event.preventDefault()
         let form = event.currentTarget
-        // let admin = form.elements.admin.checked
 
         if ((login.length >= 3 && login.length <= 10) && (mdp.length >= 8 && mdp.length <= 30)){
             let form_data = new FormData()
