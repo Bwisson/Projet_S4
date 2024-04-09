@@ -1,0 +1,44 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
+*{
+  font-family : Lato, sans-serif;
+}
+body{
+    align-items: center;
+}
+.ViewCard{
+    display: grid;
+    grid-template-columns: repeat(4,25vw);
+    grid-gap: 20px;
+    padding: 35px;
+}
+.card{
+  display: flex;
+  flex-direction: column;
+  border: solid black 2px;
+  border-radius: 10px;
+  height: 200px;
+  width: 175px;
+  align-items: center;
+  justify-content: center;
+}
+#image{
+    width: 100px;
+    height: 100px;
+    border: solid black 1px;
+    margin: 5px;
+}
+#title{
+    margin: 5px;
+}
+button{
+    margin: 5px;
+    width: 100px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background-color: $mauve;
+}
