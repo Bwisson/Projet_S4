@@ -6,14 +6,29 @@ import { Link } from "react-router-dom"
 import '../css/NavBar.scss';
 
 /* components import */
-import Disconnection from "../components/connection/Disconnection";
+import Button from "./Button"
+import Disconnection from "./connection/Disconnection";
 
 function NavBar({ admin, setDeconnection }) {
+    const [profilMenuVisible, setProfilMenuVisible] = useState(false)
+
+    function showProfilMenu(){
+        setProfilMenuVisible(!profilMenuVisible)
+    }
 
     return (
         <div className="NavBar">
             <nav>
-                <Disconnection setDeconnection={setDeconnection}/>
+                <div id="btnAndMenu">
+                    <Button id={"btnProfil"} text={"Profil"} onSmash={showProfilMenu} bgColor={"#2882ff"}></Button>
+                    {profilMenuVisible &&
+                        <div className={"profilMenu"}>
+                            <a>Mon compte</a>
+                            <Disconnection setDeconnection={setDeconnection}/>
+                        </div>
+                    }
+                </div>
+
                 <ul>
                     <li>CHEVALETS</li>
                     <li>PEINTURE</li>
