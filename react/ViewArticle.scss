@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Geostar&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
 *{
     font-family: Lato, sans-serif;
 }
@@ -31,5 +35,5 @@ body{
 #title{
     font-size: 50px;
     font-weight: bold;
-    color: blue;
+    color: $bleu1;
 }
