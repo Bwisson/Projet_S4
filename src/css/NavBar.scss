@@ -5,64 +5,60 @@ $gris : rgb(227, 227, 227);
   font-size: 0.9em;
   font-weight: 600;
   border-right: 1px solid $gris;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
 
-  nav {
-    position: relative;
+  #btnAndMenu{
+    position: absolute;
+    top: 1rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
 
-    #btnAndMenu{
-      position: absolute;
-      top: 1rem;
-      width: 100%;
+    .profilMenu{
+      height: 100px;
+      align-self: center;
       display: flex;
       flex-direction: column;
+      justify-content: space-evenly;
       align-items: center;
-
-      .profilMenu{
-        height: 100px;
-        align-self: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        padding: 5%;
-        border: 1px solid $gris;
-        border-radius: 5px;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-        background-color: white;
-        animation: dropdown 0.2s cubic-bezier(0, 0, 1, 1.31);
-        transform-origin: top center;
-      }
-
-      @keyframes dropdown {
-        0% {
-          transform: scaleY(0);
-        }
-        100% {
-          transform: scaleY(1);
-        }
-      }
+      padding: 5%;
+      border: 1px solid $gris;
+      border-radius: 5px;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      background-color: white;
+      animation: dropdown 0.2s cubic-bezier(0, 0, 1, 1.31);
+      transform-origin: top center;
     }
 
-    ul {
-      margin: 5.5rem 0 0 0.5rem;
-      padding: 0;
-      line-height: 2.4rem;
-      text-align: left;
-      list-style: none;
-
-    }
-
-    #divider{
-      width: 90%;
-      height: 0.5px;
-      margin: 1em 0 1em 0;
-      align-self: center;
-      background-color: $gris;
+    @keyframes dropdown {
+      0% {
+        transform: scaleY(0);
+      }
+      100% {
+        transform: scaleY(1);
+      }
     }
   }
 
+  ul {
+    margin: 5.5rem 0 0 0.5rem;
+    padding: 0;
+    line-height: 2.4rem;
+    text-align: left;
+    list-style: none;
+
+  }
+
+  #divider{
+    width: 90%;
+    height: 0.5px;
+    margin: 1em 0 1em 0;
+    align-self: center;
+    background-color: $gris;
+  }
 }

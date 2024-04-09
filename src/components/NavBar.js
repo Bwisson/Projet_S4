@@ -17,38 +17,34 @@ function NavBar({ admin, setDeconnection }) {
     }
 
     return (
-        <div className="NavBar">
-            <nav>
-                <div id="btnAndMenu">
-                    <Button id={"btnProfil"} text={"Profil"} onSmash={showProfilMenu} bgColor={"#2882ff"}></Button>
-                    {profilMenuVisible &&
-                        <div className={"profilMenu"}>
-                            <a>Mon compte</a>
-                            <Disconnection setDeconnection={setDeconnection}/>
-                        </div>
-                    }
-                </div>
+        <nav className="NavBar">
+            <div id="btnAndMenu">
+                <Button id={"btnProfil"} text={"Profil"} onSmash={showProfilMenu} bgColor={"#2882ff"}></Button>
+                {profilMenuVisible &&
+                    <div className={"profilMenu"}>
+                        <a>Mon compte</a>
+                        <Disconnection setDeconnection={setDeconnection}/>
+                    </div>
+                }
+            </div>
 
-                <ul>
-                    <li>CHEVALETS</li>
-                    <li>PEINTURE</li>
-                    <li>MODÈLES</li>
-                    <li>ATELIERS</li>
-                </ul>
-                {admin ?
-                    <>
-                        <div id="divider"></div>
-                        <ul>
-                            <li><Link to={"info7/AdminViewObjects"}>OBJETS</Link></li> {/* TODO : rajouter info7/ avant de push */}
-                            <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
-                        </ul>
-                    </>
-                    : null}
-                <li><Link to={"info7/Calendar"}>Calendrier</Link></li>
-
-            </nav>
-
-        </div>
+            <ul>
+                <li>CHEVALETS</li>
+                <li>PEINTURE</li>
+                <li>MODÈLES</li>
+                <li>ATELIERS</li>
+            </ul>
+            {admin ?
+                <>
+                    <div id="divider"></div>
+                    <ul>
+                        <li><Link to={"info7/AdminViewObjects"}>OBJETS</Link></li> {/* TODO : rajouter info7/ avant de push */}
+                        <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
+                    </ul>
+                </>
+                : null}
+            <li><Link to={"info7/Calendar"}>Calendrier</Link></li>
+        </nav>
     )
 }
 
