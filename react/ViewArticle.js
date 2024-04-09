@@ -52,6 +52,10 @@ function Title() {
   }
   return desc_article
   }*/
+
+function Calendar(){
+  <td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
+}
     
 return (
   <div className="ViewArticle">
