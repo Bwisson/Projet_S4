@@ -58,7 +58,7 @@ function Connection({ setAdmin,  setIsConnect }){
     }
 
     return (
-        <form className={"form"} method="post" onSubmit={sendConnection}>
+        <form className={"formConnection"} method="post" onSubmit={sendConnection}>
             <div className={"divForm"}>
                 <label htmlFor="login">Login :</label>
                 <input type="text" id="login" name="user_login" required={true} value={login} onBlur={showTextInvalidLogin} onChange={e => setLogin(e.target.value)}/>

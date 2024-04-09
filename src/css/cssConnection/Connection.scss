@@ -4,7 +4,7 @@ $mauve : #c4a6ff;
 $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
-form{
+.formConnection{
   width: 25vw;
   padding: 2%;
   border-radius: 5px;
@@ -41,11 +41,6 @@ form{
     }
   }
 }
-
-//.formError{
-//  color: red;
-//  font-size: 0.7em;
-//}
 
 .tooltip {
   position: absolute;
