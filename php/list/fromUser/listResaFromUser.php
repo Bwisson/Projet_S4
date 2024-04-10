@@ -7,7 +7,7 @@ include("../../crud/resaModele.crud.php");
 $listArticles = listResaArticleFromUser($conn, $id_user);
 $listAteliers = listResaAtelierFromUser($conn, $id_user);
 $listModeles = listResaModeleFromUser($conn, $id_user);
-$list = array(
+$listObjets = array(
     "articles" => $listArticles,
     "ateliers" => $listAteliers,
     "modeles" => $listModeles,

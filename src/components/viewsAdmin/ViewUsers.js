@@ -23,6 +23,7 @@ function ViewUsers() {
             axios.get("./php/list/listAllUsers.php")
                 .then(response => {
                     let datas = response.data
+                    console.log(datas)
                     setUsers(datas)
                 })
         }
