@@ -23,7 +23,7 @@ function NavBar({ admin, setDeconnection }) {
                     <Button id={"btnProfil"} text={"Profil"} onSmash={showProfilMenu} bgColor={"#2882ff"}></Button>
                     {profilMenuVisible &&
                         <div className={"profilMenu"}>
-                            <a>Mon compte</a>
+                            <Link to={"info7/"}>Mon compte</Link>
                             <Disconnection setDeconnection={setDeconnection}/>
                         </div>
                     }
