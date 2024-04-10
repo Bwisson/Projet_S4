@@ -19,50 +19,16 @@ function updateResaArticle($conn, $id, $id_article, $start, $end, $id_user) {
     return $res;
 }
 
-function listCurrentResaArticle($conn) {
-    $sql = "SELECT * FROM `ResaArticle` WHERE `end` >= NOW()";
+function listResaArticle($conn) {
+    $sql = "SELECT * FROM `ResaArticle`";
     $res = mysqli_query($conn, $sql);
     $rs = rs_to_table($res);
-
-    if(mysqli_num_rows($res) == 0){
-        $rs = null;
-    }
-
     return $rs;
 }
 
-function listOldResaArticle($conn) {
-    $sql = "SELECT * FROM `ResaArticle` WHERE `end` < NOW()";
+function listResaArticleFromUser($conn, $id) {
+    $sql = "SELECT * FROM `ResaArticle` ra JOIN `Article` a ON ra.id_article = a.id WHERE id_user = $id";
     $res = mysqli_query($conn, $sql);
     $rs = rs_to_table($res);
-
-    if(mysqli_num_rows($res) == 0){
-        $rs = null;
-    }
-
-    return $rs;
-}
-
-function listCurrentResaArticleFromUser($conn, $id_user) {
-    $sql = "SELECT * FROM `Article` a JOIN `ResaArticle` ra ON a.id = ra.id_article WHERE `end` >= NOW() AND ra.id_user = $id_user";
-    $res = mysqli_query($conn, $sql);
-    $rs = rs_to_table($res);
-
-    if(mysqli_num_rows($res) == 0){
-        $rs = null;
-    }
-
-    return $rs;
-}
-
-function listOldResaArticleFromUser($conn, $id_user) {
-    $sql = "SELECT * FROM `Article` a JOIN `ResaArticle` ra ON a.id = ra.id_article  WHERE `end` < NOW() AND ra.id_user = $id_user";
-    $res = mysqli_query($conn, $sql);
-    $rs = rs_to_table($res);
-
-    if(mysqli_num_rows($res) == 0){
-        $rs = null;
-    }
-
     return $rs;
 }
