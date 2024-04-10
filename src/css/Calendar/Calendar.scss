@@ -1,3 +1,55 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+$blanc : #ffffff;
+
 .Calendar{
   width: 100%;
+}
+
+#calendar {
+  max-width: 1100px;
+  height: 500;
+  margin: 40px auto;
+}
+  
+:root{
+  --fc-bg-event-color : hsla(0,0%,30%,.3);
+  --fc-non-business-color : hsla(0,0%,30%,.3);
+  --fc-bg-event-opacity : 100;    
+}
+
+#form_general{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin-right: 10px;
+  border: black solid 1px;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+#eventForm{
+  display: flex;
+  align-items: center;
+}
+
+#form_general h2{
+  color: #0068e7;
+  padding: 5px;
+}
+
+#form_general input{
+  height: 2em;
+  margin: 5px;
+}
+
+#form_general button{
+  background-color: #C4A6FF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  margin: 5px;
 }

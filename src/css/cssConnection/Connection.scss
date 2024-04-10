@@ -4,49 +4,6 @@ $mauve : #c4a6ff;
 $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
-form{
-  width: 25vw;
-  padding: 2%;
-  border-radius: 5px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  text-align: center;
-
-  .divForm{
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    margin-bottom: 1.5em;
-
-    label{
-      margin-bottom: 5px;
-    }
-
-    input{
-      height: 1.8em;
-      padding-left: 8px;
-      border-radius: 5px;
-      border: 1px solid $gris;
-    }
-    input:focus{
-      outline: none;
-      border: 1px solid $bleu2;
-    }
-
-  }
-
-  a{
-    align-self: center;
-    button {
-      width: 1%;
-    }
-  }
-}
-
-.formError{
-  color: red;
-  font-size: 0.7em;
-}
-
 .tooltip {
   position: absolute;
   top: 0;

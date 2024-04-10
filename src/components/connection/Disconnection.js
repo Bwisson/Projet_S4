@@ -6,12 +6,10 @@ import { Link } from "react-router-dom"
 import Button from "../Button";
 
 
-function Disconnection({ connecte, setConnecte }){
+function Disconnection({setDeconnection}){
     function sendDeconnection(){
         axios.get("./php/connection/disconnect.php")
-            .then(response => {
-                setConnecte(false)
-            })
+            .then(response => setDeconnection(false))
     }
 
     return (

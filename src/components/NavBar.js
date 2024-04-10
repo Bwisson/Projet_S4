@@ -6,14 +6,29 @@ import { Link } from "react-router-dom"
 import '../css/NavBar.scss';
 
 /* components import */
-import Disconnection from "../components/connection/Disconnection";
+import Button from "./Button"
+import Disconnection from "./connection/Disconnection";
 
-function NavBar({ admin, connecte, setConnecte }) {
+function NavBar({ admin, setDeconnection }) {
+    const [profilMenuVisible, setProfilMenuVisible] = useState(false)
+
+    function showProfilMenu(){
+        setProfilMenuVisible(!profilMenuVisible)
+    }
 
     return (
         <div className="NavBar">
             <nav>
-                <Disconnection connecte={connecte} setConnecte={setConnecte}/>
+                <div id="btnAndMenu">
+                    <Button id={"btnProfil"} text={"Profil"} onSmash={showProfilMenu} bgColor={"#2882ff"}></Button>
+                    {profilMenuVisible &&
+                        <div className={"profilMenu"}>
+                            <a>Mon compte</a>
+                            <Disconnection setDeconnection={setDeconnection}/>
+                        </div>
+                    }
+                </div>
+
                 <ul>
                     <li>CHEVALETS</li>
                     <li>PEINTURE</li>
@@ -23,16 +38,14 @@ function NavBar({ admin, connecte, setConnecte }) {
                 {admin ?
                     <>
                         <div id="divider"></div>
-                        <ul>
+                        <ul id={"adminLink"}>
                             <li><Link to={"info7/AdminViewObjects"}>OBJETS</Link></li> {/* TODO : rajouter info7/ avant de push */}
                             <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
                         </ul>
                     </>
                     : null}
                 <li><Link to={"info7/Calendar"}>Calendrier</Link></li>
-
             </nav>
-
         </div>
     )
 }

@@ -5,7 +5,8 @@ import axios from "axios";
 import Button from "../Button";
 
 /* css imports */
-import "../../css/cssViewsAdmin/CreateArticle.scss"
+import "../../css/cssViewsAdmin/formAddObject.scss"
+import "../../css/form.scss"
 
 
 function CreateArticle({ setNewData, setShowingFormAddArticle }){
@@ -35,7 +36,7 @@ function CreateArticle({ setNewData, setShowingFormAddArticle }){
     }
 
     return (
-        <form className={"form"} method="post" onSubmit={createArticle}>
+        <form className={"formAddObject"} method="post" onSubmit={createArticle}>
             <div className={"divForm"}>
                 <label htmlFor="code_barre">Code barre :</label>
                 <input type="text" id="code_barre" name="code_barre" required={true}/>

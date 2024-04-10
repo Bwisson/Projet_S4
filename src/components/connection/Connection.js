@@ -1,5 +1,5 @@
 /* Librairy imports */
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 /* components imports */
@@ -7,9 +7,10 @@ import Button from "../Button";
 
 /* css imports */
 import "../../css/cssConnection/Connection.scss"
+import "../../css/form.scss"
 
 
-function Connection({ setAdmin,  setConnecte }){
+function Connection({ setAdmin,  setIsConnect }){
     const [login, setLogin] = useState( '')
     const [mdp, setMdp] = useState('')
 
@@ -18,6 +19,7 @@ function Connection({ setAdmin,  setConnecte }){
 
     const [wrongLogin, setWrongLogin] = useState(false)
     const [wrongMdp, setWrongMdp] = useState(false)
+
     function sendConnection(event){
         event.preventDefault()
         let form = event.currentTarget
@@ -30,16 +32,14 @@ function Connection({ setAdmin,  setConnecte }){
             axios.post("./php/connection/connection.php", form_data)
                 .then(response => {
                     let data = response.data
-                    setConnecte(data.connecte)
+                    setIsConnect(data.connecte)
                     setAdmin(data.admin)
                     setWrongLogin(!(data.login))
                     setWrongMdp(!(data.mdp))
                     console.log(data)
                 })
-
             form.reset()
         }
-
     }
 
     function showTextInvalidLogin(){
@@ -59,7 +59,7 @@ function Connection({ setAdmin,  setConnecte }){
     }
 
     return (
-        <form className={"form"} method="post" onSubmit={sendConnection}>
+        <form className={"formConnection"} method="post" onSubmit={sendConnection}>
             <div className={"divForm"}>
                 <label htmlFor="login">Login :</label>
                 <input type="text" id="login" name="user_login" required={true} value={login} onBlur={showTextInvalidLogin} onChange={e => setLogin(e.target.value)}/>
