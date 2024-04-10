@@ -6,57 +6,61 @@ import axios from "axios";
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
 
+// const currentReservations = {"articles" : [], "modeles" : [], "ateliers" : []}
+const articles = [{nom : "test", debut : "test", fin : "test"}]
+const modeles = [{nom : "test", debut : "test", fin : "test"}]
+const ateliers = [{nom : "test", debut : "test", fin : "test"}]
+const currentReservations = [articles, modeles, ateliers]
 function Homepage() {
-    const [currentReservations, setCurrentReservations] = useState([]);
+    // const [currentReservations, setCurrentReservations] = useState([]);
     const [pastReservations, setPastReservations] = useState([]);
     const [user, setUser] = useState(null);
-    useEffect(() => {
-        axios.get("./php/list/fromUser/listResaFromUser.php")
-            .then(response => {
-                const { articles, modeles, ateliers } = response.data;
 
-                // Filtrer les réservations actuelles et passées pour chaque type d'entité
-                const currentArticlesReservations = articles.filter(reservation => isCurrentReservation(reservation));
-                const currentModelesReservations = modeles.filter(reservation => isCurrentReservation(reservation));
-                const currentAteliersReservations = ateliers.filter(reservation => isCurrentReservation(reservation));
-
-                const pastArticlesReservations = articles.filter(reservation => !isCurrentReservation(reservation));
-                const pastModelesReservations = modeles.filter(reservation => !isCurrentReservation(reservation));
-                const pastAteliersReservations = ateliers.filter(reservation => !isCurrentReservation(reservation));
-
-                // Mettre à jour les états avec les réservations actuelles et passées
-                setCurrentReservations({
-                    articles: currentArticlesReservations,
-                    modeles: currentModelesReservations,
-                    ateliers: currentAteliersReservations
-                });
-                setPastReservations({
-                    articles: pastArticlesReservations,
-                    modeles: pastModelesReservations,
-                    ateliers: pastAteliersReservations
-                });
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios.get("./php/list/fromUser/listResaFromUser.php")
+    //         .then(response => {
+    //             const { articles, modeles, ateliers } = response.data;
+    //
+    //             // Filtrer les réservations actuelles et passées pour chaque type d'entité
+    //             const currentArticlesReservations = articles.filter(reservation => isCurrentReservation(reservation));
+    //             const currentModelesReservations = modeles.filter(reservation => isCurrentReservation(reservation));
+    //             const currentAteliersReservations = ateliers.filter(reservation => isCurrentReservation(reservation));
+    //
+    //             const pastArticlesReservations = articles.filter(reservation => !isCurrentReservation(reservation));
+    //             const pastModelesReservations = modeles.filter(reservation => !isCurrentReservation(reservation));
+    //             const pastAteliersReservations = ateliers.filter(reservation => !isCurrentReservation(reservation));
+    //
+    //             // Mettre à jour les états avec les réservations actuelles et passées
+    //             // setCurrentReservations({
+    //             //     articles: currentArticlesReservations,
+    //             //     modeles: currentModelesReservations,
+    //             //     ateliers: currentAteliersReservations
+    //             // });
+    //             // setPastReservations({
+    //             //     articles: pastArticlesReservations,
+    //             //     modeles: pastModelesReservations,
+    //             //     ateliers: pastAteliersReservations
+    //             // });
+    //         });
+    // }, []);
 
     // Fonction pour vérifier si une réservation est actuelle ou passée
-    const isCurrentReservation = (reservation) => {
-        const currentDate = new Date();
-        const reservationEndDate = new Date(reservation.fin);
-        return reservationEndDate >= currentDate;
-    };
+    // const isCurrentReservation = (reservation) => {
+    //     const currentDate = new Date();
+    //     const reservationEndDate = new Date(reservation.fin);
+    //     return reservationEndDate >= currentDate;
+    // };
 
     // Fonction pour afficher une liste de réservations
-    const renderReservationList = (reservations) => {
-        return (
-            <ul>
-                {reservations.map(reservation => (
-                    <li key={reservation.id}>
-                        {reservation.nom} - {reservation.debut} à {reservation.fin}
-                    </li>
-                ))}
-            </ul>
-        );
-    };
+    function renderReservationList(reservations){
+
+        const list_resa = reservations.map(reservation =>
+            <li key={reservation.id}>
+                {reservation.nom} - {reservation.debut} à {reservation.fin}
+            </li>
+        )
+        return list_resa
+    }
 
     useEffect(() => {
       function getUser() {
@@ -88,21 +92,21 @@ function Homepage() {
           <div className="section">
             <h2 className="section-title">Réservations actuelles</h2>
               <h3>Articles</h3>
-              {renderReservationList(currentReservations.articles)}
+              {renderReservationList(currentReservations[0])}
               <h3>Modèles</h3>
-              {renderReservationList(currentReservations.modeles)}
+              {renderReservationList(currentReservations[1])}
               <h3>Ateliers</h3>
-              {renderReservationList(currentReservations.ateliers)}
+              {renderReservationList(currentReservations[2])}
           </div>
 
           <div className="section">
             <h2>Réservations passées</h2>
               <h3>Articles</h3>
-              {renderReservationList(pastReservations.articles)}
+              {/*{renderReservationList(pastReservations.articles)}*/}
               <h3>Modèles</h3>
-              {renderReservationList(pastReservations.modeles)}
+              {/*{renderReservationList(pastReservations.modeles)}*/}
               <h3>Ateliers</h3>
-              {renderReservationList(pastReservations.ateliers)}
+              {/*{renderReservationList(pastReservations.ateliers)}*/}
           </div>
 
           <div className="section">
@@ -117,7 +121,7 @@ function Homepage() {
                 </tr>
               </thead>
               <tbody>
-                {<List/> != null ? <List/> : null}
+                {/*{<List/> != null ? <List/> : null}*/}
               </tbody>
             </table>
           </div>
