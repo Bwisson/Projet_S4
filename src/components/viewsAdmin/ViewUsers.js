@@ -1,10 +1,11 @@
-/* Librairy imports */
+/* Library imports */
 import React, { useState, useEffect } from "react"
 import axios from 'axios'
 
 /* components imports */
 import Button from '../Button'
 import PopUpUser from "./PopUpUser"
+import FormInscription from "../connection/Inscription"
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewUsers.scss'
@@ -14,6 +15,7 @@ import '../../css/cssViewsAdmin/tableAdmin.scss'
 
 function ViewUsers() {
     const [showPopUp, setShowPopUp] = useState(false)
+    const [showAddUserForm, setShowAddUserForm] = useState(false)
     const [users, setUsers] = useState(null)
 
     useEffect(() => {
@@ -34,6 +36,10 @@ function ViewUsers() {
         return setShowPopUp(false)
     }
 
+    function changeVisiblityForm(){
+        return setShowAddUserForm(!showAddUserForm)
+    }
+
     function List(){
         let list_users = null
         if(users != null){
@@ -48,7 +54,6 @@ function ViewUsers() {
             );
 
         }
-
         return list_users
     }
 
@@ -68,6 +73,8 @@ function ViewUsers() {
                 {<List/> != null ? <List/> : null}
                 </tbody>
             </table>
+            {showAddUserForm && <FormInscription/>}
+            <Button id={"btnAddUser"} onSmash={changeVisiblityForm} text={"+"} bgColor={"#2882ff"}/>
             {<List/> == null ? <i>Aucun utilisateurs</i> : null}
             {showPopUp?
                 <>

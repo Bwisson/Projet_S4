@@ -5,6 +5,8 @@ import axios from "axios";
 /* components imports */
 import Button from "../Button";
 import CreateArticle from "./CreateArticle"
+import CreateAtelier from "./CreateAtelier"
+import CreateModele from "./CreateModele";
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
@@ -17,19 +19,43 @@ function ViewObjects() {
 
     const [newData, setNewData] = useState(false)
 
+    const [showingFormAddArticle, setShowingFormAddArticle] = useState(false)
+    const [showingFormAddAtelier, setShowingFormAddAtelier] = useState(false)
+    const [showingFormAddModele, setShowingFormAddModele] = useState(false)
+
+    const svgPlus = "<svg width=\"800px\" height=\"800px\" viewBox=\"0 0 24 24\" fill=\"none\"\n xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M6 12H18M12 6V18\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round stroke-linejoin=\"round\"/></svg>"
+
     useEffect(() => {
         function getModeles() {
             axios.get("./php/list/listAllModeles.php")
-                .then(response => { setModeles(response.data) })
+                .then(response => {
+                    let dataResponse = response.data
+                    if (dataResponse != null){
+                        dataResponse.reverse()
+                    }
+                    setModeles(dataResponse)
+                    setNewData(false)
+                })
         }
         function getAteliers() {
             axios.get("./php/list/listAllAteliers.php")
-                .then(response => { setAteliers(response.data) })
+                .then(response => {
+                    let dataResponse = response.data
+                    if (dataResponse != null){
+                        dataResponse.reverse()
+                    }
+                    setAteliers(dataResponse)
+                    setNewData(false)
+                })
         }
         function getArticles() {
             axios.get("./php/list/listAllArticles.php")
                 .then(response => {
-                    setArticles(response.data)
+                    let dataResponse = response.data
+                    if (dataResponse != null){
+                        dataResponse.reverse()
+                    }
+                    setArticles(dataResponse)
                     setNewData(false)
                 })
         }
@@ -48,7 +74,7 @@ function ViewObjects() {
                     <td>{modele.prenom}</td>
                     <td>{modele.genre}</td>
                     <td>{modele.age}</td>
-                    <td>{modele.tarif_horaire} €</td>
+                    <td>{modele.tarif_horaire} €/h</td>
                     {/*<td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>*/}
                 </tr>
             );
@@ -56,7 +82,6 @@ function ViewObjects() {
 
         return list_modeles
     }
-
     function ListAteliers(){
         let list_ateliers= null
         if(ateliers != null){
@@ -71,7 +96,6 @@ function ViewObjects() {
 
         return list_ateliers
     }
-
     function ListArticles(){
         let list_articles = null
         if(articles != null){
@@ -90,62 +114,84 @@ function ViewObjects() {
         return list_articles
     }
 
+    function showFormCreateArticle() {
+        setShowingFormAddArticle(!showingFormAddArticle)
+    }
+    function showFormCreateAtelier() {
+        setShowingFormAddAtelier(!showingFormAddAtelier)
+    }
+    function showFormCreateModele() {
+        setShowingFormAddModele(!showingFormAddModele)
+    }
+
     return (
         <div className="ViewObjects">
-            <table>
-                <caption>
-                    Modèles
-                </caption>
-                <thead>
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Âge</th>
-                    <th scope="col">Tarif horaire</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ListModeles/>
-                </tbody>
-            </table>
-            {modeles == null ? <i>Aucun modèles</i> : null}
+            <div className="tableForm">
+                {showingFormAddModele && <CreateModele setNewData={setNewData} setShowingFormAddModele={setShowingFormAddModele}/>}
+                <table>
+                    <caption>
+                        Modèles <Button onSmash={showFormCreateModele} text={"+"} bgColor={"#2882ff"}/>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Âge</th>
+                        <th scope="col">Tarif horaire</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ListModeles/>
+                    </tbody>
+                </table>
+            </div>
+            {modeles == null && <i>Aucun modèles</i>}
 
-            <table>
-            <caption>
-                    Ateliers
-                </caption>
-                <thead>
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Type</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ListAteliers/>
-                </tbody>
-            </table>
-            {ateliers == null ? <i>Aucun ateliers</i> : null}
+            <div className="tableForm">
+                {showingFormAddAtelier && <CreateAtelier setNewData={setNewData} setShowingFormAddAtelier={setShowingFormAddAtelier}/>}
+                <table>
+                    <caption>
+                        Ateliers <Button onSmash={showFormCreateAtelier} text={"+"} bgColor={"#2882ff"}/>
 
-            <table>
-            <caption>
-                    Articles
-                </caption>
-                <thead>
-                <tr>
-                    <th scope="col">Code barre</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Catégorie</th>
-                    <th scope="col">Couleur</th>
-                    <th scope="col">Taille</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ListArticles/>
-                </tbody>
-            </table>
-            {articles == null ? <i>Aucun articles</i> :null}
-            <CreateArticle setNewData={setNewData}/>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Type</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ListAteliers/>
+                    </tbody>
+                </table>
+            </div>
+            {ateliers == null && <i>Aucun ateliers</i>}
+
+            <div className="tableForm">
+                {showingFormAddArticle && <CreateArticle setNewData={setNewData} setShowingFormAddArticle={setShowingFormAddArticle}/>}
+                <table>
+                    <caption>
+                        Articles <Button onSmash={showFormCreateArticle} text={"+"} bgColor={"#2882ff"}/>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Code barre</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Couleur</th>
+                        <th scope="col">Taille</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ListArticles/>
+                    </tbody>
+                </table>
+                {articles == null && <i>Aucun articles</i>}
+            </div>
+
+
+
         </div>
     )
 }

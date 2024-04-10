@@ -1,8 +1,15 @@
-import Button from "../Button";
+/*Librairy imports */
 import axios from "axios";
 
+/*components imports */
+import Button from "../Button";
 
-function CreateArticle({ setNewData }){
+/* css imports */
+import "../../css/cssViewsAdmin/formAddObject.scss"
+import "../../css/form.scss"
+
+
+function CreateArticle({ setNewData, setShowingFormAddArticle }){
 
     function createArticle(event){
         event.preventDefault()
@@ -25,10 +32,11 @@ function CreateArticle({ setNewData }){
             .then(response => setNewData(response.data))
 
         form.reset()
+        setShowingFormAddArticle(false)
     }
 
     return (
-        <form className={"form"} method="post" onSubmit={createArticle}>
+        <form className={"formAddObject"} method="post" onSubmit={createArticle}>
             <div className={"divForm"}>
                 <label htmlFor="code_barre">Code barre :</label>
                 <input type="text" id="code_barre" name="code_barre" required={true}/>

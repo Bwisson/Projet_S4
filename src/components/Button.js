@@ -1,10 +1,13 @@
+/* Library imports */
+/* css imports */
 import '../css/Button.scss';
-function Button({ text, bgColor, onSmash }) {
+
+function Button({ id, text, bgColor, onSmash }) {
     if (bgColor == null){
         bgColor = "#c4a6ff";
     }
     return (
-        <button onClick={onSmash} className={"Button"} style={{backgroundColor: bgColor}} >{ text }</button>
+        <button  id={id} onClick={onSmash} className={"Button"} style={{backgroundColor: bgColor}} >{ text }</button>
     );
 }
 

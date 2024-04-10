@@ -2,9 +2,23 @@
   width: 88%;
   text-align: center;
 
-  table{
-    thead{
-      height: 8vh;
-    } 
+  .tableForm{
+    position: relative;
+
+    table{
+      position: relative;
+      caption{
+        word-spacing: 1em;
+        button{
+          width: 1.1em;
+          height: 1.1em;
+          padding: 0;
+        }
+      }
+      thead{
+        height: 8vh;
+      }
+    }
   }
 }
+

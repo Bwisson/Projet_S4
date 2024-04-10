@@ -1,8 +1,8 @@
 <?php
 include("function_rs_to_table.php");
 
-function createModele($conn, $id, $nom, $prenom, $genre, $tarif_horaire) {
-    $sql = "INSERT INTO `Modele` (`id`, `nom`, `prenom`, `genre`, `tarif_horaire`) VALUES ('$id', '$nom', '$prenom', '$genre', '$tarif_horaire')";
+function createModele($conn, $nom, $prenom, $genre, $age, $tarif_horaire) {
+    $sql = "INSERT INTO `Modele` (`nom`, `prenom`, `genre`, `age`, `tarif_horaire`) VALUES ('$nom', '$prenom', '$genre', $age, $tarif_horaire)";
     $res = mysqli_query($conn, $sql);
     return $res;
 }

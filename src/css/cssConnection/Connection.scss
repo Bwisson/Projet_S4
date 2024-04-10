@@ -4,39 +4,34 @@ $mauve : #c4a6ff;
 $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
-form{
-  width: 25vw;
-  padding: 2%;
-  border-radius: 5px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  text-align: center;
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.3em 0.6em;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  background: var(--background);
+  z-index: -1;
+  border-radius: 8px;
+  scale: 0;
+  transform-origin: 0 0;
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: 16px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+}
 
-  .divForm{
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    margin-bottom: 1.5em;
-
-    label{
-      margin-bottom: 5px;
-    }
-
-    input{
-      height: 1.8em;
-      padding-left: 8px;
-      border-radius: 5px;
-      border: 1px solid $gris;
-    }
-    input:focus{
-      outline: none;
-      border: 1px solid $bleu2;
-    }
-  }
-
-  a{
-    align-self: center;
-    button {
-      width: 1%;
-    }
-  }
+.tooltip::before {
+  position: absolute;
+  content: "";
+  border-radius: 2px;
+  height: 0.9em;
+  width: 0.9em;
+  left: -0.45em;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  background: var(--background);
 }
