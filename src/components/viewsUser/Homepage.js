@@ -6,7 +6,7 @@ import axios from "axios";
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
 
-function ViewObjects() {
+function Homepage() {
     const [currentReservations, setCurrentReservations] = useState([]);
     const [pastReservations, setPastReservations] = useState([]);
     const [user, setUser] = useState(null);
@@ -125,4 +125,4 @@ function ViewObjects() {
     );
 }
 
-export default ViewObjects;
+export default Homepage;
