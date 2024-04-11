@@ -14,6 +14,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
 
     if ($row){
         if (password_verify($mdp, $row['mdp'])) {
+            $_SESSION["id_user"] = $row["id"];
             $_SESSION["login"] = $row["login"];
             $_SESSION["connecte"] = true;
             if ($row["admin"]){

@@ -6,11 +6,6 @@ import axios from "axios";
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
 
-// const articles = [{nom : "test", debut : "test", fin : "test"}]
-// const modeles = [{nom : "test", debut : "test", fin : "test"}]
-// const ateliers = [{nom : "test", debut : "test", fin : "test"}]
-// const currentReservations = [articles, modeles, ateliers]
-
 function Homepage() {
     const [currentReservations, setCurrentReservations] = useState([]);
     const [pastReservations, setPastReservations] = useState([]);
@@ -42,12 +37,21 @@ function Homepage() {
                     ateliers: pastAteliersReservations
                 });
             });
+
+      function getUser() {
+        axios.get("./php/list/fromUser/listUserInfo.php")
+            .then(response => {
+                let datas = response.data
+                setUser(datas)
+            })
+      }
+      getUser()
     }, []);
 
     // Fonction pour vérifier si une réservation est actuelle ou passée
     const isCurrentReservation = (reservation) => {
         const currentDate = new Date();
-        const reservationEndDate = new Date(reservation.fin);
+        const reservationEndDate = new Date(reservation.end);
         return reservationEndDate >= currentDate;
     };
 
@@ -66,17 +70,6 @@ function Homepage() {
         return list_resa
     }
 
-    useEffect(() => {
-      function getUser() {
-          axios.get("./php/list/fromUser/listUserInfo.php")
-              .then(response => {
-                  let datas = response.data
-                  setUser(datas)
-              })
-      }
-      getUser() 
-  }, []);
-
     function List(){
       let list_user = null
       if(user != null) {
@@ -90,7 +83,7 @@ function Homepage() {
           );
       }
     }
-    console.log(currentReservations)
+
     return (
       <div className="container">
           <div className="section">

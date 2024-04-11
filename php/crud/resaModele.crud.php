@@ -1,4 +1,5 @@
 <?php
+// include("function_rs_to_table.php");
 
 function createResaModele($conn, $id_modele, $start, $end, $title, $groupId, $color, $constraint, $display) { 
     $sql = "INSERT INTO `ResaModele` (`id_modele`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`) VALUES ('$id_modele', '$start', '$end', '$title', '$groupId', '$color', '$constraint', '$display')";
@@ -26,7 +27,7 @@ function listResaModele($conn) {
 }
 
 function listResaModeleFromUser($conn, $id) {
-    $sql = "SELECT * FROM `ResaModele` rm JOIN `Modele` m ON rm.id_modele = m.id WHERE id_user = $id";
+    $sql = "SELECT rm.id, rm.id_modele, rm.start, rm.end, m.nom, m.prenom, m.genre, m.age, m.tarif_horaire FROM `ResaModele` rm JOIN `Modele` m ON rm.id_modele = m.id WHERE id_user = $id";
     $res = mysqli_query($conn, $sql);
     $rs = rs_to_table($res);
     return $rs;
