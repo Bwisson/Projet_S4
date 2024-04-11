@@ -61,7 +61,7 @@ function Homepage() {
         if (reservations != null) {
             list_resa = reservations.map(reservation =>
                 <li key={reservation.id}>
-                    {reservation.nom} - {reservation.debut} à {reservation.fin}
+                    {reservation.nom} - {reservation.start} à {reservation.end}
                 </li>
             )
         }else {
