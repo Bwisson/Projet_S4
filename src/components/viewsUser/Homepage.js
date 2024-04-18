@@ -1,10 +1,12 @@
 /* Librairy imports */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../Button.js"
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
+import '../../css/cssViewsUser/Homepage.scss'
 
 function Homepage() {
     const [currentReservations, setCurrentReservations] = useState([]);
@@ -56,73 +58,226 @@ function Homepage() {
     };
 
     // Fonction pour afficher une liste de réservations
+    function renderArticlesList(articles){
+      if (articles != null) {
+        return (
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Début</th>
+                <th scope="col">Fin</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Couleur</th>
+                <th scope="col">Taille</th>
+              </tr>
+            </thead>
+          {articles.map(article =>
+            <tbody key={article.id}>
+              <tr>
+                <td>{article.nom}</td>
+                <td>{article.start}</td>
+                <td>{article.end}</td>
+                <td>{article.categorie}</td>
+                <td>{article.couleur}</td>
+                <td>{article.taille}</td>
+                <td><Button /*link={} //L'id de l'article peut etre récupéré avec {article.id_article}*/ text={"Voir"} bgColor={"#2882ff"}/></td>
+              </tr>
+            </tbody>)}
+          </table>
+        )
+        
+      }else {
+        return <p>Aucun article</p>
+      }
+
+      
+    }
+
+    function renderAteliersList(ateliers){
+      if (ateliers != null) {
+        return (
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Début</th>
+                <th scope="col">Fin</th>
+                <th scope="col">Type</th>
+              </tr>
+            </thead>
+          {ateliers.map(atelier =>
+            <tbody key={atelier.id}>
+              <tr>
+                <td>{atelier.nom}</td>
+                <td>{atelier.start}</td>
+                <td>{atelier.end}</td>
+                <td>{atelier.type}</td>
+                <td><Button /*link={} //L'id de l'atelier peut etre récupéré avec {atelier.id_atelier}*/text={"Voir"} bgColor={"#2882ff"}/></td>
+              </tr>
+            </tbody>)}
+          </table>
+        )
+      }else {
+        return <p>Aucun atelier</p>
+      }
+    }
+
+    function renderModelesList(modeles){
+      if (modeles != null) {
+        return (
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Début</th>
+                <th scope="col">Fin</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Age</th>
+                <th scope="col">Tarif horaire</th>
+              </tr>
+            </thead>
+          {modeles.map(modele =>
+            <tbody key={modele.id}>
+              <tr>
+                <td>{modele.nom}</td>
+                <td>{modele.prenom}</td>
+                <td>{modele.start}</td>
+                <td>{modele.end}</td>
+                <td>{modele.genre}</td>
+                <td>{modele.age}</td>
+                <td>{modele.tarif_horaire}</td>
+                <td><Button /*link={} //L'id du modele peut etre récupéré avec {modele.id_modele}*/ text={"Voir"} bgColor={"#2882ff"}/></td>
+              </tr>
+            </tbody>)}
+          </table>
+        )
+      }else {
+        return <p>Aucun modèle</p>
+      }
+    }
+
+    // Fonction pour afficher une liste de réservations
     function renderReservationList(reservations){
-        let list_resa
         if (reservations != null) {
-            list_resa = reservations.map(reservation =>
-                <li key={reservation.id}>
-                    {reservation.nom} - {reservation.start} à {reservation.end}
-                </li>
-            )
+          return (
+          <div>
+            
+            <h3>Articles</h3>
+            <div className="tab">
+              {renderArticlesList(reservations.articles)}
+            </div>
+
+            <h3>Ateliers</h3>
+            <div className="tab">
+              {renderAteliersList(reservations.ateliers)}
+            </div>
+
+            <h3>Modeles</h3>
+            <div className="tab">
+              {renderModelesList(reservations.modeles)}
+            </div>
+
+          </div>
+          )
         }else {
-            list_resa = <p>Aucune données</p>
+            return (<p>Aucune données</p>)
         }
-        return list_resa
     }
 
     function List(){
-      let list_user = null
+      /* Calcul du nombre de réservation */
+      let nb_art_act;
+      if (currentReservations != null && currentReservations.articles != null) {
+        nb_art_act = currentReservations.articles.length;
+      }else {
+        nb_art_act = 0;
+      }
+      let nb_at_act;
+      if (currentReservations != null && currentReservations.ateliers != null) {
+        nb_at_act = currentReservations.ateliers.length;
+      }else {
+        nb_at_act = 0;
+      }
+      let nb_mod_act;
+      if (currentReservations != null && currentReservations.modeles != null) {
+        nb_mod_act = currentReservations.modeles.length;
+      }else {
+        nb_mod_act = 0;
+      }
+      let nb_art_pas;
+      if (pastReservations != null && pastReservations.articles != null) {
+        nb_art_pas = pastReservations.articles.length;
+      }else {
+        nb_art_pas = 0;
+      }
+      let nb_at_pas;
+      if (pastReservations != null && pastReservations.ateliers != null) {
+        nb_at_pas = pastReservations.ateliers.length;
+      }else {
+        nb_at_pas = 0;
+      }
+      let nb_mod_pas;
+      if (pastReservations != null && pastReservations.modeles != null) {
+        nb_mod_pas = pastReservations.modeles.length;
+      }else {
+        nb_mod_pas = 0;
+      }
+      let nb_resa = nb_art_act + nb_at_act + nb_mod_act + nb_art_pas + nb_at_pas + nb_mod_pas;
+
+      /* Tableau des données utilisateur */
       if(user != null) {
           return(
-          <tr>
-            <td id={"userLastName"}>{user.nom}</td>
-            <td>{user.prenom}</td>
-            <td>{user.login}</td>
-            <td>{user.mail}</td>
-          </tr>
+            <table>
+              <tr>
+                <th>Nom</th>
+                <td id={"userLastName"}>{user.nom}</td>
+              </tr>
+              <tr>
+                <th>Prenom</th>
+                <td>{user.prenom}</td>
+              </tr>
+              <tr>
+                <th>Login</th>
+                <td>{user.login}</td>
+              </tr>
+              <tr>
+                <th>Mail</th>
+                <td>{user.mail}</td>
+              </tr>
+              <tr>
+                <th>Nombre de réservations effectuées</th>
+                <td>{nb_resa}</td>
+              </tr>
+            </table>
           );
       }
     }
 
     return (
-      <div className="container">
+      <div className="App">
+        <div className="reservations">
           <div className="section">
-            <h2 className="section-title">Réservations actuelles</h2>
-              <h3>Articles</h3>
-              {renderReservationList(currentReservations.articles)}
-              <h3>Modèles</h3>
-              {renderReservationList(currentReservations.modeles)}
-              <h3>Ateliers</h3>
-              {renderReservationList(currentReservations.ateliers)}
+            <h2>Réservations actuelles</h2>
+            <div className="actuelles">
+                {renderReservationList(currentReservations)}
+            </div>
           </div>
-
           <div className="section">
             <h2>Réservations passées</h2>
-              <h3>Articles</h3>
-              {renderReservationList(pastReservations.articles)}
-              <h3>Modèles</h3>
-              {renderReservationList(pastReservations.modeles)}
-              <h3>Ateliers</h3>
-              {renderReservationList(pastReservations.ateliers)}
-          </div>
-
-          <div className="section">
-            <h2>Mes informations</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Prénom</th>
-                  <th scope="col">Login</th>
-                  <th scope="col">Mail</th>
-                </tr>
-              </thead>
-              <tbody>
-                {<List/> != null && <List/>}
-              </tbody>
-            </table>
+            <div className="passees">
+                {renderReservationList(pastReservations)}
+            </div>
           </div>
         </div>
+        <div className="section">
+          <div className="informations">
+          <h2>Mes informations</h2>
+            {<List/> != null && <List/>}
+          </div>
+        </div>
+      </div>
     );
 }
 
