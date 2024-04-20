@@ -256,7 +256,7 @@ function Homepage() {
     }
 
     return (
-      <div className="App">
+      <div className="Homepage">
         <div className="reservations">
           <div className="section">
             <h2>Réservations actuelles</h2>
