@@ -6,7 +6,7 @@ import Button from "../Button.js"
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
-import '../../css/cssViewsUser/Homepage.scss'
+import '../../css/cssViewUser/Homepage.scss'
 
 function Homepage() {
     const [currentReservations, setCurrentReservations] = useState([]);
