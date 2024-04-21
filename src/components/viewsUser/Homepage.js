@@ -122,39 +122,24 @@ function Homepage() {
       }
     }
 
-    function renderModelesList(modeles){
-      if (modeles != null) {
-        return (
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Prénom</th>
-                <th scope="col">Début</th>
-                <th scope="col">Fin</th>
-                <th scope="col">Genre</th>
-                <th scope="col">Age</th>
-                <th scope="col">Tarif horaire</th>
-              </tr>
-            </thead>
-          {modeles.map(modele =>
-            <tbody key={modele.id}>
-              <tr>
-                <td>{modele.nom}</td>
-                <td>{modele.prenom}</td>
-                <td>{modele.start}</td>
-                <td>{modele.end}</td>
-                <td>{modele.genre}</td>
-                <td>{modele.age}</td>
-                <td>{modele.tarif_horaire}</td>
-                <td><Button /*link={} //L'id du modele peut etre récupéré avec {modele.id_modele}*/ text={"Voir"} bgColor={"#2882ff"}/></td>
-              </tr>
-            </tbody>)}
-          </table>
-        )
-      }else {
-        return <p>Aucun modèle</p>
-      }
+    function renderModelesList(modeles) {
+        console.log(modeles);
+        let res = "Aucun modèles"
+        if (modeles != null) {
+            res = modeles.map(modele =>
+                <tr>
+                    <td>{modele.nom}</td>
+                    <td>{modele.prenom}</td>
+                    <td>{modele.start}</td>
+                    <td>{modele.end}</td>
+                    <td>{modele.genre}</td>
+                    <td>{modele.age}</td>
+                    <td>{modele.tarif_horaire}</td>
+                    <td><Button /*link={} //L'id du modele peut etre récupéré avec {modele.id_modele}*/
+                        text={"Voir"} bgColor={"#2882ff"}/></td>
+                </tr>)
+        }
+        return res
     }
 
     // Fonction pour afficher une liste de réservations
@@ -173,27 +158,42 @@ function Homepage() {
             </div>
 
             <h3>Modeles</h3>
-            <div className="tab">
-              {renderModelesList(reservations.modeles)}
-            </div>
+              <div className="tab">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th scope="col">Nom</th>
+                              <th scope="col">Prénom</th>
+                              <th scope="col">Début</th>
+                              <th scope="col">Fin</th>
+                              <th scope="col">Genre</th>
+                              <th scope="col">Age</th>
+                              <th scope="col">Tarif horaire</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        {renderModelesList(reservations.modeles)}
+                      </tbody>
+                  </table>
+              </div>
 
           </>
           )
-        }else {
+        } else {
             return (<p>Aucune données</p>)
         }
     }
 
-    function List(){
-      /* Calcul du nombre de réservation */
-      let nb_art_act;
-      if (currentReservations != null && currentReservations.articles != null) {
-        nb_art_act = currentReservations.articles.length;
-      }else {
-        nb_art_act = 0;
-      }
-      let nb_at_act;
-      if (currentReservations != null && currentReservations.ateliers != null) {
+    function List() {
+        /* Calcul du nombre de réservation */
+        let nb_art_act;
+        if (currentReservations != null && currentReservations.articles != null) {
+            nb_art_act = currentReservations.articles.length;
+        } else {
+            nb_art_act = 0;
+        }
+        let nb_at_act;
+        if (currentReservations != null && currentReservations.ateliers != null) {
         nb_at_act = currentReservations.ateliers.length;
       }else {
         nb_at_act = 0;
