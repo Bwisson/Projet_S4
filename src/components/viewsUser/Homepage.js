@@ -5,7 +5,6 @@ import Button from "../Button.js"
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
-import '../../css/cssViewsAdmin/tableAdmin.scss'
 import '../../css/cssViewUser/Homepage.scss'
 
 function Homepage() {
@@ -162,8 +161,7 @@ function Homepage() {
     function renderReservationList(reservations){
         if (reservations != null) {
           return (
-          <div>
-            
+          <>
             <h3>Articles</h3>
             <div className="tab">
               {renderArticlesList(reservations.articles)}
@@ -179,7 +177,7 @@ function Homepage() {
               {renderModelesList(reservations.modeles)}
             </div>
 
-          </div>
+          </>
           )
         }else {
             return (<p>Aucune données</p>)
@@ -230,26 +228,28 @@ function Homepage() {
       if(user != null) {
           return(
             <table>
-              <tr>
-                <th>Nom</th>
-                <td id={"userLastName"}>{user.nom}</td>
-              </tr>
-              <tr>
-                <th>Prenom</th>
-                <td>{user.prenom}</td>
-              </tr>
-              <tr>
-                <th>Login</th>
-                <td>{user.login}</td>
-              </tr>
-              <tr>
-                <th>Mail</th>
-                <td>{user.mail}</td>
-              </tr>
-              <tr>
-                <th>Nombre de réservations effectuées</th>
-                <td>{nb_resa}</td>
-              </tr>
+                <tbody>
+                  <tr>
+                    <th>Nom</th>
+                    <td id={"userLastName"}>{user.nom}</td>
+                  </tr>
+                  <tr>
+                    <th>Prenom</th>
+                    <td>{user.prenom}</td>
+                  </tr>
+                  <tr>
+                    <th>Login</th>
+                    <td>{user.login}</td>
+                  </tr>
+                  <tr>
+                    <th>Mail</th>
+                    <td>{user.mail}</td>
+                  </tr>
+                  <tr>
+                    <th>Nombre de réservations effectuées</th>
+                    <td>{nb_resa}</td>
+                  </tr>
+                </tbody>
             </table>
           );
       }

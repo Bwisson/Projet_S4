@@ -5,82 +5,78 @@ $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
 .Homepage {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Divise la grille en deux colonnes égales */
-    gap: 20px; /* Espacement entre les colonnes */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Divise la grille en deux colonnes égales */
+  gap: 20px; /* Espacement entre les colonnes */
 
-    h2 {
-      color: $bleu1;
-      background-color: $rose;
-      margin-top: 5px;
-      padding: 10px;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-    }
-  
-    .reservations {
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-  
-      .section {
-        border: 1px solid #000000;
-        border-radius: 15px;
-        padding: 10px;
-  
-        h3 {
-          color: $bleu2;
-          margin-top: 10px;
-        }
-      }
-  
-      .tab {
-        margin-top: 10px;
-        max-height: 200px;
-        overflow-y: auto;
-  
-        table {
-          width: 100%;
-          border-collapse: collapse;
-  
-          th, td {
-            border: 1px solid $gris;
-            padding: 8px;
-            text-align: left;
-          }
-  
-          th {
-            background-color: $mauve;
-            font-weight: bold;
-          }
-        }
-      }
-    }
-  
-    .informations {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+  h2 {
+    color: $bleu1;
+    background-color: $rose;
+    margin-top: 5px;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  th{
+    color: white;
+    background-color: $mauve;
+    font-weight: bold;
+  }
+
+  .reservations {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .section {
       border: 1px solid black;
       border-radius: 15px;
       padding: 10px;
-      margin: 10px;
+
+      h3 {
+        color: $bleu2;
+        margin-top: 10px;
+      }
+    }
+
+    .tab {
+      margin-top: 10px;
+      max-height: 200px;
+      overflow-y: auto;
 
       table {
         width: 100%;
         border-collapse: collapse;
-  
+
         th, td {
           border: 1px solid $gris;
           padding: 8px;
           text-align: left;
         }
-  
-        th {
-          background-color: $mauve;
-          font-weight: bold;
-        }
       }
     }
   }
+}
+  
+.informations {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+
+    table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid $gris;
+      padding: 8px;
+      text-align: left;
+    }
+  }
+}
