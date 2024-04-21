@@ -5,6 +5,7 @@ $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
 .Homepage {
+  width: 88vw;
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Divise la grille en deux colonnes égales */
   gap: 20px; /* Espacement entre les colonnes */
