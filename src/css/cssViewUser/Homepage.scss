@@ -12,17 +12,17 @@ $gris : rgb(227, 227, 227);
 
   h2 {
     color: $bleu1;
-    background-color: $rose;
     margin-top: 5px;
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
 
   th{
-    color: white;
-    background-color: $mauve;
-    font-weight: bold;
+    padding: 8px;
+    border-bottom: 1.5px solid black;
+    //color: $gris;
+    font-weight: normal;
   }
 
   .reservations {
@@ -51,11 +51,19 @@ $gris : rgb(227, 227, 227);
         width: 100%;
         border-collapse: collapse;
 
-        th, td {
-          border: 1px solid $gris;
+        td {
+          border-left: 1px solid $gris;
+          border-bottom: 1px solid $gris;
           padding: 8px;
-          text-align: left;
+          text-align: center;
         }
+
+        //td:last-of-type{
+        //  border: none;
+        //}
+        //td:first-of-type{
+        //  border-left: 1px solid $gris;
+        //}
       }
     }
   }

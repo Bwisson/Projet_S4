@@ -60,7 +60,7 @@ function ViewUsers() {
 
     return (
         <div className="ViewUsers">
-            <table>
+            <table className={"adminTable"}>
                 <thead>
                     <tr>
                         <th scope="col">Nom</th>

@@ -128,7 +128,7 @@ function ViewObjects() {
         <div className="ViewObjects">
             <div className="tableForm">
                 {showingFormAddModele && <CreateModele setNewData={setNewData} setShowingFormAddModele={setShowingFormAddModele}/>}
-                <table>
+                <table className={"adminTable"}>
                     <caption>
                         Modèles <Button onSmash={showFormCreateModele} text={"+"} bgColor={"#2882ff"}/>
                     </caption>
@@ -150,7 +150,7 @@ function ViewObjects() {
 
             <div className="tableForm">
                 {showingFormAddAtelier && <CreateAtelier setNewData={setNewData} setShowingFormAddAtelier={setShowingFormAddAtelier}/>}
-                <table>
+                <table className={"adminTable"}>
                     <caption>
                         Ateliers <Button onSmash={showFormCreateAtelier} text={"+"} bgColor={"#2882ff"}/>
 
@@ -170,7 +170,7 @@ function ViewObjects() {
 
             <div className="tableForm">
                 {showingFormAddArticle && <CreateArticle setNewData={setNewData} setShowingFormAddArticle={setShowingFormAddArticle}/>}
-                <table>
+                <table className={"adminTable"}>
                     <caption>
                         Articles <Button onSmash={showFormCreateArticle} text={"+"} bgColor={"#2882ff"}/>
                     </caption>
@@ -189,9 +189,6 @@ function ViewObjects() {
                 </table>
                 {articles == null && <i>Aucun articles</i>}
             </div>
-
-
-
         </div>
     )
 }
