@@ -42,7 +42,7 @@ function App() {
                 <div className={"pageContent"}>
                     <NavBar admin={admin} setDeconnection={setIsConnect}/>
                     <Routes>
-                        <Route path={"info7/Homepage"} element={<Homepage/>}/>
+                        <Route path={"info7/"} element={<Homepage/>}/>
                         <Route path="info7/AdminViewUsers" element={<ViewUsers />}/>  TODO : changer avant de push
                         {/*<Route path="/AdminViewUsers" element={<ViewUsers />}/>*/}
                         <Route path="info7/AdminViewObjects" element={<ViewObjects />}/>
