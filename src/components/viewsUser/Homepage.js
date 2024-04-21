@@ -64,8 +64,8 @@ function Homepage() {
                 let list_articles = articles.map(article =>
                     <tr>
                         <td>{article.nom}</td>
-                        <td>{article.start}</td>
-                        <td>{article.end}</td>
+                        <td>{new Date(article.start).toLocaleDateString()}</td>
+                        <td>{new Date(article.end).toLocaleDateString()}</td>
                         <td>{article.categorie}</td>
                         <td>{article.couleur}</td>
                         <td>{article.taille}</td>
@@ -100,8 +100,8 @@ function Homepage() {
                 let list_ateliers = ateliers.map(atelier =>
                     <tr>
                         <td>{atelier.nom}</td>
-                        <td>{atelier.start}</td>
-                        <td>{atelier.end}</td>
+                        <td>{new Date(atelier.start).toLocaleDateString()}</td>
+                        <td>{new Date(atelier.end).toLocaleDateString()}</td>
                         <td>{atelier.type}</td>
                         <td><Button /*link={} //L'id de l'atelier peut etre récupéré avec {atelier.id_atelier}*/
                             text={"Voir"} bgColor={"#2882ff"}/></td>
@@ -135,8 +135,8 @@ function Homepage() {
                         <tr>
                             <td>{modele.nom}</td>
                             <td>{modele.prenom}</td>
-                            <td>{modele.start}</td>
-                            <td>{modele.end}</td>
+                            <td>{new Date(modele.start).toLocaleDateString()}</td>
+                            <td>{new Date(modele.end).toLocaleDateString()}</td>
                             <td>{modele.genre}</td>
                             <td>{modele.age}</td>
                             <td>{modele.tarif_horaire}</td>
