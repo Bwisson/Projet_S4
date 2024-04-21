@@ -58,86 +58,110 @@ function Homepage() {
 
     // Fonction pour afficher une liste de réservations
     function renderArticlesList(articles){
-      if (articles != null) {
-        return (
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Début</th>
-                <th scope="col">Fin</th>
-                <th scope="col">Catégorie</th>
-                <th scope="col">Couleur</th>
-                <th scope="col">Taille</th>
-              </tr>
-            </thead>
-          {articles.map(article =>
-            <tbody key={article.id}>
-              <tr>
-                <td>{article.nom}</td>
-                <td>{article.start}</td>
-                <td>{article.end}</td>
-                <td>{article.categorie}</td>
-                <td>{article.couleur}</td>
-                <td>{article.taille}</td>
-                <td><Button /*link={} //L'id de l'article peut etre récupéré avec {article.id_article}*/ text={"Voir"} bgColor={"#2882ff"}/></td>
-              </tr>
-            </tbody>)}
-          </table>
-        )
-        
-      }else {
-        return <p>Aucun article</p>
-      }
-
-      
+        let res= <p>Aucun article</p>
+        if (articles != null) {
+            if (articles.length != 0){
+                let list_articles = articles.map(article =>
+                    <tr>
+                        <td>{article.nom}</td>
+                        <td>{article.start}</td>
+                        <td>{article.end}</td>
+                        <td>{article.categorie}</td>
+                        <td>{article.couleur}</td>
+                        <td>{article.taille}</td>
+                        <td><Button /*link={} //L'id de l'article peut etre récupéré avec {article.id_article}*/
+                            text={"Voir"} bgColor={"#2882ff"}/></td>
+                    </tr>)
+                res =
+                    <table className={"tab"}>
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Début</th>
+                            <th scope="col">Fin</th>
+                            <th scope="col">Catégorie</th>
+                            <th scope="col">Couleur</th>
+                            <th scope="col">Taille</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {list_articles}
+                        </tbody>
+                    </table>
+            }
+        }
+        return res
     }
 
-    function renderAteliersList(ateliers){
-      if (ateliers != null) {
-        return (
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Début</th>
-                <th scope="col">Fin</th>
-                <th scope="col">Type</th>
-              </tr>
-            </thead>
-          {ateliers.map(atelier =>
-            <tbody key={atelier.id}>
-              <tr>
-                <td>{atelier.nom}</td>
-                <td>{atelier.start}</td>
-                <td>{atelier.end}</td>
-                <td>{atelier.type}</td>
-                <td><Button /*link={} //L'id de l'atelier peut etre récupéré avec {atelier.id_atelier}*/text={"Voir"} bgColor={"#2882ff"}/></td>
-              </tr>
-            </tbody>)}
-          </table>
-        )
-      }else {
-        return <p>Aucun atelier</p>
-      }
+    function renderAteliersList(ateliers) {
+        let res = <p>Aucun ateliers</p>
+        if (ateliers != null) {
+            if (ateliers.length != 0){
+                let list_ateliers = ateliers.map(atelier =>
+                    <tr>
+                        <td>{atelier.nom}</td>
+                        <td>{atelier.start}</td>
+                        <td>{atelier.end}</td>
+                        <td>{atelier.type}</td>
+                        <td><Button /*link={} //L'id de l'atelier peut etre récupéré avec {atelier.id_atelier}*/
+                            text={"Voir"} bgColor={"#2882ff"}/></td>
+                    </tr>)
+
+                res =
+                    <table className={"tab"}>
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Début</th>
+                            <th scope="col">Fin</th>
+                            <th scope="col">Type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {list_ateliers}
+                        </tbody>
+                    </table>
+            }
+        }
+        return res
     }
 
     function renderModelesList(modeles) {
-        console.log(modeles);
         let res = "Aucun modèles"
         if (modeles != null) {
-            res = modeles.map(modele =>
-                <tr>
-                    <td>{modele.nom}</td>
-                    <td>{modele.prenom}</td>
-                    <td>{modele.start}</td>
-                    <td>{modele.end}</td>
-                    <td>{modele.genre}</td>
-                    <td>{modele.age}</td>
-                    <td>{modele.tarif_horaire}</td>
-                    <td><Button /*link={} //L'id du modele peut etre récupéré avec {modele.id_modele}*/
-                        text={"Voir"} bgColor={"#2882ff"}/></td>
-                </tr>)
+            if (modeles.length != 0) {
+                let list_modeles =
+                    modeles.map(modele =>
+                        <tr>
+                            <td>{modele.nom}</td>
+                            <td>{modele.prenom}</td>
+                            <td>{modele.start}</td>
+                            <td>{modele.end}</td>
+                            <td>{modele.genre}</td>
+                            <td>{modele.age}</td>
+                            <td>{modele.tarif_horaire}</td>
+                            <td><Button /*link={} //L'id du modele peut etre récupéré avec {modele.id_modele}*/
+                                text={"Voir"} bgColor={"#2882ff"}/></td>
+                        </tr>)
+
+                res =
+                    <table className={"tab"}>
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Début</th>
+                            <th scope="col">Fin</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Tarif horaire</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {list_modeles}
+                        </tbody>
+                    </table>
+            }
         }
         return res
     }
@@ -145,40 +169,25 @@ function Homepage() {
     // Fonction pour afficher une liste de réservations
     function renderReservationList(reservations){
         if (reservations != null) {
-          return (
-          <>
-            <h3>Articles</h3>
-            <div className="tab">
-              {renderArticlesList(reservations.articles)}
-            </div>
+            return (
+            <>
+                <div className="titleTab">
+                    <h3>Articles</h3>
+                    {renderArticlesList(reservations.articles)}
+                </div>
 
-            <h3>Ateliers</h3>
-            <div className="tab">
-              {renderAteliersList(reservations.ateliers)}
-            </div>
+                <div className="titleTab">
+                    <h3>Ateliers</h3>
+                    {renderAteliersList(reservations.ateliers)}
+                </div>
 
-            <h3>Modeles</h3>
-              <div className="tab">
-                  <table>
-                      <thead>
-                          <tr>
-                              <th scope="col">Nom</th>
-                              <th scope="col">Prénom</th>
-                              <th scope="col">Début</th>
-                              <th scope="col">Fin</th>
-                              <th scope="col">Genre</th>
-                              <th scope="col">Age</th>
-                              <th scope="col">Tarif horaire</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        {renderModelesList(reservations.modeles)}
-                      </tbody>
-                  </table>
-              </div>
+                <div className={"titleTab"}>
+                    <h3>Modeles</h3>
+                    {renderModelesList(reservations.modeles)}
+                </div>
 
-          </>
-          )
+            </>
+            )
         } else {
             return (<p>Aucune données</p>)
         }
@@ -194,12 +203,12 @@ function Homepage() {
         }
         let nb_at_act;
         if (currentReservations != null && currentReservations.ateliers != null) {
-        nb_at_act = currentReservations.ateliers.length;
-      }else {
-        nb_at_act = 0;
-      }
-      let nb_mod_act;
-      if (currentReservations != null && currentReservations.modeles != null) {
+            nb_at_act = currentReservations.ateliers.length;
+        } else {
+            nb_at_act = 0;
+        }
+        let nb_mod_act;
+        if (currentReservations != null && currentReservations.modeles != null) {
         nb_mod_act = currentReservations.modeles.length;
       }else {
         nb_mod_act = 0;
@@ -260,13 +269,13 @@ function Homepage() {
         <div className="reservations">
           <div className="section">
             <h2>Réservations actuelles</h2>
-            <div className="actuelles">
+            <div className="listResas">
                 {renderReservationList(currentReservations)}
             </div>
           </div>
           <div className="section">
             <h2>Réservations passées</h2>
-            <div className="passees">
+            <div className="listResas">
                 {renderReservationList(pastReservations)}
             </div>
           </div>

@@ -13,16 +13,9 @@ $gris : rgb(227, 227, 227);
   h2 {
     color: $bleu1;
     margin-top: 5px;
-    padding: 10px 10px 10px 0;
+    padding: 10px 0 10px 0;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-  }
-
-  th{
-    padding: 8px;
-    border-bottom: 1.5px solid black;
-    //color: $gris;
-    font-weight: normal;
   }
 
   .reservations {
@@ -40,6 +33,13 @@ $gris : rgb(227, 227, 227);
         color: $bleu2;
         margin-top: 10px;
       }
+
+      .listResas{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 40px;
+      }
     }
 
     .tab {
@@ -47,23 +47,20 @@ $gris : rgb(227, 227, 227);
       max-height: 200px;
       overflow-y: auto;
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
+      width: 100%;
+      border-collapse: collapse;
 
-        td {
-          border-left: 1px solid $gris;
-          border-bottom: 1px solid $gris;
-          padding: 8px;
-          text-align: center;
-        }
+      th{
+        padding: 8px;
+        border-bottom: 1.5px solid black;
+        font-weight: normal;
+      }
 
-        //td:last-of-type{
-        //  border: none;
-        //}
-        //td:first-of-type{
-        //  border-left: 1px solid $gris;
-        //}
+      td {
+        border-left: 1px solid $gris;
+        border-bottom: 1px solid $gris;
+        padding: 8px;
+        text-align: center;
       }
     }
   }
