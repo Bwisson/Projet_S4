@@ -1,6 +1,3 @@
-/* Librairy imports */
-import React, { useState, useEffect } from "react"
-
 /* components imports */
 import Button from '../Button'
 
