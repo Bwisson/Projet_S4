@@ -30,6 +30,7 @@ function NavBar({ admin, setDeconnection }) {
                 </div>
 
                 <ul>
+                    <li><Link to={"info7/ViewArticles"}>ARTICLES (provisoire)</Link></li>
                     <li>CHEVALETS</li>
                     <li>PEINTURE</li>
                     <li>MODÈLES</li>
