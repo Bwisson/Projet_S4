@@ -12,7 +12,9 @@ function CardReservable({title, URLimage}){
     return(
         <div className={"CardReservable"}>
             <div className={"img"}></div>
-            <h4>{title}</h4>
+            <div className="cardTitle">
+                <h4>{title}</h4>
+            </div>
             <Button bgColor={"#C4A6FF"} text={"Réserver"}/>
 
         </div>

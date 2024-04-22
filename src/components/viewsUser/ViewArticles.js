@@ -11,53 +11,33 @@ import '../../css/cssViewUser/ViewArticles.scss'
 
 
 function ViewArticles() {
-    const [article, setArticle]=useState(null)
+    const [articles, setArticles]=useState(null)
 
     useEffect(()=> {
         function getArticle() {
-            axios.get(".php/list/getArticle.php")
-                .then(response => {setArticle(response.data)})
+            axios.get("./php/list/listAllArticles.php")
+                .then(response => {setArticles(response.data)})
         }
         getArticle();
         }, [])
 
-    /*function Image() {
-      let image_product = null
-      if(product != null){
-        image_product = product.map(prod =>
-          <span>{prod.i}</span>
-          );
-          }
-          return image_article
-          }*/
-
-    function Title() {
-        let title_article = null
-        if(article != null){
-            title_article = article.map(art =>
-                <span>{art.nom}</span>
-            );
+    function ListArticles(){
+        let res = <p>Aucun articles désolé</p>
+        if (articles != null) {
+            if (articles.length != 0) {
+                res = articles.map(article =>
+                    <CardReservable title={article.nom}/>
+                )
+            }
         }
-        return title_article
+        return res
     }
-
-    /*function Desc() {
-    let desc_article = null
-    if(article != null){
-      desc_article = article.map(art =>
-        <p>{art.desc}</p>
-      );
-    }
-    return desc_article
-    }*/
-
-    // function Calendar(){
-    //     return <td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
-    // }
 
     return (
-        <div className="ViewArticle">
-            <CardReservable title={"Pinceau"}/>
+        <div className="ViewArticles">
+            <div className="articlesContainer">
+                <ListArticles/>
+            </div>
         </div>
     )
 }
