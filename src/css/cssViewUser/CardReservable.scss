@@ -1,3 +1,9 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
+
 .CardReservable{
   display: flex;
   flex-direction: column;
@@ -11,7 +17,7 @@
   .img{
     width: 180px;
     height: 130px;
-    background-color: #ffd2ff;
+    background-color: $rose;
     border-radius: 8px;
   }
 

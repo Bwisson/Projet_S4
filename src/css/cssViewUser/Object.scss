@@ -1,0 +1,39 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
+
+.Object{
+  width: 88vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 40px;
+
+  .leftSide{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    .imgCard{
+      width: 540px;
+      height: 390px;
+      background-color: lightgray;
+    }
+
+    h2{
+      color: $bleu1;
+    }
+
+    article{
+      width: 540px;
+    }
+  }
+
+  .rightSide{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+}

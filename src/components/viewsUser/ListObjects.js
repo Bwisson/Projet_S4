@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
-/* components imports */
-import CardReservable from "./CardReservable";
-
 /* css imports */
 import '../../css/cssViewUser/ListObjects.scss'
+
+/* components imports */
+import CardReservable from "./CardReservable";
 
 
 function ListObjects() {
