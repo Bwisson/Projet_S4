@@ -1,9 +1,9 @@
 /* Librairy imports */
 import React, { useState, useEffect } from "react"
+import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
 /* components imports */
-import Button from '../Button'
 import CardReservable from "./CardReservable";
 
 /* css imports */
@@ -11,17 +11,19 @@ import '../../css/cssViewUser/ViewArticles.scss'
 
 
 function ViewArticles() {
+    const { reservableObject } = useParams()
+    const url = "./../php/list/listAll"+reservableObject+".php"
     const [articles, setArticles]=useState(null)
 
     useEffect(()=> {
-        function getArticle() {
-            axios.get("./php/list/listAllArticles.php")
+        function getObjects() {
+            axios.get(url)
                 .then(response => {setArticles(response.data)})
         }
-        getArticle();
-        }, [])
+        getObjects();
+        }, [url])
 
-    function ListArticles(){
+    function Objects(){
         let res = <p>Aucun articles désolé</p>
         if (articles != null) {
             if (articles.length != 0) {
@@ -36,7 +38,7 @@ function ViewArticles() {
     return (
         <div className="ViewArticles">
             <div className="articlesContainer">
-                <ListArticles/>
+                <Objects/>
             </div>
         </div>
     )

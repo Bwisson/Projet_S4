@@ -22,13 +22,26 @@ function selectArticle($conn, $id){
     $res = mysqli_query($conn, $sql);
     return $res;
 }
-function listArticle($conn) {
+
+function selectArticleCat($conn, $cat){
+    $sql = "SELECT * FROM `Article` WHERE `categorie`='$cat'";
+    $res = mysqli_query($conn, $sql);
+    $rs = null;
+
+    if (mysqli_num_rows($res) != 0){
+        $rs = rs_to_table($res);
+    }
+
+    return $rs;
+}
+function listArticle($conn)
+{
     $sql = "SELECT * FROM `Article`";
     $res = mysqli_query($conn, $sql);
-    $rs = rs_to_table($res);
+    $rs = null;
 
-    if(mysqli_num_rows($res) == 0){
-        $rs = null;
+    if (mysqli_num_rows($res) != 0) {
+        $rs = rs_to_table($res);
     }
 
     return $rs;
