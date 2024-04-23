@@ -32,10 +32,10 @@ function NavBar({ admin, setDeconnection }) {
                     </div>
 
                     <ul>
-                        <li><Link to={"info7/ViewArticles/Chevalets"}>CHEVALETS</Link></li>
-                        <li><Link to={"info7/ViewArticles/Peinture"}>PEINTURE</Link></li>
-                        <li><Link to={"info7/ViewArticles/Modeles"}>MODÈLES</Link></li>
-                        <li><Link to={"info7/ViewArticles/Ateliers"}>ATELIERS</Link></li>
+                        <li><Link to={"info7/ListObjects/Chevalets"}>CHEVALETS</Link></li>
+                        <li><Link to={"info7/ListObjects/Peinture"}>PEINTURE</Link></li>
+                        <li><Link to={"info7/ListObjects/Modeles"}>MODÈLES</Link></li>
+                        <li><Link to={"info7/ListObjects/Ateliers"}>ATELIERS</Link></li>
                     </ul>
                     {admin ?
                         <>

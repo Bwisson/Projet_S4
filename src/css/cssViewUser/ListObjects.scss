@@ -4,8 +4,9 @@ $mauve : #c4a6ff;
 $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
-.ViewArticles{
+.ListObjects{
   width: 88vw;
+
   .articlesContainer{
     display: grid;
     grid-template-columns: repeat(4, 1fr);

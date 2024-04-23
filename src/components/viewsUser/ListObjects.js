@@ -7,10 +7,10 @@ import axios from 'axios'
 import CardReservable from "./CardReservable";
 
 /* css imports */
-import '../../css/cssViewUser/ViewArticles.scss'
+import '../../css/cssViewUser/ListObjects.scss'
 
 
-function ViewArticles() {
+function ListObjects() {
     const { reservableObject } = useParams()
     const url = "./../php/list/listAll"+reservableObject+".php"
     const [articles, setArticles]=useState(null)
@@ -36,7 +36,7 @@ function ViewArticles() {
     }
 
     return (
-        <div className="ViewArticles">
+        <div className="ListObjects">
             <div className="articlesContainer">
                 <Objects/>
             </div>
@@ -44,4 +44,4 @@ function ViewArticles() {
     )
 }
 
-export default ViewArticles;
+export default ListObjects;
