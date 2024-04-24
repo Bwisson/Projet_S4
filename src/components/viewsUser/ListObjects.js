@@ -28,7 +28,7 @@ function ListObjects() {
         if (articles != null) {
             if (articles.length != 0) {
                 res = articles.map(article =>
-                    <CardReservable title={article.nom}/>
+                    <CardReservable id={article.id} type={reservableObject} title={article.nom}/>
                 )
             }
         }
