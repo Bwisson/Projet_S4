@@ -5,16 +5,16 @@ $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
 .Object{
-  width: 88vw;
+  width: calc(88vw - 39px);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 40px;
+  padding: 20px;
 
   .leftSide{
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 40px;
 
     .imgCard{
       width: 540px;
@@ -34,6 +34,13 @@ $gris : rgb(227, 227, 227);
   .rightSide{
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    justify-content: space-between;
+    gap: 20px;
+
+    .calendar{
+      width: 540px;
+      height: 390px;
+      border: 1px solid black;
+    }
   }
 }
