@@ -8,7 +8,6 @@ import Button from '../Button'
 import '../../css/cssViewUser/CardReservable.scss'
 
 function CardReservable({id, type, title, URLimage}){
-    const url = "info7/Object/" + type + "/" + id
 
     return(
         <div className={"CardReservable"}>
@@ -16,7 +15,7 @@ function CardReservable({id, type, title, URLimage}){
             <div className="cardTitle">
                 <h4>{title}</h4>
             </div>
-            <Link to={url}></Link><Button bgColor={"#C4A6FF"} text={"Réserver"}/>
+            <Link to={id}><Button bgColor={"#C4A6FF"} text={"Réserver"}/></Link>
 
         </div>
     )
