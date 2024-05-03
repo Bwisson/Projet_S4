@@ -17,13 +17,13 @@ function ViewUsers() {
     const [showPopUp, setShowPopUp] = useState(false)
     const [showAddUserForm, setShowAddUserForm] = useState(false)
     const [users, setUsers] = useState(null)
+    const [idUserClicked, setIdUserClicked] = useState(null)
 
     useEffect(() => {
         function getUsers() {
             axios.get("./php/list/listAllUsers.php")
                 .then(response => {
                     let datas = response.data
-                    console.log(datas)
                     setUsers(datas)
                 })
         }
@@ -46,11 +46,11 @@ function ViewUsers() {
         if(users != null){
             list_users = users.map(user =>
                 <tr>
-                    <td id={"userLastName"}>{user.nom}</td>
+                    <td id={user.nom}>{user.nom}</td>
                     <td>{user.prenom}</td>
                     <td>{user.login}</td>
                     <td>{user.mail}</td>
-                    <td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
+                    <td><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
                 </tr>
             );
 
@@ -80,7 +80,7 @@ function ViewUsers() {
             {showPopUp?
                 <>
                     <div onClick={hidePopUp} className="foreground"></div>
-                    <PopUpUser showPopUp={showPopUp} setShowPopUp={setShowPopUp}/>
+                    <PopUpUser id={idUserClicked} setShowPopUp={setShowPopUp}/>
                 </>
                  : null}
         </div>
