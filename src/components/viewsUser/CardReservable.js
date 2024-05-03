@@ -7,11 +7,12 @@ import Button from '../Button'
 /* css imports */
 import '../../css/cssViewUser/CardReservable.scss'
 
-function CardReservable({id, type, title, URLimage}){
+function CardReservable({id, title, imageName}){
+    const urlImage = "../assets/images/objects/" + imageName
 
     return(
         <div className={"CardReservable"}>
-            <div className={"img"}></div>
+            <img src={urlImage} alt=""/>
             <div className="cardTitle">
                 <h4>{title}</h4>
             </div>

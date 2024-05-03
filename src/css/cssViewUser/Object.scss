@@ -14,15 +14,16 @@ $gris : rgb(227, 227, 227);
   .leftSide{
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    justify-content: space-between;
 
     .imgCard{
-      width: 540px;
-      height: 390px;
-      background-color: lightgray;
+      width: 50%;
+      height: auto;
+      align-self: center;
     }
 
     h2{
+      font-size: 3.5rem;
       color: $bleu1;
       align-self: center;
     }
