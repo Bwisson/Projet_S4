@@ -1,6 +1,4 @@
 <?php
-// include("function_rs_to_table.php");
-
 function createResaAtelier($conn, $id_atelier, $start, $end, $title, $groupId, $color, $constraint, $display) {
     $sql = "INSERT INTO `ResaAtelier` (`id_atelier`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`) VALUES ('$id_atelier', '$start', '$end', '$title', '$groupId', '$color', '$constraint', '$display')";
     $res = mysqli_query($conn, $sql);

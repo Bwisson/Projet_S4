@@ -1,6 +1,4 @@
 <?php
-include("function_rs_to_table.php");
-
 function createModele($conn, $nom, $prenom, $genre, $age, $tarif_horaire) {
     $sql = "INSERT INTO `Modele` (`nom`, `prenom`, `genre`, `age`, `tarif_horaire`) VALUES ('$nom', '$prenom', '$genre', $age, $tarif_horaire)";
     $res = mysqli_query($conn, $sql);
@@ -16,6 +14,12 @@ function updateModele($conn, $id, $nom, $prenom, $genre, $tarif_horaire) {
     $sql = "UPDATE `Modele` SET `id`='$id', `nom`='$nom', `prenom`='$prenom', `genre`='$genre', `tarif_horaire`='$tarif_horaire' WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);
     return $res;
+}
+function selectModele($conn, $id){
+    $sql = "SELECT * FROM `Modele` WHERE id=$id";
+    $res = mysqli_query($conn, $sql);
+    $rs = rs_to_table($res);
+    return $rs;
 }
 function listModele($conn) {
     $sql = "SELECT * FROM `Modele`"; $res = mysqli_query($conn, $sql);

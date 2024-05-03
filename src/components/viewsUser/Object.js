@@ -1,17 +1,35 @@
-
+/* Librairy imports */
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from 'axios'
 
 /* css imports */
 import '../../css/cssViewUser/Object.scss'
 
 /* components imports */
 import Button from '../Button'
-import {useParams} from "react-router-dom";
+import {formatDate} from "@fullcalendar/core";
 
-function Object({image, objectName, objectInformations}){
+function Object(){
     const urlParams = useParams()
-    const type = urlParams.type
     const id = urlParams.id
+    const objectType = urlParams.reservableObject
+    const [objectName, setObjectName] = useState("")
 
+    useEffect(() => {
+        function getObjectInfo() {
+            let dataObject = new FormData()
+            dataObject.append("id", id)
+            dataObject.append("type", objectType)
+            axios.post("./../../php/select/selectObject.php", dataObject)
+                .then(response => {
+                    let data = response.data[0]
+                    setObjectName(data.nom)
+                })
+        }
+        getObjectInfo()
+    }, []);
+    console.log(objectName)
     return(
         <div className="Object">
             <div className={"leftSide"}>
@@ -19,7 +37,7 @@ function Object({image, objectName, objectInformations}){
                 <h2>{objectName}</h2>
                 <article>
                     <p>
-                        {objectInformations}
+                        {objectType}
                     </p>
                 </article>
             </div>

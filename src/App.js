@@ -45,9 +45,8 @@ function App() {
                     <NavBar admin={admin} setDeconnection={setIsConnect}/>
                     <Routes>
                         <Route path={"info7/"} element={<Homepage/>}/>
-                        <Route path={"info7/ListObjects/:reservableObject/"} element={<ListObjects/>}>
-                            <Route path={":id"} element={<Object/>}/>
-                        </Route>
+                        <Route path={"info7/ListObjects/:reservableObject"} element={<ListObjects/>}/>
+                        <Route path={"info7/ListObjects/:reservableObject/:id"} element={<Object/>}/>
                         <Route path="info7/AdminViewUsers" element={<ViewUsers />}/>
                         <Route path="info7/AdminViewObjects" element={<ViewObjects />}/>
                         <Route path="info7/Calendar" element={<Calendar />}/>
