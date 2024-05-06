@@ -8,11 +8,12 @@ import Button from "../Button";
 /* css imports */
 import "../../css/cssViewsAdmin/PopUpUser.scss"
 
-function PopUpUser({id, setShowPopUp}) {
+function PopUpUser({id, setShowPopUp, positionY}) {
     const [listResasArticles, setListResasArticles] = useState([])
     const [listResasAteliers, setListResasAteliers] = useState([])
     const [listResasModeles, setListResasModeles] = useState([])
 
+    console.log(positionY)
     useEffect(() => {
         function getUserResas(){
             let form_data = new FormData()
@@ -134,8 +135,15 @@ function PopUpUser({id, setShowPopUp}) {
         return setShowPopUp(false)
     }
 
+    let popup = document.getElementsByClassName("PopUpUser")
+
+    if(popup[0] != undefined){
+        let popupHeight = popup[0].clientHeight
+        positionY = positionY - popupHeight
+    }
+
     return (
-        <div className="PopUpUser">
+        <div className="PopUpUser" style={{top: positionY + 'px'}}>
             <Button onSmash={hidePopUp} text={"X"} bgColor={"#ff2828"}/>
             <h2>Articles</h2>
             <MapResasArticles/>

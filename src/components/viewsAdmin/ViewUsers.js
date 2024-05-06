@@ -18,6 +18,7 @@ function ViewUsers() {
     const [showAddUserForm, setShowAddUserForm] = useState(false)
     const [users, setUsers] = useState(null)
     const [idUserClicked, setIdUserClicked] = useState(null)
+    const [popupPosition, setPopupPosition] = useState(20)
 
     useEffect(() => {
         function getUsers() {
@@ -52,7 +53,10 @@ function ViewUsers() {
                     <td>{user.mail}</td>
                     <td><Button id={user.id} onSmash={function (event) {
                         let idElement = event.target.id
+                        let scroll = event.view.scrollY
                         setIdUserClicked(idElement)
+                        setPopupPosition(((event.view.screen.height)/2) + scroll)
+
                         return setShowPopUp(true)
                     }} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
                 </tr>
@@ -84,7 +88,7 @@ function ViewUsers() {
             {showPopUp?
                 <>
                     <div onClick={hidePopUp} className="foreground"></div>
-                    <PopUpUser id={idUserClicked} setShowPopUp={setShowPopUp}/>
+                    <PopUpUser id={idUserClicked} setShowPopUp={setShowPopUp} positionY={popupPosition}/>
                 </>
                  : null}
         </div>
