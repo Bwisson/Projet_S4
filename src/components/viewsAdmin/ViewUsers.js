@@ -50,7 +50,11 @@ function ViewUsers() {
                     <td>{user.prenom}</td>
                     <td>{user.login}</td>
                     <td>{user.mail}</td>
-                    <td><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
+                    <td><Button id={user.id} onSmash={function (event) {
+                        let idElement = event.target.id
+                        setIdUserClicked(idElement)
+                        return setShowPopUp(true)
+                    }} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
                 </tr>
             );
 
