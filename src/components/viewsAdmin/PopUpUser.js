@@ -13,7 +13,6 @@ function PopUpUser({id, setShowPopUp, positionY}) {
     const [listResasAteliers, setListResasAteliers] = useState([])
     const [listResasModeles, setListResasModeles] = useState([])
 
-    console.log(positionY)
     useEffect(() => {
         function getUserResas(){
             let form_data = new FormData()
