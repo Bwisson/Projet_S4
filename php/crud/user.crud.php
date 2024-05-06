@@ -31,7 +31,7 @@ function listUserLogin($conn)
     return rs_to_table($res);
 }
 
-function selectUser($conn, $login)
+function selectUserByLogin($conn, $login)
 {
     $sql = "SELECT * FROM `User`  WHERE `login` = '$login'";
     $res = mysqli_query($conn, $sql);
@@ -39,6 +39,21 @@ function selectUser($conn, $login)
 
     if (mysqli_num_rows($res) > 0){
         $res_table = rs_to_table($res)[0];
+    }
+
+    return $res_table;
+}
+
+function selectUserById($conn, $id)
+{
+    $sql = "SELECT * FROM `User`  WHERE `id` = $id";
+    $res = mysqli_query($conn, $sql);
+    $res_table = null;
+
+    if ($res){
+        if (mysqli_num_rows($res) > 0){
+            $res_table = rs_to_table($res)[0];
+        }
     }
 
     return $res_table;

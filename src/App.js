@@ -16,7 +16,7 @@ import Calendar from "./components/calendar/Calendar"
 import Homepage from "./components/viewsUser/Homepage"
 import ListObjects from "./components/viewsUser/ListObjects";
 import Object from "./components/viewsUser/Object";
-import PopUpResasUser from "./components/viewsAdmin/PopUpResasUser";
+import PopUpResasUser from "./components/viewsAdmin/PopupUser";
 
 function App() {
     const [admin, setAdmin] = useState(false)
