@@ -32,7 +32,7 @@ function PopUpUser({id, setShowPopUp, positionY}) {
 
 
     function MapResasArticles(){
-        let res = <p>Acune réservations</p>
+        let res = <p>Aucune réservations</p>
         if (listResasArticles.length != 0) {
             const list_resas = listResasArticles.map(resa =>
                 <tr>
@@ -67,7 +67,7 @@ function PopUpUser({id, setShowPopUp, positionY}) {
     }
 
     function MapResasAteliers(){
-        let res = <p>Acune réservations</p>
+        let res = <p>Aucune réservations</p>
         if (listResasAteliers.length != 0) {
             const list_resas = listResasAteliers.map(resa =>
                 <tr>
@@ -96,7 +96,7 @@ function PopUpUser({id, setShowPopUp, positionY}) {
     }
 
     function MapResasModeles(){
-        let res = <p>Acune réservations</p>
+        let res = <p>Aucune réservations</p>
         if (listResasModeles.length != 0) {
             const list_resas = listResasModeles.map(resa =>
                 <tr>
@@ -144,14 +144,20 @@ function PopUpUser({id, setShowPopUp, positionY}) {
     return (
         <div className="PopUpUser" style={{top: positionY + 'px'}}>
             <Button onSmash={hidePopUp} text={"X"} bgColor={"#ff2828"}/>
-            <h2>Articles</h2>
-            <MapResasArticles/>
+            <div className={"titleTab"}>
+                <h2>Articles</h2>
+                <MapResasArticles/>
+            </div>
 
-            <h2>Ateliers</h2>
-            <MapResasAteliers/>
+            <div className={"titleTab"}>
+                <h2>Ateliers</h2>
+                <MapResasAteliers/>
+            </div>
 
-            <h2>Modèles</h2>
-            <MapResasModeles/>
+            <div className={"titleTab"}>
+                <h2>Modèles</h2>
+                <MapResasModeles/>
+            </div>
         </div>
     )
 }
