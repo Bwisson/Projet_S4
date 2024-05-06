@@ -8,7 +8,7 @@ import Button from "../Button";
 /* css imports */
 import "../../css/cssViewsAdmin/PopUpUser.scss"
 
-function PopUpUser({id, setShowPopUp, positionY}) {
+function PopUpResasUser({id, setShowPopUp, positionY}) {
     const [listResasArticles, setListResasArticles] = useState([])
     const [listResasAteliers, setListResasAteliers] = useState([])
     const [listResasModeles, setListResasModeles] = useState([])
@@ -162,4 +162,4 @@ function PopUpUser({id, setShowPopUp, positionY}) {
     )
 }
 
-export default PopUpUser;
+export default PopUpResasUser;

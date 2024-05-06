@@ -4,7 +4,7 @@ import axios from 'axios'
 
 /* components imports */
 import Button from '../Button'
-import PopUpUser from "./PopUpUser"
+import PopUpResasUser from "./PopUpResasUser"
 import FormInscription from "../connection/Inscription"
 
 /* css imports */
@@ -88,7 +88,7 @@ function ViewUsers() {
             {showPopUp?
                 <>
                     <div onClick={hidePopUp} className="foreground"></div>
-                    <PopUpUser id={idUserClicked} setShowPopUp={setShowPopUp} positionY={popupPosition}/>
+                    <PopUpResasUser id={idUserClicked} setShowPopUp={setShowPopUp} positionY={popupPosition}/>
                 </>
                  : null}
         </div>
