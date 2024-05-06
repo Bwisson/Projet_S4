@@ -1,6 +1,4 @@
 <?php
-include("function_rs_to_table.php");
-
 function createAtelier($conn, $nom, $type) {
     $sql = "INSERT INTO `Atelier` (`nom`, `type`) VALUES ('$nom', '$type')";
     $res = mysqli_query($conn, $sql);
@@ -15,6 +13,12 @@ function updateAtelier($conn, $id, $nom, $type) {
     $sql = "UPDATE `Atelier` SET `id`='$id', `nom`='$nom', `type`='$type' WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);
     return $res;
+}
+function selectAtelier($conn, $id){
+    $sql = "SELECT * FROM `Atelier` WHERE id=$id";
+    $res = mysqli_query($conn, $sql);
+    $rs = rs_to_table($res);
+    return $rs;
 }
 function listAtelier($conn) {
     $sql = "SELECT * FROM `Atelier`";

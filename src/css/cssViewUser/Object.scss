@@ -1,0 +1,48 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
+
+.Object{
+  width: calc(88vw - 39px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+
+  .leftSide{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .imgCard{
+      width: 50%;
+      height: auto;
+      align-self: center;
+    }
+
+    h2{
+      font-size: 3.5rem;
+      color: $bleu1;
+      align-self: center;
+    }
+
+    article{
+      width: 540px;
+    }
+  }
+
+  .rightSide{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+
+    .calendar{
+      width: 540px;
+      height: 390px;
+      border: 1px solid black;
+    }
+  }
+}

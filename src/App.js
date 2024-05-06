@@ -13,6 +13,10 @@ import NavBar from "./components/NavBar";
 import ViewUsers from "./components/viewsAdmin/ViewUsers";
 import ViewObjects from "./components/viewsAdmin/ViewObjects"
 import Calendar from "./components/calendar/Calendar"
+import Homepage from "./components/viewsUser/Homepage"
+import ListObjects from "./components/viewsUser/ListObjects";
+import Object from "./components/viewsUser/Object";
+import PopUpUser from "./components/viewsAdmin/PopUpUser";
 
 function App() {
     const [admin, setAdmin] = useState(false)
@@ -41,12 +45,12 @@ function App() {
                 <div className={"pageContent"}>
                     <NavBar admin={admin} setDeconnection={setIsConnect}/>
                     <Routes>
-                        <Route path="info7/AdminViewUsers" element={<ViewUsers />}/>  TODO : changer avant de push
-                        {/*<Route path="/AdminViewUsers" element={<ViewUsers />}/>*/}
-                        <Route path="info7/AdminViewObjects" element={<ViewObjects />}/>
-                        {/*<Route path="/AdminViewObjects" element={<ViewObjects />}/>*/}
-                        <Route path="info7/Calendar" element={<Calendar />}/>
-                        {/*<Route path="/Calendar" element={<Calendar />}/>*/}
+                        <Route path={"info7/"} element={<Homepage/>}/>
+                        <Route path={"info7/ListObjects/:reservableObject"} element={<ListObjects/>}/>
+                        <Route path={"info7/ListObjects/:reservableObject/:id"} element={<Object/>}/>
+                        <Route path={"info7/AdminViewUsers"} element={<ViewUsers/>}/>
+                        <Route path={"info7/AdminViewObjects"} element={<ViewObjects/>}/>
+                        <Route path={"info7/Calendar"} element={<Calendar/>}/>
                     </Routes>
                 </div>
             }

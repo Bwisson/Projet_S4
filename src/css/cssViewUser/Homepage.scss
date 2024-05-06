@@ -1,0 +1,89 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
+
+.Homepage {
+  width: 88vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Divise la grille en deux colonnes égales */
+  gap: 20px; /* Espacement entre les colonnes */
+
+  h2 {
+    color: $bleu1;
+    margin-top: 5px;
+    padding: 10px 0 10px 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .reservations {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .section {
+      border: 1px solid black;
+      border-radius: 15px;
+      padding: 10px;
+
+      h3 {
+        color: $bleu2;
+        margin-top: 10px;
+      }
+
+      .listResas{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 40px;
+      }
+    }
+
+    .tab {
+      margin-top: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+
+      width: 100%;
+      border-collapse: collapse;
+
+      th{
+        padding: 8px;
+        border-bottom: 1.5px solid black;
+        font-weight: normal;
+        color: darkgray;
+      }
+
+      td {
+        border-left: 1px solid $gris;
+        border-bottom: 1px solid $gris;
+        padding: 8px;
+        text-align: center;
+      }
+    }
+  }
+}
+  
+.informations {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+
+    table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid $gris;
+      padding: 8px;
+      text-align: left;
+    }
+  }
+}

@@ -11,10 +11,19 @@ $rose : #ffd2ff;
   border-radius: 5px;
   background-color: white;
   position: absolute;
-  top: 50%;
-  left: 68%;
-  transform: translate(-68%, -50%);
+  left: 50%;
+  transform: translate(-50%);
   overflow: auto;
+
+  .titleTab{
+    margin: 20px 0 40px 0;
+
+    h2{
+      text-align: left;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+  }
 
   table{
     width: 100%;

@@ -17,6 +17,8 @@ function ViewUsers() {
     const [showPopUp, setShowPopUp] = useState(false)
     const [showAddUserForm, setShowAddUserForm] = useState(false)
     const [users, setUsers] = useState(null)
+    const [idUserClicked, setIdUserClicked] = useState(null)
+    const [popupPosition, setPopupPosition] = useState(20)
 
     useEffect(() => {
         function getUsers() {
@@ -45,11 +47,18 @@ function ViewUsers() {
         if(users != null){
             list_users = users.map(user =>
                 <tr>
-                    <td id={"userLastName"}>{user.nom}</td>
+                    <td id={user.nom}>{user.nom}</td>
                     <td>{user.prenom}</td>
                     <td>{user.login}</td>
                     <td>{user.mail}</td>
-                    <td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
+                    <td><Button id={user.id} onSmash={function (event) {
+                        let idElement = event.target.id
+                        let scroll = event.view.scrollY
+                        setIdUserClicked(idElement)
+                        setPopupPosition(((event.view.screen.height)/2) + scroll)
+
+                        return setShowPopUp(true)
+                    }} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
                 </tr>
             );
 
@@ -59,7 +68,7 @@ function ViewUsers() {
 
     return (
         <div className="ViewUsers">
-            <table>
+            <table className={"adminTable"}>
                 <thead>
                     <tr>
                         <th scope="col">Nom</th>
@@ -79,7 +88,7 @@ function ViewUsers() {
             {showPopUp?
                 <>
                     <div onClick={hidePopUp} className="foreground"></div>
-                    <PopUpUser showPopUp={showPopUp} setShowPopUp={setShowPopUp}/>
+                    <PopUpUser id={idUserClicked} setShowPopUp={setShowPopUp} positionY={popupPosition}/>
                 </>
                  : null}
         </div>

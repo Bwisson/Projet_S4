@@ -1,5 +1,4 @@
 <?php
-
 function createResaAtelier($conn, $id_atelier, $start, $end, $title, $groupId, $color, $constraint, $display) {
     $sql = "INSERT INTO `ResaAtelier` (`id_atelier`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`) VALUES ('$id_atelier', '$start', '$end', '$title', '$groupId', '$color', '$constraint', '$display')";
     $res = mysqli_query($conn, $sql);
@@ -26,7 +25,7 @@ function listResaAtelier($conn) {
 }
 
 function listResaAtelierFromUser($conn, $id) {
-    $sql = "SELECT * FROM `ResaAtelier` ra JOIN `Atelier` a ON ra.id_atelier = a.id WHERE id_user = $id";
+    $sql = "SELECT ra.id, ra.id_atelier, ra.start, ra.end, a.nom, a.type FROM `ResaAtelier` ra JOIN `Atelier` a ON ra.id_atelier = a.id WHERE id_user = $id";
     $res = mysqli_query($conn, $sql);
     $rs = rs_to_table($res);
     return $rs;

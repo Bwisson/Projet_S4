@@ -11,7 +11,7 @@ import "../../css/form.scss"
 
 
 function Connection({ setAdmin,  setIsConnect }){
-    const [login, setLogin] = useState( '')
+    const [login, setLogin] = useState('')
     const [mdp, setMdp] = useState('')
 
     const [invalidLogin, setInvalidLogin] = useState(false)
@@ -73,7 +73,7 @@ function Connection({ setAdmin,  setIsConnect }){
             </div>
             {wrongLogin && <p className={"formError"}>Login inexistant</p>}
             {wrongMdp && <p className={"formError"}>Mauvais mot de passe</p>}
-            <Button type="submit" text={"Connexion"}></Button>
+            <Button type="submit" text={"Connexion"}/>
         </form>
     )
 }

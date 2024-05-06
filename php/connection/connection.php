@@ -1,8 +1,8 @@
 <?php
 global $conn;
-
 session_start();
 include("../db/db_connect.php");
+include("../crud/function_rs_to_table.php");
 include("../crud/user.crud.php");
 header("Content-Type: application/json");
 
@@ -14,6 +14,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
 
     if ($row){
         if (password_verify($mdp, $row['mdp'])) {
+            $_SESSION["id_user"] = $row["id"];
             $_SESSION["login"] = $row["login"];
             $_SESSION["connecte"] = true;
             if ($row["admin"]){
