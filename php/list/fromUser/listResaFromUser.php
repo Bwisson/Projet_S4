@@ -16,6 +16,7 @@ $listObjets = array(
     "ateliers" => $listAteliers,
     "modeles" => $listModeles,
 );
+
 $strListObjets = json_encode($listObjets);
 
 echo $strListObjets;

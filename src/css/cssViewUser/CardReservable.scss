@@ -14,11 +14,9 @@ $gris : rgb(227, 227, 227);
   border-radius: 10px;
   padding: 10px 20px 10px 20px;
 
-  .img{
-    width: 180px;
-    height: 130px;
-    background-color: $rose;
-    border-radius: 8px;
+  img{
+    width: 100%;
+    height: auto;
   }
 
   .cardTitle{

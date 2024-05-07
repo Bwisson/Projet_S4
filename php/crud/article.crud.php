@@ -1,6 +1,4 @@
 <?php
-include("function_rs_to_table.php");
-
 function createArticle($conn, $code_barre, $nom, $categorie, $couleur, $taille) {
     $sql = "INSERT INTO `Article` (`code_barre`, `nom`, `categorie`, `couleur`, `taille`) VALUES ('$code_barre', '$nom', '$categorie', '$couleur', '$taille')";
     $res = mysqli_query($conn, $sql);
@@ -20,7 +18,8 @@ function updateArticle($conn, $id, $code_barre, $nom, $categorie, $couleur, $tai
 function selectArticle($conn, $id){
     $sql = "SELECT * FROM `Article` WHERE id=$id";
     $res = mysqli_query($conn, $sql);
-    return $res;
+    $rs = rs_to_table($res);
+    return $rs;
 }
 
 function selectArticleCat($conn, $cat){

@@ -36,7 +36,6 @@ function NavBar({ admin, setDeconnection }) {
                         <li><Link to={"info7/ListObjects/Peinture"}>PEINTURE</Link></li>
                         <li><Link to={"info7/ListObjects/Modeles"}>MODÈLES</Link></li>
                         <li><Link to={"info7/ListObjects/Ateliers"}>ATELIERS</Link></li>
-                        <li><Link to={"info7/Object/:type/:id"}>Objet</Link></li>
                     </ul>
                     {admin ?
                         <>

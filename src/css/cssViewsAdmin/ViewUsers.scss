@@ -2,8 +2,10 @@ $bleu1 : #0068e7;
 $bleu2 : #2882ff;
 $mauve : #c4a6ff;
 $rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
 
 .ViewUsers{
+  position: relative;
   width: 88vw;
   text-align: center;
 
@@ -27,11 +29,10 @@ $rose : #ffd2ff;
   }
 
   .foreground{
-    width: 88vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.2);
     position: absolute;
     top: 0;
-    overflow: clip;
+    width: 88vw;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2);
   }
 }

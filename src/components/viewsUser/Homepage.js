@@ -3,10 +3,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../Button.js"
 import ModifInfo from './ModifInfo.js';
+import { Link } from "react-router-dom"
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewUser/Homepage.scss'
+
+/* components imports */
+import Button from "../Button.js"
 
 function Homepage() {
     const [currentReservations, setCurrentReservations] = useState([]);
@@ -23,14 +27,29 @@ function Homepage() {
             .then(response => {
                 const { articles, modeles, ateliers } = response.data;
 
-                // Filtrer les réservations actuelles et passées pour chaque type d'entité
-                const currentArticlesReservations = articles.filter(reservation => isCurrentReservation(reservation));
-                const currentModelesReservations = modeles.filter(reservation => isCurrentReservation(reservation));
-                const currentAteliersReservations = ateliers.filter(reservation => isCurrentReservation(reservation));
+                let currentArticlesReservations = []
+                let currentAteliersReservations = []
+                let currentModelesReservations = []
 
-                const pastArticlesReservations = articles.filter(reservation => !isCurrentReservation(reservation));
-                const pastModelesReservations = modeles.filter(reservation => !isCurrentReservation(reservation));
-                const pastAteliersReservations = ateliers.filter(reservation => !isCurrentReservation(reservation));
+                let pastArticlesReservations = []
+                let pastAteliersReservations = []
+                let pastModelesReservations = []
+
+                // Filtrer les réservations actuelles et passées pour chaque type d'entité
+                if (articles.length > 0){
+                    currentArticlesReservations = articles.filter(reservation => isCurrentReservation(reservation));
+                    pastArticlesReservations = articles.filter(reservation => !isCurrentReservation(reservation));
+                }
+
+                if (ateliers.length > 0){
+                    currentAteliersReservations = ateliers.filter(reservation => isCurrentReservation(reservation));
+                    pastAteliersReservations = ateliers.filter(reservation => !isCurrentReservation(reservation));
+                }
+
+                if (modeles.length > 0){
+                    currentModelesReservations = modeles.filter(reservation => isCurrentReservation(reservation));
+                    pastModelesReservations = modeles.filter(reservation => !isCurrentReservation(reservation));
+                }
 
                 // Mettre à jour les états avec les réservations actuelles et passées
                 setCurrentReservations({
@@ -38,11 +57,13 @@ function Homepage() {
                     modeles: currentModelesReservations,
                     ateliers: currentAteliersReservations
                 });
+
                 setPastReservations({
                     articles: pastArticlesReservations,
                     modeles: pastModelesReservations,
                     ateliers: pastAteliersReservations
                 });
+
             });
 
       function getUser() {
@@ -67,6 +88,14 @@ function Homepage() {
         let res= <p>Aucun article</p>
         if (articles != null) {
             if (articles.length != 0){
+                for (let i = 0; i < articles.length; i++) {
+                    let cat = articles[i].categorie
+                    if (cat == "chevalet"){
+                        articles[i].categorie = "Chevalets"
+                    }else if (cat == "pinceaux_outils"){
+                        articles[i].categorie = "Peinture"
+                    }
+                }
                 let list_articles = articles.map(article =>
                     <tr>
                         <td>{article.nom}</td>
@@ -75,8 +104,7 @@ function Homepage() {
                         <td>{article.categorie}</td>
                         <td>{article.couleur}</td>
                         <td>{article.taille}</td>
-                        <td><Button /*link={} //L'id de l'article peut etre récupéré avec {article.id_article}*/
-                            text={"Voir"} bgColor={"#2882ff"}/></td>
+                        <td><Link to={"ListObjects/" + article.categorie + "/" + article.id_article}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td> {/*ListObjects/Chevalets/12*/}
                     </tr>)
                 res =
                     <table className={"tab"}>
@@ -109,8 +137,7 @@ function Homepage() {
                         <td>{new Date(atelier.start).toLocaleDateString()}</td>
                         <td>{new Date(atelier.end).toLocaleDateString()}</td>
                         <td>{atelier.type}</td>
-                        <td><Button /*link={} //L'id de l'atelier peut etre récupéré avec {atelier.id_atelier}*/
-                            text={"Voir"} bgColor={"#2882ff"}/></td>
+                        <td><Link to={"ListObjects/Ateliers/" + atelier.id_atelier}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td>
                     </tr>)
 
                 res =
@@ -146,8 +173,7 @@ function Homepage() {
                             <td>{modele.genre}</td>
                             <td>{modele.age}</td>
                             <td>{modele.tarif_horaire}</td>
-                            <td><Button /*link={} //L'id du modele peut etre récupéré avec {modele.id_modele}*/
-                                text={"Voir"} bgColor={"#2882ff"}/></td>
+                            <td><Link to={"ListObjects/Modeles/" + modele.id_modele}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td>
                         </tr>)
 
                 res =

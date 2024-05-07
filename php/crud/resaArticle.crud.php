@@ -1,6 +1,4 @@
 <?php
-// include("function_rs_to_table.php");
-
 function createResaArticle($conn, $id_article, $start, $end, $id_user) {
     $sql = "INSERT INTO `ResaArticle` (`id_article`, `start`, `end`, `id_user`) VALUES ('$id_article', '$start', '$end', '$id_user')";
     $res = mysqli_query($conn, $sql);
