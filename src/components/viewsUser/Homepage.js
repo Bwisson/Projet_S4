@@ -81,6 +81,14 @@ function Homepage() {
         let res= <p>Aucun article</p>
         if (articles != null) {
             if (articles.length != 0){
+                for (let i = 0; i < articles.length; i++) {
+                    let cat = articles[i].categorie
+                    if (cat == "chevalet"){
+                        articles[i].categorie = "Chevalets"
+                    }else if (cat == "pinceaux_outils"){
+                        articles[i].categorie = "Peinture"
+                    }
+                }
                 let list_articles = articles.map(article =>
                     <tr>
                         <td>{article.nom}</td>
@@ -89,7 +97,7 @@ function Homepage() {
                         <td>{article.categorie}</td>
                         <td>{article.couleur}</td>
                         <td>{article.taille}</td>
-                        <td><Link to={article.id}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td> {/* url complète à mettre */}
+                        <td><Link to={"ListObjects/" + article.categorie + "/" + article.id_article}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td> {/*ListObjects/Chevalets/12*/}
                     </tr>)
                 res =
                     <table className={"tab"}>
@@ -122,8 +130,7 @@ function Homepage() {
                         <td>{new Date(atelier.start).toLocaleDateString()}</td>
                         <td>{new Date(atelier.end).toLocaleDateString()}</td>
                         <td>{atelier.type}</td>
-                        <td><Button /*link={} //L'id de l'atelier peut etre récupéré avec {atelier.id_atelier}*/
-                            text={"Voir"} bgColor={"#2882ff"}/></td>
+                        <td><Link to={"ListObjects/Ateliers/" + atelier.id_atelier}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td>
                     </tr>)
 
                 res =
@@ -159,8 +166,7 @@ function Homepage() {
                             <td>{modele.genre}</td>
                             <td>{modele.age}</td>
                             <td>{modele.tarif_horaire}</td>
-                            <td><Button /*link={} //L'id du modele peut etre récupéré avec {modele.id_modele}*/
-                                text={"Voir"} bgColor={"#2882ff"}/></td>
+                            <td><Link to={"ListObjects/Modeles/" + modele.id_modele}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td>
                         </tr>)
 
                 res =
