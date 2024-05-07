@@ -17,6 +17,7 @@ function ViewUsers() {
     const [showPopupResas, setShowPopupResas] = useState(false)
     const [showPopupUser, setShowPopupUser] = useState(false)
     const [showAddUserForm, setShowAddUserForm] = useState(false)
+    const [NewData, setNewData] = useState(false)
 
     const [users, setUsers] = useState(null)
     const [idUserClicked, setIdUserClicked] = useState(null)
@@ -28,10 +29,11 @@ function ViewUsers() {
                 .then(response => {
                     let datas = response.data
                     setUsers(datas)
+                    setNewData(false)
                 })
         }
         getUsers()
-    }, []);
+    }, [NewData]);
 
     function showingPopUp(event){
         let idElement = event.target.id
@@ -82,7 +84,7 @@ function ViewUsers() {
                 {<List/> != null && <List/> }
                 </tbody>
             </table>
-            {showAddUserForm && <FormInscription/>}
+            {showAddUserForm && <FormInscription setNewData={setNewData}/>}
             <Button id={"btnAddUser"} onSmash={changeVisiblityForm} text={"+"} bgColor={"#2882ff"}/>
             {<List/> == null && <i>Aucun utilisateurs</i>}
             {showPopupResas &&

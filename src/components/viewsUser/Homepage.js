@@ -1,11 +1,14 @@
 /* Librairy imports */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Button from "../Button.js"
+import { Link } from "react-router-dom"
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewUser/Homepage.scss'
+
+/* components imports */
+import Button from "../Button.js"
 
 function Homepage() {
     const [currentReservations, setCurrentReservations] = useState([]);
@@ -17,14 +20,29 @@ function Homepage() {
             .then(response => {
                 const { articles, modeles, ateliers } = response.data;
 
-                // Filtrer les réservations actuelles et passées pour chaque type d'entité
-                const currentArticlesReservations = articles.filter(reservation => isCurrentReservation(reservation));
-                const currentModelesReservations = modeles.filter(reservation => isCurrentReservation(reservation));
-                const currentAteliersReservations = ateliers.filter(reservation => isCurrentReservation(reservation));
+                let currentArticlesReservations = []
+                let currentAteliersReservations = []
+                let currentModelesReservations = []
 
-                const pastArticlesReservations = articles.filter(reservation => !isCurrentReservation(reservation));
-                const pastModelesReservations = modeles.filter(reservation => !isCurrentReservation(reservation));
-                const pastAteliersReservations = ateliers.filter(reservation => !isCurrentReservation(reservation));
+                let pastArticlesReservations = []
+                let pastAteliersReservations = []
+                let pastModelesReservations = []
+
+                // Filtrer les réservations actuelles et passées pour chaque type d'entité
+                if (articles.length > 0){
+                    currentArticlesReservations = articles.filter(reservation => isCurrentReservation(reservation));
+                    pastArticlesReservations = articles.filter(reservation => !isCurrentReservation(reservation));
+                }
+
+                if (ateliers.length > 0){
+                    currentAteliersReservations = ateliers.filter(reservation => isCurrentReservation(reservation));
+                    pastAteliersReservations = ateliers.filter(reservation => !isCurrentReservation(reservation));
+                }
+
+                if (modeles.length > 0){
+                    currentModelesReservations = modeles.filter(reservation => isCurrentReservation(reservation));
+                    pastModelesReservations = modeles.filter(reservation => !isCurrentReservation(reservation));
+                }
 
                 // Mettre à jour les états avec les réservations actuelles et passées
                 setCurrentReservations({
@@ -32,11 +50,13 @@ function Homepage() {
                     modeles: currentModelesReservations,
                     ateliers: currentAteliersReservations
                 });
+
                 setPastReservations({
                     articles: pastArticlesReservations,
                     modeles: pastModelesReservations,
                     ateliers: pastAteliersReservations
                 });
+
             });
 
       function getUser() {
@@ -69,8 +89,7 @@ function Homepage() {
                         <td>{article.categorie}</td>
                         <td>{article.couleur}</td>
                         <td>{article.taille}</td>
-                        <td><Button /*link={} //L'id de l'article peut etre récupéré avec {article.id_article}*/
-                            text={"Voir"} bgColor={"#2882ff"}/></td>
+                        <td><Link to={article.id}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td> {/* url complète à mettre */}
                     </tr>)
                 res =
                     <table className={"tab"}>
