@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../Button.js"
+import ModifInfo from './ModifInfo.js';
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
@@ -11,6 +12,11 @@ function Homepage() {
     const [currentReservations, setCurrentReservations] = useState([]);
     const [pastReservations, setPastReservations] = useState([]);
     const [user, setUser] = useState(null);
+    const [showModifInfo, setShowModifInfo] = useState(false);
+
+    const toggleModifInfo = () => {
+      setShowModifInfo(!showModifInfo);
+    };
 
     useEffect(() => {
         axios.get("./php/list/fromUser/listResaFromUser.php")
@@ -284,6 +290,8 @@ function Homepage() {
           <div className="informations">
           <h2>Mes informations</h2>
             {<List/> != null && <List/>}
+            <Button onSmash={toggleModifInfo} text={"Modifier mes informations"} bgColor={"#2882ff"} />
+            {showModifInfo && <ModifInfo />}
           </div>
         </div>
       </div>
