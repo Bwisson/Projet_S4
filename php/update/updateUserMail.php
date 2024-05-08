@@ -2,11 +2,13 @@
 session_start();
 include("../db/db_connect.php");
 include("../crud/user.crud.php");
+include("../crud/function_rs_to_table.php");
+
 header("Content-Type: application/json");
 
 if (isset($_POST['mail'], $_POST['mdp'])) {
     $id_user = $_SESSION["id_user"];
-    $row = selectUser($conn, $login);
+    $row = selectUserById($conn, $id_user);
     $mail = htmlspecialchars($_POST['mail']);
     $mdp = htmlspecialchars($_POST['mdp']);
 

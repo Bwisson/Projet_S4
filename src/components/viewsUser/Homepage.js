@@ -1,8 +1,6 @@
 /* Librairy imports */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Button from "../Button.js"
-import ModifInfo from './ModifInfo.js';
 import { Link } from "react-router-dom"
 
 /* css imports */
@@ -10,13 +8,16 @@ import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewUser/Homepage.scss'
 
 /* components imports */
-import Button from "../Button.js"
+import Button from "../Button"
+import ModifInfo from './ModifInfo';
+
 
 function Homepage() {
     const [currentReservations, setCurrentReservations] = useState([]);
     const [pastReservations, setPastReservations] = useState([]);
     const [user, setUser] = useState(null);
     const [showModifInfo, setShowModifInfo] = useState(false);
+    const [dataModified, setDataModified] = useState(false);
 
     const toggleModifInfo = () => {
       setShowModifInfo(!showModifInfo);
@@ -71,10 +72,11 @@ function Homepage() {
             .then(response => {
                 let datas = response.data
                 setUser(datas)
+                setDataModified(false)
             })
       }
       getUser()
-    }, []);
+    }, [dataModified]);
 
     // Fonction pour vérifier si une réservation est actuelle ou passée
     const isCurrentReservation = (reservation) => {
@@ -104,10 +106,10 @@ function Homepage() {
                         <td>{article.categorie}</td>
                         <td>{article.couleur}</td>
                         <td>{article.taille}</td>
-                        <td><Link to={"ListObjects/" + article.categorie + "/" + article.id_article}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td> {/*ListObjects/Chevalets/12*/}
+                        <td><Link to={"ListObjects/" + article.categorie + "/" + article.id_article}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td>
                     </tr>)
-                res =
-                    <table className={"tab"}>
+
+                res = <table className={"tab"}>
                         <thead>
                         <tr>
                             <th scope="col">Nom</th>
@@ -317,7 +319,7 @@ function Homepage() {
           <h2>Mes informations</h2>
             {<List/> != null && <List/>}
             <Button onSmash={toggleModifInfo} text={"Modifier mes informations"} bgColor={"#2882ff"} />
-            {showModifInfo && <ModifInfo />}
+            {showModifInfo && <ModifInfo setDataModified={setDataModified} />}
           </div>
         </div>
       </div>

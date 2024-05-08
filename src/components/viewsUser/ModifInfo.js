@@ -4,9 +4,9 @@ import axios from "axios"
 import Button from "../Button.js";
 
 /* css imports */
-import "../../css/ModifInfo.scss";
+import "../../css/cssViewUser/ModifInfo.scss";
 
-function ModifInfo() {
+function ModifInfo({setDataModified}) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,6 +40,7 @@ function ModifInfo() {
       form_data.append("mail", email)
       form_data.append("mdp", password)
       axios.post("./php/update/updateUserMail.php", form_data)
+          .then(response => {setDataModified(response.data)})
     } else if (selectedOption === 'password') {
       // Faites quelque chose avec les mots de passe
       let form_data = new FormData()
@@ -47,6 +48,7 @@ function ModifInfo() {
       form_data.append("newMdp", newPassword)
       form_data.append("confirmNewMdp", confirmNewPassword)
       axios.post("./php/update/updateUserPassword.php", form_data)
+          .then(response => {setDataModified(response.data)})
     }
   };
 
