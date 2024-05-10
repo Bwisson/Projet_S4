@@ -53,24 +53,24 @@ function ModifInfo({setDataModified}) {
   };
 
   return (
-    <div>
+    <div className="container">
       <h2>Modifier les informations</h2>
-      <div>
+      <div className="options">
         <input type="radio" id="email" name="option" value="email" onChange={() => handleOptionChange('email')} />
-        <label htmlFor="email">Changer email</label>
+        <label htmlFor="email"> Changer email</label>
         <br />
         <input type="radio" id="password" name="option" value="password" onChange={() => handleOptionChange('password')} />
-        <label htmlFor="password">Changer mot de passe</label>
+        <label htmlFor="password"> Changer mot de passe</label>
       </div>
       {selectedOption === 'email' && (
-        <div>
+        <div className="inputs">
           <input type="text" placeholder="Nouvel email" value={email} onChange={handleEmailChange} />
           <br />
           <input type="password" placeholder="Mot de passe" value={password} onChange={handlePasswordChange} />
         </div>
       )}
       {selectedOption === 'password' && (
-        <div>
+        <div className="inputs">
           <input type="password" placeholder="Ancien mot de passe" value={password} onChange={handlePasswordChange} />
           <br />
           <input type="password" placeholder="Nouveau mot de passe" value={newPassword} onChange={handleNewPasswordChange} />
