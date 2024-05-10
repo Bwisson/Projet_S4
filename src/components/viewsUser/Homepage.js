@@ -10,6 +10,7 @@ import '../../css/cssViewUser/Homepage.scss'
 /* components imports */
 import Button from "../Button"
 import ModifInfo from './ModifInfo';
+import PopUpAnnulationResa from "./PopUpAnnulationResa";
 
 
 function Homepage() {
@@ -19,8 +20,40 @@ function Homepage() {
     const [showModifInfo, setShowModifInfo] = useState(false);
     const [dataModified, setDataModified] = useState(false);
 
+    const [showAnnulationPopup, setShowAnnulationPopup] = useState(false);
+    const [reservationIdToCancel, setReservationIdToCancel] = useState(null);
+    const [reservationTypeToCancel, setReservationTypeToCancel] = useState(null);
+
+
     const toggleModifInfo = () => {
       setShowModifInfo(!showModifInfo);
+    };
+
+    const handleAnnulationClick = (reservationId, reservationType) => {
+        setReservationIdToCancel(reservationId);
+        setReservationTypeToCancel(reservationType);
+        setShowAnnulationPopup(true);
+    };
+
+    const handlePopUpCancel = () => {
+        setShowAnnulationPopup(false);
+        setReservationIdToCancel(null);
+        setReservationTypeToCancel(null);
+    };
+
+    const handlePopUpConfirm = () => {
+        let form_data = new FormData()
+        form_data.append("id_resa", reservationIdToCancel)
+        if (reservationTypeToCancel === "article") {
+            axios.post("./php/create/createAnnulationArticle.php", form_data)
+        } else if (reservationTypeToCancel === "atelier") {
+            axios.post("./php/create/createAnnulationAtelier.php", form_data)
+        } else if (reservationTypeToCancel === "modele") {
+            axios.post("./php/create/createAnnulationModele.php", form_data)
+        }
+        setShowAnnulationPopup(false);
+        setReservationIdToCancel(null);
+        setReservationTypeToCancel(null);
     };
 
     useEffect(() => {
@@ -106,7 +139,10 @@ function Homepage() {
                         <td>{article.categorie}</td>
                         <td>{article.couleur}</td>
                         <td>{article.taille}</td>
-                        <td><Link to={"ListObjects/" + article.categorie + "/" + article.id_article}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td>
+                        <div className="Buttons">
+                            <td><Link to={"ListObjects/" + article.categorie + "/" + article.id_article}><Button text={"Voir"} bgColor={"#2882ff"}/></Link>
+                            {isCurrentReservation(article) && <Button onSmash={() => handleAnnulationClick(article.id, "article")} text="Annuler" bgColor={"#2882ff"}/>}</td>
+                        </div>
                     </tr>)
 
                 res = <table className={"tab"}>
@@ -139,7 +175,10 @@ function Homepage() {
                         <td>{new Date(atelier.start).toLocaleDateString()}</td>
                         <td>{new Date(atelier.end).toLocaleDateString()}</td>
                         <td>{atelier.type}</td>
-                        <td><Link to={"ListObjects/Ateliers/" + atelier.id_atelier}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td>
+                        <div className="Buttons">
+                            <td><Link to={"ListObjects/Ateliers/" + atelier.id_atelier}><Button text={"Voir"} bgColor={"#2882ff"}/></Link>
+                            {isCurrentReservation(atelier) && <Button onSmash={() => handleAnnulationClick(atelier.id, "atelier")} text="Annuler" bgColor={"#2882ff"}/>}</td>
+                        </div>
                     </tr>)
 
                 res =
@@ -175,7 +214,11 @@ function Homepage() {
                             <td>{modele.genre}</td>
                             <td>{modele.age}</td>
                             <td>{modele.tarif_horaire}</td>
-                            <td><Link to={"ListObjects/Modeles/" + modele.id_modele}><Button text={"Voir"} bgColor={"#2882ff"}/></Link></td>
+                            <div className="Buttons">
+                                <td><Link to={"ListObjects/Modeles/" + modele.id_modele}><Button text={"Voir"} bgColor={"#2882ff"}/></Link>
+                                {isCurrentReservation(modele) && <Button onSmash={() => handleAnnulationClick(modele.id, "modele")} text="Annuler" bgColor={"#2882ff"}/>}</td>
+                            </div>
+                            
                         </tr>)
 
                 res =
@@ -322,6 +365,12 @@ function Homepage() {
             {showModifInfo && <ModifInfo setDataModified={setDataModified} />}
           </div>
         </div>
+        {showAnnulationPopup && (
+          <PopUpAnnulationResa
+            onCancel={handlePopUpCancel}
+            onConfirm={handlePopUpConfirm}
+          />
+        )}
       </div>
     );
 }
