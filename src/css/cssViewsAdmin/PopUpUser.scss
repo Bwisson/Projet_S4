@@ -2,6 +2,7 @@ $bleu1 : #0068e7;
 $bleu2 : #2882ff;
 $mauve : #c4a6ff;
 $rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
 
 .PopUpUser{
   z-index: 2;
@@ -23,14 +24,22 @@ $rose : #ffd2ff;
     padding: 20px;
 
     .formPopUser{
-      width: calc(100% - 40px);
+      width: 100%;
       padding: 0 0 20px 0;
       box-shadow: none;
       display: flex;
       justify-content: space-between;
 
+
+      input{
+        padding: 5px;
+        border: 1px solid $gris;
+        border-radius: 5px;
+      }
+
       input:disabled{
         cursor: not-allowed;
+        background-color: rgb(243, 243, 243);
       }
     }
 
@@ -42,9 +51,9 @@ $rose : #ffd2ff;
 
   dialog{
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -30%);
     width: auto;
     border: none;
     border-radius: 5px;
