@@ -23,6 +23,8 @@ function ViewObjects() {
     const [showingFormAddAtelier, setShowingFormAddAtelier] = useState(false)
     const [showingFormAddModele, setShowingFormAddModele] = useState(false)
 
+    const [showPopupObject, setShowPopupObject] = useState(false)
+
     const svgPlus = "<svg width=\"800px\" height=\"800px\" viewBox=\"0 0 24 24\" fill=\"none\"\n xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M6 12H18M12 6V18\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round stroke-linejoin=\"round\"/></svg>"
 
     useEffect(() => {
@@ -124,7 +126,15 @@ function ViewObjects() {
         setShowingFormAddModele(!showingFormAddModele)
     }
 
-    return (
+    function popupObjectVisible(){
+        setShowPopupObject(true)
+    }
+
+    function popupObjectUnvisible() {
+        setShowPopupObject(false)
+    }
+
+        return (
         <div className="ViewObjects">
             <div className="tableForm">
                 {showingFormAddModele && <CreateModele setNewData={setNewData} setShowingFormAddModele={setShowingFormAddModele}/>}
@@ -133,7 +143,7 @@ function ViewObjects() {
                         Modèles <Button onSmash={showFormCreateModele} text={"+"} bgColor={"#2882ff"}/>
                     </caption>
                     <thead>
-                    <tr>
+                    <tr onClick={popupObjectVisible}>
                         <th scope="col">Nom</th>
                         <th scope="col">Prénom</th>
                         <th scope="col">Genre</th>
@@ -156,7 +166,7 @@ function ViewObjects() {
 
                     </caption>
                     <thead>
-                    <tr>
+                    <tr onClick={popupObjectVisible}>
                         <th scope="col">Nom</th>
                         <th scope="col">Type</th>
                     </tr>
@@ -175,7 +185,7 @@ function ViewObjects() {
                         Articles <Button onSmash={showFormCreateArticle} text={"+"} bgColor={"#2882ff"}/>
                     </caption>
                     <thead>
-                    <tr>
+                    <tr onClick={popupObjectVisible}>
                         <th scope="col">Code barre</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Catégorie</th>

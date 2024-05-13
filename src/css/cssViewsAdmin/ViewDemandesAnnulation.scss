@@ -1,0 +1,48 @@
+$gris : rgb(227, 227, 227);
+$bleu : #2882ff;
+
+.ViewDemandesAnnulation {
+  display: flex;
+  justify-content: space-between;
+
+  h3 {
+    color: $bleu;
+    margin-top: 10px;
+  }
+
+  .tab {
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    max-height: 1000px;
+    overflow-y: auto;
+    width: 100%;
+    border-collapse: collapse;
+
+    .Buttons {
+      display: flex;
+      gap: 10px;
+      
+      Button {
+        flex-grow: 1;
+        justify-content: center;
+        margin: 2px; /* Légère marge autour des boutons */
+      }
+    }
+
+    th{
+      padding: 8px;
+      border-bottom: 1.5px solid black;
+      font-weight: normal;
+      color: darkgray;
+    }
+
+    td {
+      border-left: 1px solid $gris;
+      border-bottom: 1px solid $gris;
+      padding: 8px;
+      text-align: center;
+    }
+  }
+}

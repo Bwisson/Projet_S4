@@ -7,13 +7,16 @@ header("Content-Type: application/json");
 
 if (isset($_POST['id_resa'])) {
     $id_resa = htmlspecialchars($_POST['id_resa']);
-
-    $res = createAnnulationArticle($conn, $id_resa);
-    if ($res) {
-        echo json_encode(true);
-    } else {
-        echo json_encode(false);
+    $listAnnulations = listAnnulationArticle($conn);
+    $id_resa_values = array_column($listAnnulations, 'id_resa');
+    if (!in_array($id_resa, $id_resa_values, $strict = true)) {
+        $res = createAnnulationArticle($conn, $id_resa);
+        if ($res) {
+            echo json_encode(true);
+        } else {
+            echo json_encode(false);
+        }
     }
 } else {
-    echo json_encode("$_POST : non défini")
+    echo json_encode("$_POST : non défini");
 }

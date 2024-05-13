@@ -31,3 +31,9 @@ function listAtelier($conn) {
 
     return $rs;
 }
+function listResaAtelierForObject($conn, $id_object) {
+    $sql = "SELECT * FROM `ResaAtelier` WHERE `id_atelier`=$id_object";
+    $res = mysqli_query($conn, $sql);
+    $rs = rs_to_table($res);
+    return $rs;
+}

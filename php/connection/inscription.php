@@ -14,6 +14,7 @@ if (isset($_POST['login'], $_POST['mdp'], $_POST['nom'], $_POST['prenom'], $_POS
     $admin = $_POST['admin'];
 
     $listUser = listUser($conn);
+
     if (!in_array($login, $listUser, $strict = true)){
         $res = createUser($conn, $login, $mdp, $nom, $prenom, $mail, $admin);
         if ($res) {
