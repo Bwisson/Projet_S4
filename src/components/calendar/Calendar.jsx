@@ -73,18 +73,17 @@ function CalendarComponent({ objectInfo , objectType }) {
 
     // Déterminer le type d'objet et l'endpoint correspondant
     if (objectType === "Ateliers") {
-        endpoint = "deplaceAteliers.php";
+        endpoint = "createResaAteliers.php";
     } else if (objectType === "Modeles") {
-        endpoint = "deplaceModeles.php";
+        endpoint = "createResaModeles.php";
     } else if (objectType === "Chevalets" || objectType === "Peinture") {
-        endpoint = "deplaceArticles.php"; 
+        endpoint = "createResaArticles.php"; 
     } else {
         console.error("Type d'objet non pris en charge pour la réservation");
         return;
     }
 
-
-    const response = await axios.post(`./../../php/deplace/${endpoint}`, formData);
+    const response = await axios.post(`./../../php/createResa/${endpoint}`, formData);
     console.log("Réservation mise à jour :", response.data);
 
 
