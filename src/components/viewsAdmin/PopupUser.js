@@ -47,9 +47,9 @@ function PopupUser({id, setShowPopUp, positionY}) {
                     let data = response.data
                     setUser(data)
                     setLoginInput(data.login)
-                    setLoginInput(data.nom)
-                    setLoginInput(data.prenom)
-                    setLoginInput(data.mail)
+                    setNomInput(data.nom)
+                    setPrenomInput(data.prenom)
+                    setMailInput(data.mail)
                 })
         }
 
@@ -177,7 +177,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
             list_inputs[i].disabled = true;
         }
 
-        setModifUserInfo(false) /* TODO : garder l'ancien texte si une modif a été faites puis annuler */
+        setModifUserInfo(false)
         setLoginInput(user.login)
         setNomInput(user.nom)
         setPrenomInput(user.prenom)
@@ -215,7 +215,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
             let form_data = new FormData()
             form_data.append("id", user.id)
 
-            axios.post("./php/delete/deleteUser.php")
+            axios.post("./php/delete/deleteUser.php", form_data)
                 .then(response => setDelUser(response.data))
         }
     }

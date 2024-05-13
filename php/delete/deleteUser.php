@@ -1,4 +1,5 @@
 <?php
+include("../connection/connection.php");
 include("../crud/user.crud.php");
 include("../crud/function_rs_to_table.php");
 
@@ -12,5 +13,5 @@ if (isset($_POST)){
         echo json_encode(false);
     }
 }else {
-    echo "Erreur : POST non undef";
+    echo "Erreur : POST undef";
 }
