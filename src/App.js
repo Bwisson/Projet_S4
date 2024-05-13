@@ -24,17 +24,17 @@ function App() {
     const [isConnect, setIsConnect] = useState(false)
     const [deconnection, setDeconnection] = useState(true)
 
-    // useEffect(() => { // Permet de garder la connexion activer lors d'un rechargement de la page
-    //     axios.get("./php/connection/isConnect.php")
-    //         .then(response => {
-    //             setIsConnect(response.data)
-    //         })
-    //
-    //     axios.get("./php/connection/isAdmin.php")
-    //         .then(response => {
-    //             setAdmin(response.data)
-    //         })
-    // }, []);
+    useEffect(() => { // Permet de garder la connexion activer lors d'un rechargement de la page
+        axios.get("./php/connection/isConnect.php")
+            .then(response => {
+                setIsConnect(response.data)
+            })
+
+        axios.get("./php/connection/isAdmin.php")
+            .then(response => {
+                setAdmin(response.data)
+            })
+    }, []);
 
     console.log("isConnect : ", isConnect, "; admin : ", admin)
 
@@ -42,7 +42,7 @@ function App() {
         <div className="App">
             { !isConnect ?
                 <>
-                    {/*<Connection setAdmin={setAdmin} setIsConnect={setIsConnect}/>*/}
+                    <Connection setAdmin={setAdmin} setIsConnect={setIsConnect}/>
                 </>
                 :
                 <div className={"pageContent"}>

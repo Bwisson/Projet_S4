@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../Button';
-import "../../css/PopUpHandleAnnulationResa.scss";
+import "../../css/cssViewsAdmin/PopUpHandleAnnulationResa.scss";
 
 const PopUpHandleAnnulationResa = ({ handleType, onCancel, onConfirm}) => {
     return (

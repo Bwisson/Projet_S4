@@ -1,6 +1,7 @@
 /* Librairy import */
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom"
+import axios from "axios"
 
 /* css import */
 import '../css/NavBar.scss';
