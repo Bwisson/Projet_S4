@@ -215,7 +215,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
             let form_data = new FormData()
             form_data.append("id", user.id)
 
-            axios.post("./../php/delete/deleteUser.php")
+            axios.post("./php/delete/deleteUser.php")
                 .then(response => setDelUser(response.data))
         }
     }
