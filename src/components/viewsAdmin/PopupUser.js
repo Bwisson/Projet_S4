@@ -273,14 +273,14 @@ function PopupUser({id, setShowPopUp, positionY}) {
             </div>
 
             <dialog id="favDialog">
-                <form method="dialog">
+                <form className={"formDialogPopupUser"} method="dialog">
                     <p>
-                        Vous êtes sur le point de supprimer l'utilisateur : {user.nom}, {user.prenom}<br/>
+                        Vous êtes sur le point de supprimer {user.nom}, {user.prenom} de la base de donnée.<br/>
                         Êtes-vous sûr ?
                     </p>
                     <menu>
                         <Button id={"cancelBtn"} text={"Annuler"} bgColor={"#2882ff"} onSmash={deleteUser} value={"false"}/>
-                        <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"#2882ff"} onSmash={deleteUser} value={"true"}/>
+                        <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"red"} onSmash={deleteUser} value={"true"}/>
                     </menu>
                 </form>
             </dialog>
