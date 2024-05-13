@@ -1,6 +1,6 @@
 <?php
-function createResaModele($conn, $id_modele, $start, $end, $title, $groupId, $color, $constraint, $display) { 
-    $sql = "INSERT INTO `ResaModele` (`id_modele`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`) VALUES ('$id_modele', '$start', '$end', '$title', '$groupId', '$color', '$constraint', '$display')";
+function createResaModele($conn, $id_modele, $start, $end, $title, $groupId, $color, $constraint, $display, $id_user) { 
+    $sql = "INSERT INTO `ResaModele` (`id_modele`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`, `id_user`) VALUES ('$id_modele', '$start', '$end', '$title', '$groupId', '$color', '$constraint', '$display', '$id_user')";
     $res = mysqli_query($conn, $sql);
     return $res;
 }
