@@ -210,7 +210,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
     }
     function deleteUser(e){
         setDelUser(e.target.value)
-
+        /* TODO : supprimer toutes ses données résas + demandes d'annualtions */
         if (delUser){
             let form_data = new FormData()
             form_data.append("id", user.id)
