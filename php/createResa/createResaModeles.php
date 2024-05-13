@@ -12,7 +12,7 @@ if(isset($_POST['start'])){
     $title = $_POST['title'];
     $groupId = NULL;
     $color = $_POST['color'];
-    $constrait = NULL;
+    $constrait = "businessHours";
     $display = NULL;
     $id_user = $_POST['id_user'];
     $id = NULL;

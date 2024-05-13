@@ -52,43 +52,13 @@ function CalendarComponent({ objectInfo , objectType }) {
     }
 }
 
-  async function handleEventResaSubmit(eventDateValue, eventTimeDebutValue, eventTimeFinValue) {
+  function handleEventResaSubmit(eventDateValue, eventTimeDebutValue, eventTimeFinValue) {
     const eventStart = `${eventDateValue}T${eventTimeDebutValue}`;
     const eventEnd = `${eventDateValue}T${eventTimeFinValue}`;
     
     const eventColor = listeCouleurEvent[Math.floor(Math.random() * listeCouleurEvent.length)];
     const event_louer = "Louer par " + user.nom + " " + user.prenom; 
 
-    const formData = new FormData();
-
-    // Ajout des données à l'objet FormData
-    formData.append('id_article', objectInfo.id);
-    formData.append('title', event_louer);
-    formData.append('start', eventStart);
-    formData.append('end', eventEnd);
-    formData.append('color', eventColor);
-    formData.append('id_user', user.id);
-
-    let endpoint;
-
-    // Déterminer le type d'objet et l'endpoint correspondant
-    if (objectType === "Ateliers") {
-        endpoint = "createResaAteliers.php";
-    } else if (objectType === "Modeles") {
-        endpoint = "createResaModeles.php";
-    } else if (objectType === "Chevalets" || objectType === "Peinture") {
-        endpoint = "createResaArticles.php"; 
-    } else {
-        console.error("Type d'objet non pris en charge pour la réservation");
-        return;
-    }
-
-    const response = await axios.post(`./../../php/createResa/${endpoint}`, formData);
-    console.log("Réservation mise à jour :", response.data);
-
-
-    
-
     const isOverlapping = events.some(event => ( // Vérifie s'il y a un chevauchement avec un autre événement
         (event.start < eventEnd && event.end > eventStart) ||
         (event.start >= eventStart && event.start < eventEnd) ||
@@ -99,93 +69,153 @@ function CalendarComponent({ objectInfo , objectType }) {
         alert('L\'événement se chevauche avec un autre événement. Veuillez choisir une autre heure.');
         return;
     }
-
-    if (eventStart === 'T' || eventEnd === 'T') {
+    else if (eventStart === 'T' || eventEnd === 'T') {
         alert('Veuillez remplir tous les champs');
         return;
     }
-
-    if (eventStart >= eventEnd) {
+    else if (eventStart >= eventEnd) {
         alert('L\'heure de début doit être inférieure à l\'heure de fin');
         return;
     }
-
-    if (eventStart === eventEnd) {
+    else if (eventStart === eventEnd) {
         alert('L\'heure de début doit être différente de l\'heure de fin');
         return;
     }
-
-    if (eventStart < eventDateValue + 'T07:59' || eventEnd > eventDateValue + 'T20:01') {
+    else if (eventStart < eventDateValue + 'T07:59' || eventEnd > eventDateValue + 'T20:01') {
         alert('Les réservations ne sont possibles qu\'entre 8h00 et 20h00');
         return;
     }
+    else{
 
+      const formData = new FormData();
 
-    window.location.reload();
-}
+      // Ajout des données à l'objet FormData
+      formData.append('id_article', objectInfo.id);
+      formData.append('title', event_louer);
+      formData.append('start', eventStart);
+      formData.append('end', eventEnd);
+      formData.append('color', eventColor);
+      formData.append('id_user', user.id);
+  
+      let endpoint;
+  
+      // Déterminer le type d'objet et l'endpoint correspondant
+      if (objectType === "Ateliers") {
+          endpoint = "createResaAtelier.php";
+      } else if (objectType === "Modeles") {
+          endpoint = "createResaModeles.php";
+      } else if (objectType === "Chevalets" || objectType === "Peinture") {
+          endpoint = "createResaArticles.php"; 
+      } else {
+          console.error("Type d'objet non pris en charge pour la réservation");
+          return;
+      }
+  
+      const response = axios.post(`./../../php/createResa/${endpoint}`, formData);
+      console.log("Réservation mise à jour :", response.data);
+
+      window.location.reload();
+    }
+  }
 
 
   function handleEventCourSubmit(eventDateValue, eventTimeDebutValue, eventTimeFinValue) {
     const eventStart = `${eventDateValue}T${eventTimeDebutValue}`;
     const eventEnd = `${eventDateValue}T${eventTimeFinValue}`;
 
-    const event_complet = {
-        start: eventStart,
-        end: eventEnd,
-        constraint: 'businessHours',
-        display: 'background',
-        groupId: 'cours',
-    };
-
     const isOverlapping = events.some(event => ( // Vérifie s'il y a un chevauchement avec un autre événement
-        (event.start < eventEnd && event.end > eventStart) ||
-        (event.start >= eventStart && event.start < eventEnd) ||
-        (event.end > eventStart && event.end <= eventEnd)
+      (event.start < eventEnd && event.end > eventStart) ||
+      (event.start >= eventStart && event.start < eventEnd) ||
+      (event.end > eventStart && event.end <= eventEnd)
     ));
 
     if (isOverlapping) {
         alert('L\'événement se chevauche avec un autre événement. Veuillez choisir une autre heure.');
         return;
     }
-
-    if (eventStart === 'T' || eventEnd === 'T') {
-      alert('Veuillez remplir tous les champs');
-      return;
+    else if (eventStart === 'T' || eventEnd === 'T') {
+        alert('Veuillez remplir tous les champs');
+        return;
     }
-
-    if (eventStart >= eventEnd) {
+    else if (eventStart >= eventEnd) {
         alert('L\'heure de début doit être inférieure à l\'heure de fin');
         return;
     }
-
-    if (eventStart === eventEnd) {
+    else if (eventStart === eventEnd) {
         alert('L\'heure de début doit être différente de l\'heure de fin');
         return;
     }
-
-    if (eventStart < eventDateValue + 'T07:59' || eventEnd > eventDateValue + 'T20:01') {
-        alert('Les cours ne sont possibles qu\'entre 8h00 et 20h00');
+    else if (eventStart < eventDateValue + 'T07:59' || eventEnd > eventDateValue + 'T20:01') {
+        alert('Les réservations ne sont possibles qu\'entre 8h00 et 20h00');
         return;
     }
+    else{
 
+      const formData = new FormData();
 
-    setEvents(prevEvents => [...prevEvents, event_complet]);
-    //console.log(events);
+      // Ajout des données à l'objet FormData
+      formData.append('id_article', objectInfo.id);
+      formData.append('start', eventStart);
+      formData.append('end', eventEnd);
+      formData.append('id_user', user.id);
 
-}
+      let endpoint;
+
+      // Déterminer le type d'objet et l'endpoint correspondant
+      if (objectType === "Ateliers") {
+          endpoint = "createCourAtelier.php";
+      } else if (objectType === "Modeles") {
+          endpoint = "createCourModeles.php";
+      } else if (objectType === "Chevalets" || objectType === "Peinture") {
+          endpoint = "createCourArticles.php"; 
+      } else {
+          console.error("Type d'objet non pris en charge pour la réservation");
+          return;
+      }
+
+      const response = axios.post(`./../../php/createCour/${endpoint}`, formData);
+      console.log("Réservation mise à jour :", response.data);
+
+      window.location.reload();
+    }
+  }
 
 
   function handleEventClick(eventInfo) {
+
     if (user) {
       const userRole = user.admin;
       if (userRole === "1") { // Si l'utilisateur est un administrateur
         if (window.confirm("Voulez-vous vraiment supprimer cet événement ?")) {
-
           events.splice(eventInfo.event._def.publicId, 1);
           eventInfo.event.remove();
+
+          let endpoint;
+          if (objectType === "Ateliers") {
+              endpoint = "deleteResaAtelier.php";
+          } else if (objectType === "Modeles") {
+              endpoint = "deleteResaModeles.php";
+          } else if (objectType === "Chevalets" || objectType === "Peinture") {
+              endpoint = "deleteResaArticles.php"; 
+          } else {
+              console.error("Type d'objet non pris en charge pour la réservation");
+              return;
+          }
+
+          const formData = new FormData();
+          formData.append('id_resa', eventInfo.event._def.publicId);
+
+          console.log("Id Element supprimer :", eventInfo.event._def.publicId);
+
+          const response = axios.post(`./../../php/deleteResa/${endpoint}`, formData);
+          console.log("Element supprimer :", response.data);
+
+
         }
       }
     }
+
+
   }
 
   async function handleEventDrop(eventDropInfo) {

@@ -9,11 +9,11 @@ if(isset($_POST['start'])){
     $start = $_POST['start'];
     $end = $_POST['end'];
     $id_user = $_POST['id_user'];
-    $title = $_POST['title'];
-    $groupId = NULL;
-    $color = $_POST['color'];
-    $constrait = "businessHours";
-    $display = NULL;
+    $title = NULL;
+    $groupId = "cours";
+    $color = NULL;
+    $constrait = NULL;
+    $display = "background";
     $id_user = $_POST['id_user'];
     $id = NULL;
 

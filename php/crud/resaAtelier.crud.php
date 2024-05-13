@@ -1,6 +1,6 @@
 <?php
 function createResaAtelier($conn, $id_article, $start, $end, $title, $groupId, $color, $constrait, $display, $id_user) {
-    $sql = "INSERT INTO `ResaAtelier` (`id_atelier`, `start`, `end`, `title`, `groupId`, `color`, `constrait`, `display`, `id_user`) VALUES ('$id_atelier', '$start', '$end', '$title', '$groupId', '$color', '$constrait', '$display', '$id_user')";
+    $sql = "INSERT INTO `ResaAtelier` (`id_atelier`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`, `id_user`) VALUES ('$id_atelier', '$start', '$end', '$title', '$groupId', '$color', '$constrait', '$display', '$id_user')";
      $res = mysqli_query($conn, $sql);
     return $res;
 }
@@ -11,8 +11,8 @@ function deleteResaAtelier($conn, $id) {
     return $res;
 }
 
-function updateResaAtelier($conn, $id, $id_atelier, $start, $end, $title, $groupId, $color, $constraint, $display) {
-    $sql = "UPDATE `ResaAtelier` SET `id_atelier`='$id_atelier', `start`='$start', `end`='$end', `title`='$title', `groupId`='$groupId', `color`='$color', `constraint`='$constraint', `display`='$display' WHERE `id` = $id";
+function updateResaAtelier($conn, $id, $id_article, $start, $end, $id_user) {
+    $sql = "UPDATE `ResaAtelier` SET SET `id_article`='$id_article', `start`='$start', `end`='$end' , `id_user`='$id_user' WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);
     return $res;
 }
