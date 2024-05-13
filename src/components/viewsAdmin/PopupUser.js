@@ -265,10 +265,8 @@ function PopupUser({id, setShowPopUp, positionY}) {
                     </div>
                     :
                     <div className={"btnModifPopUpUser"}>
-                        <Button id={"btnEditPopUpUser"} onSmash={modifUserAvailable} text={"Modifier"}
-                                bgColor={"#2882ff"}/>
-                        <Button id={"btnDeletePopUpUser"} onSmash={showDeleteDialog} text={"Supprimer l'utilisateur"}
-                                bgColor={"red"}/>
+                        <Button id={"btnEditPopUpUser"} onSmash={modifUserAvailable} text={"Modifier"} bgColor={"#2882ff"}/>
+                        <Button id={"btnDeletePopUpUser"} onSmash={showDeleteDialog} text={"Supprimer l'utilisateur"} bgColor={"red"}/>
                     </div>}
             </div>
 
@@ -279,8 +277,8 @@ function PopupUser({id, setShowPopUp, positionY}) {
                         Êtes-vous sûr ?
                     </p>
                     <menu>
-                        <Button id={"cancelBtn"} text={"Annuler"} bgColor={"#2882ff"} onSmash={deleteUser} value={"false"}/>
-                        <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"red"} onSmash={deleteUser} value={"true"}/>
+                        <Button id={"cancelBtn"} text={"Annuler"} bgColor={"#2882ff"} onSmash={deleteUser} value={false}/>
+                        <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"red"} onSmash={deleteUser} value={true}/>
                     </menu>
                 </form>
             </dialog>
