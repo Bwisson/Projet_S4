@@ -50,7 +50,7 @@ function App() {
                         <Route path={"info7/ListObjects/:reservableObject/:id"} element={<Object/>}/>
                         <Route path={"info7/AdminViewUsers"} element={<ViewUsers/>}/>
                         <Route path={"info7/AdminViewObjects"} element={<ViewObjects/>}/>
-                        {/* <Route path={"info7/Calendar"} element={<Calendar/>}/> */}
+                        <Route path={"info7/Calendar"} element={<Calendar/>}/>
                     </Routes>
                 </div>
             }

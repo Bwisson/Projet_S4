@@ -52,21 +52,43 @@ function CalendarComponent({ objectInfo , objectType }) {
     }
 }
 
-  function handleEventResaSubmit(eventDateValue, eventTimeDebutValue, eventTimeFinValue) {
+  async function handleEventResaSubmit(eventDateValue, eventTimeDebutValue, eventTimeFinValue) {
     const eventStart = `${eventDateValue}T${eventTimeDebutValue}`;
     const eventEnd = `${eventDateValue}T${eventTimeFinValue}`;
     
     const eventColor = listeCouleurEvent[Math.floor(Math.random() * listeCouleurEvent.length)];
     const event_louer = "Louer par " + user.nom + " " + user.prenom; 
 
-    const event_complet = {
-        id: events.length,
-        title: event_louer,
-        start: eventStart,
-        end: eventEnd,
-        constraint: 'businessHours',
-        color: eventColor,
-    };
+    const formData = new FormData();
+
+    // Ajout des données à l'objet FormData
+    formData.append('id_article', objectInfo.id);
+    formData.append('title', event_louer);
+    formData.append('start', eventStart);
+    formData.append('end', eventEnd);
+    formData.append('color', eventColor);
+    formData.append('id_user', user.id);
+
+    let endpoint;
+
+    // Déterminer le type d'objet et l'endpoint correspondant
+    if (objectType === "Ateliers") {
+        endpoint = "deplaceAteliers.php";
+    } else if (objectType === "Modeles") {
+        endpoint = "deplaceModeles.php";
+    } else if (objectType === "Chevalets" || objectType === "Peinture") {
+        endpoint = "deplaceArticles.php";
+    } else {
+        console.error("Type d'objet non pris en charge pour la réservation");
+        return;
+    }
+
+
+    const response = await axios.post(`./../../php/deplace/${endpoint}`, formData);
+    console.log("Réservation mise à jour :", response.data);
+
+
+    
 
     const isOverlapping = events.some(event => ( // Vérifie s'il y a un chevauchement avec un autre événement
         (event.start < eventEnd && event.end > eventStart) ||
@@ -99,7 +121,8 @@ function CalendarComponent({ objectInfo , objectType }) {
         return;
     }
 
-    setEvents(prevEvents => [...prevEvents, event_complet]);
+
+    window.location.reload();
 }
 
 
