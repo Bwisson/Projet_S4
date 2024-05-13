@@ -9,12 +9,15 @@ import '../../css/cssViewUser/Object.scss'
 /* components imports */
 import Button from '../Button'
 import {formatDate} from "@fullcalendar/core";
+import Calendar from "../calendar/Calendar";
+
 
 function Object(){
     const urlParams = useParams()
     const id = urlParams.id
     const objectType = urlParams.reservableObject
 
+    const [objectInfo, setObjectInfo] = useState(null)
     const [objectName, setObjectName] = useState("")
     const [objectImage, setObjectImage] = useState("../../assets/images/objects/")
 
@@ -27,11 +30,12 @@ function Object(){
             axios.post("./../../php/select/selectObject.php", dataObject)
                 .then(response => {
                     let data = response.data[0]
+                    setObjectInfo(data)
                     setObjectName(data.nom)
                     setObjectImage(objectImage + data.image)
                 })
         }
-        getObjectInfo()
+        getObjectInfo();
     }, []);
 
     return(
@@ -48,8 +52,9 @@ function Object(){
             </div>
 
             <div className={"rightSide"}>
-                <div className={"calendar"}></div>
-                <Button text={"Réserver"}></Button>
+                <div className={"calendar"}>
+                    <Calendar objectInfo={objectInfo} objectType={objectType}/>
+                </div>
             </div>
         </div>
     )
