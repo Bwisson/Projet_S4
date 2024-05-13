@@ -188,9 +188,10 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible}){
 
         if (delObject){
             let form_data = new FormData()
-            form_data.append("id", objectInfos.id)
+            form_data.append("id_objet", objectInfos.id)
+            form_data.append("type_objet", type_objet)
 
-            axios.post("./php/delete/deleteUser.php", form_data)
+            axios.post("./php/delete/deleteObject.php", form_data)
                 .then(response => setDelObject(response.data))
         }
     }
