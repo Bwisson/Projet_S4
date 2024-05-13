@@ -13,8 +13,9 @@ if (isset($_POST['login'], $_POST['mdp'], $_POST['nom'], $_POST['prenom'], $_POS
     $mail = htmlspecialchars($_POST['mail']);
     $admin = $_POST['admin'];
 
-    $listUserLogin = listUserLogin($conn);
-    if (!in_array($login, $listUserLogin, $strict = true)){
+    $listUser = listUser($conn);
+
+    if (!in_array($login, $listUser, $strict = true)){
         $res = createUser($conn, $login, $mdp, $nom, $prenom, $mail, $admin);
         if ($res) {
             echo json_encode(true);

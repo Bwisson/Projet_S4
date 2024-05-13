@@ -4,7 +4,7 @@ import axios from 'axios'
 
 /* components imports */
 import Button from '../Button'
-import PopUpUser from "./PopUpUser"
+import PopupUser from "./PopupUser"
 import FormInscription from "../connection/Inscription"
 
 /* css imports */
@@ -14,8 +14,11 @@ import '../../css/cssViewsAdmin/tableAdmin.scss'
 
 
 function ViewUsers() {
-    const [showPopUp, setShowPopUp] = useState(false)
+    const [showPopupResas, setShowPopupResas] = useState(false)
+    const [showPopupUser, setShowPopupUser] = useState(false)
     const [showAddUserForm, setShowAddUserForm] = useState(false)
+    const [NewData, setNewData] = useState(false)
+
     const [users, setUsers] = useState(null)
     const [idUserClicked, setIdUserClicked] = useState(null)
     const [popupPosition, setPopupPosition] = useState(20)
@@ -26,16 +29,22 @@ function ViewUsers() {
                 .then(response => {
                     let datas = response.data
                     setUsers(datas)
+                    setNewData(false)
                 })
         }
         getUsers()
-    }, []);
+    }, [NewData]);
 
-    function showingPopUp(){
-        return setShowPopUp(true)
+    function showingPopUp(event){
+        let idElement = event.target.id
+        let scroll = event.view.scrollY
+        setIdUserClicked(idElement)
+        setPopupPosition(((event.view.screen.height)/2) + scroll)
+
+        setShowPopupResas(true)
     }
     function hidePopUp(){
-        return setShowPopUp(false)
+        setShowPopupResas(false)
     }
 
     function changeVisiblityForm(){
@@ -51,14 +60,7 @@ function ViewUsers() {
                     <td>{user.prenom}</td>
                     <td>{user.login}</td>
                     <td>{user.mail}</td>
-                    <td><Button id={user.id} onSmash={function (event) {
-                        let idElement = event.target.id
-                        let scroll = event.view.scrollY
-                        setIdUserClicked(idElement)
-                        setPopupPosition(((event.view.screen.height)/2) + scroll)
-
-                        return setShowPopUp(true)
-                    }} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>
+                    <td><Button id={user.id} onSmash={showingPopUp} text={"Voir"} bgColor={"#2882ff"}/></td>
                 </tr>
             );
 
@@ -79,18 +81,17 @@ function ViewUsers() {
                     </tr>
                 </thead>
                 <tbody>
-                {<List/> != null ? <List/> : null}
+                {<List/> != null && <List/> }
                 </tbody>
             </table>
-            {showAddUserForm && <FormInscription/>}
+            {showAddUserForm && <FormInscription setNewData={setNewData}/>}
             <Button id={"btnAddUser"} onSmash={changeVisiblityForm} text={"+"} bgColor={"#2882ff"}/>
-            {<List/> == null ? <i>Aucun utilisateurs</i> : null}
-            {showPopUp?
+            {<List/> == null && <i>Aucun utilisateurs</i>}
+            {showPopupResas &&
                 <>
                     <div onClick={hidePopUp} className="foreground"></div>
-                    <PopUpUser id={idUserClicked} setShowPopUp={setShowPopUp} positionY={popupPosition}/>
-                </>
-                 : null}
+                    <PopupUser id={idUserClicked} setShowPopUp={setShowPopupResas} positionY={popupPosition}/>
+                </>}
         </div>
 
     )

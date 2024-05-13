@@ -1,0 +1,30 @@
+.pop-up-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Pour s'assurer que la fenêtre pop-up est au-dessus du reste du contenu */
+    width: 400px; /* Largeur de la fenêtre pop-up */
+  }
+  
+  .pop-up {
+    margin-bottom: 20px; /* Espacement après le paragraphe */
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Ombre légère */
+  }
+  
+  .pop-up h2 {
+    margin-top: 0;
+  }
+  
+  .pop-up p {
+    margin-bottom: 20px; /* Espacement après le paragraphe */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between; /* Pour espacer les boutons horizontalement */
+  }

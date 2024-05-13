@@ -1,30 +1,89 @@
 /* Librairy imports */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Button from "../Button.js"
+import { Link } from "react-router-dom"
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewUser/Homepage.scss'
 
+/* components imports */
+import Button from "../Button"
+import ModifInfo from './ModifInfo';
+import PopUpAnnulationResa from "./PopUpAnnulationResa";
+
+
 function Homepage() {
     const [currentReservations, setCurrentReservations] = useState([]);
     const [pastReservations, setPastReservations] = useState([]);
     const [user, setUser] = useState(null);
+    const [showModifInfo, setShowModifInfo] = useState(false);
+    const [dataModified, setDataModified] = useState(false);
+
+    const [showAnnulationPopup, setShowAnnulationPopup] = useState(false);
+    const [reservationIdToCancel, setReservationIdToCancel] = useState(null);
+    const [reservationTypeToCancel, setReservationTypeToCancel] = useState(null);
+
+
+    const toggleModifInfo = () => {
+      setShowModifInfo(!showModifInfo);
+    };
+
+    const handleAnnulationClick = (reservationId, reservationType) => {
+        setReservationIdToCancel(reservationId);
+        setReservationTypeToCancel(reservationType);
+        setShowAnnulationPopup(true);
+    };
+
+    const handlePopUpCancel = () => {
+        setShowAnnulationPopup(false);
+        setReservationIdToCancel(null);
+        setReservationTypeToCancel(null);
+    };
+
+    const handlePopUpConfirm = () => {
+        let form_data = new FormData()
+        form_data.append("id_resa", reservationIdToCancel)
+        if (reservationTypeToCancel === "article") {
+            axios.post("./php/create/createAnnulationArticle.php", form_data)
+        } else if (reservationTypeToCancel === "atelier") {
+            axios.post("./php/create/createAnnulationAtelier.php", form_data)
+        } else if (reservationTypeToCancel === "modele") {
+            axios.post("./php/create/createAnnulationModele.php", form_data)
+        }
+        setShowAnnulationPopup(false);
+        setReservationIdToCancel(null);
+        setReservationTypeToCancel(null);
+    };
 
     useEffect(() => {
         axios.get("./php/list/fromUser/listResaFromUser.php")
             .then(response => {
                 const { articles, modeles, ateliers } = response.data;
 
-                // Filtrer les réservations actuelles et passées pour chaque type d'entité
-                const currentArticlesReservations = articles.filter(reservation => isCurrentReservation(reservation));
-                const currentModelesReservations = modeles.filter(reservation => isCurrentReservation(reservation));
-                const currentAteliersReservations = ateliers.filter(reservation => isCurrentReservation(reservation));
+                let currentArticlesReservations = []
+                let currentAteliersReservations = []
+                let currentModelesReservations = []
 
-                const pastArticlesReservations = articles.filter(reservation => !isCurrentReservation(reservation));
-                const pastModelesReservations = modeles.filter(reservation => !isCurrentReservation(reservation));
-                const pastAteliersReservations = ateliers.filter(reservation => !isCurrentReservation(reservation));
+                let pastArticlesReservations = []
+                let pastAteliersReservations = []
+                let pastModelesReservations = []
+
+                // Filtrer les réservations actuelles et passées pour chaque type d'entité
+                if (articles.length > 0){
+                    currentArticlesReservations = articles.filter(reservation => isCurrentReservation(reservation));
+                    pastArticlesReservations = articles.filter(reservation => !isCurrentReservation(reservation));
+                }
+
+                if (ateliers.length > 0){
+                    currentAteliersReservations = ateliers.filter(reservation => isCurrentReservation(reservation));
+                    pastAteliersReservations = ateliers.filter(reservation => !isCurrentReservation(reservation));
+                }
+
+                if (modeles.length > 0){
+                    currentModelesReservations = modeles.filter(reservation => isCurrentReservation(reservation));
+                    pastModelesReservations = modeles.filter(reservation => !isCurrentReservation(reservation));
+                }
 
                 // Mettre à jour les états avec les réservations actuelles et passées
                 setCurrentReservations({
@@ -32,11 +91,13 @@ function Homepage() {
                     modeles: currentModelesReservations,
                     ateliers: currentAteliersReservations
                 });
+
                 setPastReservations({
                     articles: pastArticlesReservations,
                     modeles: pastModelesReservations,
                     ateliers: pastAteliersReservations
                 });
+
             });
 
       function getUser() {
@@ -44,10 +105,11 @@ function Homepage() {
             .then(response => {
                 let datas = response.data
                 setUser(datas)
+                setDataModified(false)
             })
       }
       getUser()
-    }, []);
+    }, [dataModified]);
 
     // Fonction pour vérifier si une réservation est actuelle ou passée
     const isCurrentReservation = (reservation) => {
@@ -61,6 +123,14 @@ function Homepage() {
         let res= <p>Aucun article</p>
         if (articles != null) {
             if (articles.length != 0){
+                for (let i = 0; i < articles.length; i++) {
+                    let cat = articles[i].categorie
+                    if (cat == "chevalet"){
+                        articles[i].categorie = "Chevalets"
+                    }else if (cat == "pinceaux_outils"){
+                        articles[i].categorie = "Peinture"
+                    }
+                }
                 let list_articles = articles.map(article =>
                     <tr>
                         <td>{article.nom}</td>
@@ -69,11 +139,13 @@ function Homepage() {
                         <td>{article.categorie}</td>
                         <td>{article.couleur}</td>
                         <td>{article.taille}</td>
-                        <td><Button /*link={} //L'id de l'article peut etre récupéré avec {article.id_article}*/
-                            text={"Voir"} bgColor={"#2882ff"}/></td>
+                        <div className="Buttons">
+                            <td><Link to={"ListObjects/" + article.categorie + "/" + article.id_article}><Button text={"Voir"} bgColor={"#2882ff"}/></Link>
+                            {isCurrentReservation(article) && <Button onSmash={() => handleAnnulationClick(article.id, "article")} text="Annuler" bgColor={"#2882ff"}/>}</td>
+                        </div>
                     </tr>)
-                res =
-                    <table className={"tab"}>
+
+                res = <table className={"tab"}>
                         <thead>
                         <tr>
                             <th scope="col">Nom</th>
@@ -103,8 +175,10 @@ function Homepage() {
                         <td>{new Date(atelier.start).toLocaleDateString()}</td>
                         <td>{new Date(atelier.end).toLocaleDateString()}</td>
                         <td>{atelier.type}</td>
-                        <td><Button /*link={} //L'id de l'atelier peut etre récupéré avec {atelier.id_atelier}*/
-                            text={"Voir"} bgColor={"#2882ff"}/></td>
+                        <div className="Buttons">
+                            <td><Link to={"ListObjects/Ateliers/" + atelier.id_atelier}><Button text={"Voir"} bgColor={"#2882ff"}/></Link>
+                            {isCurrentReservation(atelier) && <Button onSmash={() => handleAnnulationClick(atelier.id, "atelier")} text="Annuler" bgColor={"#2882ff"}/>}</td>
+                        </div>
                     </tr>)
 
                 res =
@@ -140,8 +214,11 @@ function Homepage() {
                             <td>{modele.genre}</td>
                             <td>{modele.age}</td>
                             <td>{modele.tarif_horaire}</td>
-                            <td><Button /*link={} //L'id du modele peut etre récupéré avec {modele.id_modele}*/
-                                text={"Voir"} bgColor={"#2882ff"}/></td>
+                            <div className="Buttons">
+                                <td><Link to={"ListObjects/Modeles/" + modele.id_modele}><Button text={"Voir"} bgColor={"#2882ff"}/></Link>
+                                {isCurrentReservation(modele) && <Button onSmash={() => handleAnnulationClick(modele.id, "modele")} text="Annuler" bgColor={"#2882ff"}/>}</td>
+                            </div>
+                            
                         </tr>)
 
                 res =
@@ -284,8 +361,16 @@ function Homepage() {
           <div className="informations">
           <h2>Mes informations</h2>
             {<List/> != null && <List/>}
+            <Button onSmash={toggleModifInfo} text={"Modifier mes informations"} bgColor={"#2882ff"} />
+            {showModifInfo && <ModifInfo setDataModified={setDataModified} />}
           </div>
         </div>
+        {showAnnulationPopup && (
+          <PopUpAnnulationResa
+            onCancel={handlePopUpCancel}
+            onConfirm={handlePopUpConfirm}
+          />
+        )}
       </div>
     );
 }
