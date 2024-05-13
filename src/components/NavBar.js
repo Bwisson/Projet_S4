@@ -1,5 +1,5 @@
 /* Librairy import */
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom"
 
 /* css import */
@@ -15,6 +15,19 @@ function NavBar({ admin, setDeconnection }) {
     function showProfilMenu(){
         setProfilMenuVisible(!profilMenuVisible)
     }
+
+    const [nbDemandesAnnulation, setNbDemandesAnnulation] = useState(0)
+
+    useEffect(() => {
+        function getNbDemandesAnnulation() {
+            axios.get("./php/list/listDemandesAnnulation.php")
+            .then(response => {
+                const data = response.data
+                setNbDemandesAnnulation(Array.isArray(data) ? data.length : 0)
+            })
+        }
+        getNbDemandesAnnulation()
+    }, []);
 
     return (
         <div className="NavBar">
@@ -44,6 +57,7 @@ function NavBar({ admin, setDeconnection }) {
                                 <li><Link to={"info7/AdminViewObjects"}>OBJETS</Link></li>
                                 {/* TODO : rajouter info7/ avant de push */}
                                 <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
+                                <li><Link to={"info7/AdminViewDemandesAnnulation"}>DEMANDES D'ANNULATION ({nbDemandesAnnulation})</Link></li>
                             </ul>
                         </>
                         : null}
