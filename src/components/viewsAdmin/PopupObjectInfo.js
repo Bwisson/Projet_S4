@@ -11,24 +11,31 @@ import "../../css/cssViewsAdmin/PopupObjectInfo.scss"
 
 
 function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible}){
-    const [objectInfo, setObjectInfo] = useState([])
+    const [objectInfos, setObjectInfos] = useState([])
 
     useEffect(() => {
         function getObjectInfo(){
-            if(type_objet == "article"){
-                axios.post("",)
-                    .then(response => setObjectInfo(response.data))
-            }else if (type_objet == "atelier"){
-                axios.post("",)
-                    .then(response => setObjectInfo(response.data))
-            }else if (type_objet == "modele"){
-                axios.post("",)
-                    .then(response => setObjectInfo(response.data))
-            }else {
-                console.log("type d'objet inconnu")
-            }
+           let form_data = new FormData()
+            form_data.append("id", id_objet)
+            form_data.append("type", type_objet)
+            axios.post("./php/select/selectObject.php", form_data)
+                .then(response => setObjectInfos(response.data))
         }
     }, []);
+    
+    function createFormObject(){
+        if (objectInfos != undefined && objectInfos != null)
+            if (objectInfos.legnth > 0) {
+                let res = objectInfos.map(info => (
+                    <>
+                        <div>
+                            <label></label>
+                            <input type="text"/>
+                        </div>
+                    </>
+                ))
+            }
+    }
 
     function popupObjectUnvisible(){
         setPopupObjectVisible(false)
