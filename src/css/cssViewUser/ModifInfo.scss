@@ -24,7 +24,7 @@
 }
 
 .container .inputs input {
-  width: 100%;
+  width: calc(100% - 20px);
   margin-bottom: 15px;
   padding: 10px;
   border: 1px solid #ccc;

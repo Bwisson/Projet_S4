@@ -15,6 +15,7 @@ function Object(){
     const id = urlParams.id
     const objectType = urlParams.reservableObject
 
+    const [objectInfo, setObjectInfo] = useState(null)
     const [objectName, setObjectName] = useState("")
     const [objectImage, setObjectImage] = useState("../../assets/images/objects/")
 
@@ -27,6 +28,7 @@ function Object(){
             axios.post("./../../php/select/selectObject.php", dataObject)
                 .then(response => {
                     let data = response.data[0]
+                    setObjectInfo(data)
                     setObjectName(data.nom)
                     setObjectImage(objectImage + data.image)
                 })

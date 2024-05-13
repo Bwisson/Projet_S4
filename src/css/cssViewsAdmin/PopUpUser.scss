@@ -2,18 +2,74 @@ $bleu1 : #0068e7;
 $bleu2 : #2882ff;
 $mauve : #c4a6ff;
 $rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
 
 .PopUpUser{
   z-index: 2;
   width: 70vw;
   min-height: 38vh;
   max-height: 70vh;
+  border: 1px solid lightgrey;
   border-radius: 5px;
   background-color: white;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
   overflow: auto;
+
+  .containerFormPopUser{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 20px;
+
+    .formPopUser{
+      width: 100%;
+      padding: 0 0 20px 0;
+      box-shadow: none;
+      display: flex;
+      justify-content: space-between;
+
+
+      input{
+        padding: 5px;
+        border: 1px solid $gris;
+        border-radius: 5px;
+      }
+
+      input:disabled{
+        cursor: not-allowed;
+        background-color: rgb(243, 243, 243);
+      }
+    }
+
+    .btnModifPopUpUser{
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+  dialog{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    width: auto;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+
+    .formDialogPopupUser{
+      width: auto;
+
+      menu{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 20px;
+      }
+    }
+  }
 
   .titleTab{
     margin: 20px 0 40px 0;
@@ -37,7 +93,11 @@ $rose : #ffd2ff;
     }
   }
 
-  button{
+  p {
+    text-align: center;
+  }
+
+  #btnClose{
     min-width: 50px;
     position: absolute;
     border-radius: 0 0 0 5px;
