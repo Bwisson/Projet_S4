@@ -77,7 +77,7 @@ function CalendarComponent({ objectInfo , objectType }) {
     } else if (objectType === "Modeles") {
         endpoint = "deplaceModeles.php";
     } else if (objectType === "Chevalets" || objectType === "Peinture") {
-        endpoint = "deplaceArticles.php";
+        endpoint = "deplaceArticles.php"; 
     } else {
         console.error("Type d'objet non pris en charge pour la réservation");
         return;
