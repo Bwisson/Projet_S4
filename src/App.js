@@ -43,7 +43,6 @@ function App() {
             { !isConnect ?
                 <>
                     {/*<Connection setAdmin={setAdmin} setIsConnect={setIsConnect}/>*/}
-                    <PopupUser />
                 </>
                 :
                 <div className={"pageContent"}>

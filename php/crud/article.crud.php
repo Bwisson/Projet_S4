@@ -45,3 +45,9 @@ function listArticle($conn)
 
     return $rs;
 }
+function listResaArticleForObject($conn, $id_object) {
+    $sql = "SELECT * FROM `ResaArticle` WHERE `id_article`=$id_object";
+    $res = mysqli_query($conn, $sql);
+    $rs = rs_to_table($res);
+    return $rs;
+}
