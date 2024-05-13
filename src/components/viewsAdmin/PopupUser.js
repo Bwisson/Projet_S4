@@ -9,7 +9,7 @@ import Button from "../Button";
 import "../../css/cssViewsAdmin/PopUpUser.scss"
 import {translateRect} from "@fullcalendar/core/internal";
 
-function PopupUser({id, setShowPopUp, positionY}) {
+function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
     const [listResasArticles, setListResasArticles] = useState([])
     const [listResasAteliers, setListResasAteliers] = useState([])
     const [listResasModeles, setListResasModeles] = useState([])
@@ -23,6 +23,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
     const [mailInput, setMailInput] = useState('')
 
     const [newData, setNewData] = useState(false)
+    sendNewdata(newData)
     const [delUser, setDelUser] = useState(false)
 
     useEffect(() => {
@@ -36,6 +37,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
                     setListResasArticles(data.articles)
                     setListResasAteliers(data.ateliers)
                     setListResasModeles(data.modeles)
+                    setNewData(false)
                 })
         }
         function getUserInfo(){
@@ -50,12 +52,13 @@ function PopupUser({id, setShowPopUp, positionY}) {
                     setNomInput(data.nom)
                     setPrenomInput(data.prenom)
                     setMailInput(data.mail)
+                    setNewData(false)
                 })
         }
 
         getUserResas()
         getUserInfo()
-    }, [id]);
+    }, [newData]);
 
 
     function MapResasArticles(){
@@ -195,12 +198,15 @@ function PopupUser({id, setShowPopUp, positionY}) {
             form_data.append("mail", mailInput)
             form_data.append("admin", user.admin)
 
-            axios.post("./../php/update/updateUserInfo.php", form_data)
-                .then(response => {setNewData(response.data)})
+            axios.post("./php/update/updateUserInfo.php", form_data)
+                .then(response => {
+                    let data = response.data
+                    setNewData(data)
+                    if (data){
+                        cancelUserModif()
+                    }//else afficher un message erreur modif ne s'est pas faite
+                })
 
-            if (newData){
-                cancelUserModif()
-            }//else afficher un message erreur modif ne s'est pas faite
         }
     }
 
@@ -209,14 +215,13 @@ function PopupUser({id, setShowPopUp, positionY}) {
         dialog.showModal();
     }
     function deleteUser(e){
-        setDelUser(e.target.value)
         /* TODO : supprimer toutes ses données résas + demandes d'annualtions */
-        if (delUser){
+        if (e.target.value === "true"){
             let form_data = new FormData()
             form_data.append("id", user.id)
-
-            axios.post("./php/delete/deleteUser.php", form_data)
-                .then(response => setDelUser(response.data))
+            console.log("utilisateur supprimer")
+            // axios.post("./php/delete/deleteUser.php", form_data)
+            //     .then(response => setDelUser(response.data))
         }
     }
 

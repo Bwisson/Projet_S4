@@ -56,9 +56,9 @@ function ViewUsers() {
         if(users != null){
             list_users = users.map(user =>
                 <tr>
+                    <td>{user.login}</td>
                     <td id={user.nom}>{user.nom}</td>
                     <td>{user.prenom}</td>
-                    <td>{user.login}</td>
                     <td>{user.mail}</td>
                     <td><Button id={user.id} onSmash={showingPopUp} text={"Voir"} bgColor={"#2882ff"}/></td>
                 </tr>
@@ -72,13 +72,13 @@ function ViewUsers() {
         <div className="ViewUsers">
             <table className={"adminTable"}>
                 <thead>
-                    <tr>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Prénom</th>
-                        <th scope="col">Login</th>
-                        <th scope="col">Mail</th>
-                        <th scope="col">Réservations</th>
-                    </tr>
+                <tr>
+                    <th scope="col">Login</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Mail</th>
+                    <th scope="col">Réservations</th>
+                </tr>
                 </thead>
                 <tbody>
                 {<List/> != null && <List/> }
@@ -90,7 +90,7 @@ function ViewUsers() {
             {showPopupResas &&
                 <>
                     <div onClick={hidePopUp} className="foreground"></div>
-                    <PopupUser id={idUserClicked} setShowPopUp={setShowPopupResas} positionY={popupPosition}/>
+                    <PopupUser id={idUserClicked} setShowPopUp={setShowPopupResas} positionY={popupPosition} sendNewdata={setNewData}/>
                 </>}
         </div>
 
