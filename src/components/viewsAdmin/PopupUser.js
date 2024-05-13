@@ -281,8 +281,6 @@ function PopupUser({id, setShowPopUp, positionY}) {
                     <menu>
                         <Button id={"cancelBtn"} text={"Annuler"} bgColor={"#2882ff"} onSmash={deleteUser} value={"false"}/>
                         <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"#2882ff"} onSmash={deleteUser} value={"true"}/>
-                        {/*<button id="cancelValue" onClick={deleteUser} value="false">Annuler</button>*/}
-                        {/*<button id="confirmBtn" onClick={deleteUser} value="true">Confirmer</button>*/}
                     </menu>
                 </form>
             </dialog>
