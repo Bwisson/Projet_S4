@@ -41,9 +41,23 @@ function ViewDemandesAnnulation() {
 
     useEffect(() => {
         axios.get("./php/list/listDemandesAnnulation.php")
-            .then(response => {
-                setDemandesAnnulation(response.data);
+          .then(response => {
+            const data = response.data;
+            const initialDemandes = {
+              articles: data.articles ? data.articles : null,
+              ateliers: data.ateliers ? data.ateliers : null,
+              modeles: data.modeles ? data.modeles : null
+            };
+            setDemandesAnnulation(initialDemandes);
+          })
+          .catch(error => {
+            console.error("Error fetching demandes d'annulation: ", error);
+            setDemandesAnnulation({
+              articles: null,
+              ateliers: null,
+              modeles: null
             });
+          })
     }, []);
 
     function renderArticlesList(articles){
