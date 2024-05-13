@@ -16,30 +16,34 @@ import Calendar from "./components/calendar/Calendar"
 import Homepage from "./components/viewsUser/Homepage"
 import ListObjects from "./components/viewsUser/ListObjects";
 import Object from "./components/viewsUser/Object";
+import PopupUser from "./components/viewsAdmin/PopupUser";
 
 function App() {
     const [admin, setAdmin] = useState(false)
     const [isConnect, setIsConnect] = useState(false)
     const [deconnection, setDeconnection] = useState(true)
 
-    useEffect(() => { // Permet de garder la connexion activer lors d'un rechargement de la page
-        axios.get("./php/connection/isConnect.php")
-            .then(response => {
-                setIsConnect(response.data)
-            })
-
-        axios.get("./php/connection/isAdmin.php")
-            .then(response => {
-                setAdmin(response.data)
-            })
-    }, []);
+    // useEffect(() => { // Permet de garder la connexion activer lors d'un rechargement de la page
+    //     axios.get("./php/connection/isConnect.php")
+    //         .then(response => {
+    //             setIsConnect(response.data)
+    //         })
+    //
+    //     axios.get("./php/connection/isAdmin.php")
+    //         .then(response => {
+    //             setAdmin(response.data)
+    //         })
+    // }, []);
 
     console.log("isConnect : ", isConnect, "; admin : ", admin)
 
     return (
         <div className="App">
             { !isConnect ?
-                <Connection setAdmin={setAdmin} setIsConnect={setIsConnect}/>
+                <>
+                    {/*<Connection setAdmin={setAdmin} setIsConnect={setIsConnect}/>*/}
+                    <PopupUser />
+                </>
                 :
                 <div className={"pageContent"}>
                     <NavBar admin={admin} setDeconnection={setIsConnect}/>

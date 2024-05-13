@@ -5,8 +5,6 @@ include("../crud/resaArticle.crud.php");
 include("../crud/resaAtelier.crud.php");
 include("../crud/resaModele.crud.php");
 
-
-
 if(isset($_POST['id'])){
     $id_user = $_POST['id'];
 

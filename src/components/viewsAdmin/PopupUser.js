@@ -15,6 +15,13 @@ function PopupUser({id, setShowPopUp, positionY}) {
     const [listResasModeles, setListResasModeles] = useState([])
     const [userInfo, setUserInfo] = useState([])
 
+    const [modifUserInfo, setModifUserInfo] = useState(false)
+    const [loginInput, setLoginInput] = useState('')
+    const [nomInput, setNomInput] = useState('')
+    const [prenomInput, setPrenomInput] = useState('')
+    const [mailInput, setMailInput] = useState('')
+    const [newData, setNewData] = useState(false)
+
     useEffect(() => {
         function getUserResas(){
             let form_data = new FormData()
@@ -147,6 +154,44 @@ function PopupUser({id, setShowPopUp, positionY}) {
         return setShowPopUp(false)
     }
 
+    function modifUserAvailable(){
+        let list_inputs = document.getElementsByTagName("input")
+
+        for (let i = 0; i < list_inputs.length; i++) {
+            list_inputs[i].disabled = false;
+        }
+        setModifUserInfo(true)
+    }
+
+    function cancelUserModif(){
+        let list_inputs = document.getElementsByTagName("input")
+
+        for (let i = 0; i < list_inputs.length; i++) {
+            list_inputs[i].disabled = true;
+        }
+
+        setModifUserInfo(false) /* TODO : garder l'ancien texte si une modif a été faites puis annuler */
+    }
+
+    function sendModifUser(){
+        if ((loginInput.length >= 3 && loginInput.length <= 10)){
+            let form_data = new FormData()
+            form_data.append("login", loginInput)
+            form_data.append("nom", nomInput)
+            form_data.append("prenom", prenomInput)
+            form_data.append("mail", mailInput)
+
+            // axios.post("./php/connection/inscription.php", form_data)
+            //     .then(response => {setNewData(response.data)})
+
+            if (newData){
+                cancelUserModif()
+            }//else afficher un message erreur modif ne s'est pas faite
+        }
+
+
+    }
+
     let popup = document.getElementsByClassName("PopUpUser")
 
     if(popup[0] != undefined){
@@ -154,24 +199,41 @@ function PopupUser({id, setShowPopUp, positionY}) {
         positionY = positionY - (popupHeight/1.4)
     }
 
-    console.log(userInfo)
     return (
         <div className="PopUpUser" style={{top: positionY + 'px'}}>
-            <Button onSmash={hidePopUp} text={"X"} bgColor={"#ff2828"}/>
-            <form>
-                <label htmlFor="login">Login :</label>
-                <input type="text" value={userInfo.login} disabled={true}/>
+            <Button id={"btnClose"} onSmash={hidePopUp} text={"X"} bgColor={"#ff2828"}/>
 
-                <label htmlFor="nom">Nom :</label>
-                <input type="text" value={userInfo.nom} disabled={true}/>
+            <div className={"containerFormPopUser"}>
+                <form className={"formPopUser"}>
+                    <div className={"divFormPopUser"}>
+                        <label htmlFor="login">Login : </label>
+                        <input type="text" value={loginInput}  onChange={e => setLoginInput(e.target.value)} disabled={true}/>
+                    </div>
 
-                <label htmlFor="login">Prénom :</label>
-                <input type="text" value={userInfo.prenom} disabled={true}/>
+                    <div className={"divFormPopUser"}>
+                        <label htmlFor="nom">Nom : </label>
+                        <input type="text" value={nomInput} onChange={e => setNomInput(e.target.value)} disabled={true}/>
+                    </div>
 
-                <label htmlFor="login">Mail :</label>
-                <input type="text" value={userInfo.mail} disabled={true}/>
-            </form>
+                    <div className={"divFormPopUser"}>
+                        <label htmlFor="login">Prénom : </label>
+                        <input type="text" value={prenomInput} onChange={e => setPrenomInput(e.target.value)} disabled={true}/>
+                    </div>
 
+                    <div className={"divFormPopUser"}>
+                        <label htmlFor="login">Mail : </label>
+                        <input type="text" value={mailInput} onChange={e => setMailInput(e.target.value)} disabled={true}/>
+                    </div>
+                </form>
+                {modifUserInfo ?
+                    <div className={"btnModifPopUpUser"}>
+                        <Button id={"btnModifierPopUpUser"} onSmash={cancelUserModif} text={"Annuler"} bgColor={"red"}/>
+                        <Button id={"btnModifierPopUpUser"} onSmash={sendModifUser} text={"Enregistrer"} bgColor={"#2882ff"}/>
+                    </div>
+
+                    :<Button id={"btnModifierPopUpUser"} onSmash={modifUserAvailable} text={"Modifier"} bgColor={"#2882ff"}/>}
+
+            </div>
 
             <div className={"titleTab"}>
                 <h2>Articles</h2>

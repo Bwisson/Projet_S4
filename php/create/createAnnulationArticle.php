@@ -15,5 +15,5 @@ if (isset($_POST['id_resa'])) {
         echo json_encode(false);
     }
 } else {
-    echo json_encode("$_POST : non défini")
+    echo json_encode("$_POST : non défini");
 }
