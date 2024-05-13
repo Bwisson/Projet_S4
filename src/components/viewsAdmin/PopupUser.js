@@ -13,14 +13,17 @@ function PopupUser({id, setShowPopUp, positionY}) {
     const [listResasArticles, setListResasArticles] = useState([])
     const [listResasAteliers, setListResasAteliers] = useState([])
     const [listResasModeles, setListResasModeles] = useState([])
-    const [userInfo, setUserInfo] = useState([])
 
+    const [user, setUser] = useState([])
     const [modifUserInfo, setModifUserInfo] = useState(false)
+
     const [loginInput, setLoginInput] = useState('')
     const [nomInput, setNomInput] = useState('')
     const [prenomInput, setPrenomInput] = useState('')
     const [mailInput, setMailInput] = useState('')
+
     const [newData, setNewData] = useState(false)
+    const [delUser, setDelUser] = useState(false)
 
     useEffect(() => {
         function getUserResas(){
@@ -42,7 +45,11 @@ function PopupUser({id, setShowPopUp, positionY}) {
             axios.post("./php/select/selectUser.php", form_data)
                 .then(response => {
                     let data = response.data
-                    setUserInfo(data)
+                    setUser(data)
+                    setLoginInput(data.login)
+                    setLoginInput(data.nom)
+                    setLoginInput(data.prenom)
+                    setLoginInput(data.mail)
                 })
         }
 
@@ -171,25 +178,46 @@ function PopupUser({id, setShowPopUp, positionY}) {
         }
 
         setModifUserInfo(false) /* TODO : garder l'ancien texte si une modif a été faites puis annuler */
+        setLoginInput(user.login)
+        setNomInput(user.nom)
+        setPrenomInput(user.prenom)
+        setMailInput(user.mail)
     }
 
     function sendModifUser(){
         if ((loginInput.length >= 3 && loginInput.length <= 10)){
             let form_data = new FormData()
+            form_data.append("id", user.id)
             form_data.append("login", loginInput)
+            form_data.append("mdp", user.mdp)
             form_data.append("nom", nomInput)
             form_data.append("prenom", prenomInput)
             form_data.append("mail", mailInput)
+            form_data.append("admin", user.admin)
 
-            // axios.post("./php/connection/inscription.php", form_data)
-            //     .then(response => {setNewData(response.data)})
+            axios.post("./../php/update/updateUserInfo.php", form_data)
+                .then(response => {setNewData(response.data)})
 
             if (newData){
                 cancelUserModif()
             }//else afficher un message erreur modif ne s'est pas faite
         }
+    }
 
+    function showDeleteDialog(){
+        let dialog = document.getElementById("favDialog")
+        dialog.showModal();
+    }
+    function deleteUser(e){
+        setDelUser(e.target.value)
 
+        if (delUser){
+            let form_data = new FormData()
+            form_data.append("id", user.id)
+
+            axios.post("./../php/delete/deleteUser.php")
+                .then(response => setDelUser(response.data))
+        }
     }
 
     let popup = document.getElementsByClassName("PopUpUser")
@@ -207,33 +235,57 @@ function PopupUser({id, setShowPopUp, positionY}) {
                 <form className={"formPopUser"}>
                     <div className={"divFormPopUser"}>
                         <label htmlFor="login">Login : </label>
-                        <input type="text" value={loginInput}  onChange={e => setLoginInput(e.target.value)} disabled={true}/>
+                        <input type="text" value={loginInput} onChange={e => setLoginInput(e.target.value)}
+                               disabled={true}/>
                     </div>
 
                     <div className={"divFormPopUser"}>
                         <label htmlFor="nom">Nom : </label>
-                        <input type="text" value={nomInput} onChange={e => setNomInput(e.target.value)} disabled={true}/>
+                        <input type="text" value={nomInput} onChange={e => setNomInput(e.target.value)}
+                               disabled={true}/>
                     </div>
 
                     <div className={"divFormPopUser"}>
                         <label htmlFor="login">Prénom : </label>
-                        <input type="text" value={prenomInput} onChange={e => setPrenomInput(e.target.value)} disabled={true}/>
+                        <input type="text" value={prenomInput} onChange={e => setPrenomInput(e.target.value)}
+                               disabled={true}/>
                     </div>
 
                     <div className={"divFormPopUser"}>
                         <label htmlFor="login">Mail : </label>
-                        <input type="text" value={mailInput} onChange={e => setMailInput(e.target.value)} disabled={true}/>
+                        <input type="text" value={mailInput} onChange={e => setMailInput(e.target.value)}
+                               disabled={true}/>
                     </div>
                 </form>
                 {modifUserInfo ?
                     <div className={"btnModifPopUpUser"}>
-                        <Button id={"btnModifierPopUpUser"} onSmash={cancelUserModif} text={"Annuler"} bgColor={"red"}/>
-                        <Button id={"btnModifierPopUpUser"} onSmash={sendModifUser} text={"Enregistrer"} bgColor={"#2882ff"}/>
+                        <Button id={"btnCancelPopUpUser"} onSmash={cancelUserModif} text={"Annuler"} bgColor={"red"}/>
+                        <Button id={"btnSavePopUpUser"} onSmash={sendModifUser} text={"Enregistrer"}
+                                bgColor={"#2882ff"}/>
                     </div>
-
-                    :<Button id={"btnModifierPopUpUser"} onSmash={modifUserAvailable} text={"Modifier"} bgColor={"#2882ff"}/>}
-
+                    :
+                    <div className={"btnModifPopUpUser"}>
+                        <Button id={"btnEditPopUpUser"} onSmash={modifUserAvailable} text={"Modifier"}
+                                bgColor={"#2882ff"}/>
+                        <Button id={"btnDeletePopUpUser"} onSmash={showDeleteDialog} text={"Supprimer l'utilisateur"}
+                                bgColor={"red"}/>
+                    </div>}
             </div>
+
+            <dialog id="favDialog">
+                <form method="dialog">
+                    <p>
+                        Vous êtes sur le point de supprimer l'utilisateur : {user.nom}, {user.prenom}<br/>
+                        Êtes-vous sûr ?
+                    </p>
+                    <menu>
+                        <Button id={"cancelBtn"} text={"Annuler"} bgColor={"#2882ff"} onSmash={deleteUser} value={"false"}/>
+                        <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"#2882ff"} onSmash={deleteUser} value={"true"}/>
+                        {/*<button id="cancelValue" onClick={deleteUser} value="false">Annuler</button>*/}
+                        {/*<button id="confirmBtn" onClick={deleteUser} value="true">Confirmer</button>*/}
+                    </menu>
+                </form>
+            </dialog>
 
             <div className={"titleTab"}>
                 <h2>Articles</h2>
