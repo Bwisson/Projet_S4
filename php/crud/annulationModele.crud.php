@@ -20,7 +20,7 @@ function selectAnnulationModele($conn, $id){
 
 function listAnnulationModele($conn)
 {
-    $sql = "SELECT a.id AS id, a.id_resa AS id_resa, r.start AS start, r.end AS end, mod.nom AS nom_modele, mod.prenom AS prenom_modele, u.nom AS nom_user, u.prenom AS prenom_user FROM `AnnulationModele` a JOIN `ResaModele` r ON a.id_resa=r.id JOIN `User` u ON r.id_user=u.id JOIN `Modele` mod ON r.id_modele=mod.id";
+    $sql = "SELECT a.id AS id, a.id_resa AS id_resa, r.start AS start, r.end AS end, mod.nom AS nom_modele, mod.prenom AS prenom_modele, u.nom AS nom_user, u.prenom AS prenom_user FROM `AnnulationModele` a JOIN `ResaModele` r ON a.id_resa=r.id JOIN `User` u ON r.id_user=u.id JOIN `Modele` mod ON r.id_modele=mod.id WHERE r.end > NOW()";
     $res = mysqli_query($conn, $sql);
     $rs = null;
 
