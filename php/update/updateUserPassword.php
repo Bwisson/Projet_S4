@@ -13,7 +13,9 @@ if (isset($_POST['oldMdp'], $_POST['newMdp'], $_POST['confirmNewMdp'])) {
     $confirmNewMdp = htmlspecialchars($_POST['confirmNewMdp']);
 
     if (password_verify($oldMdp, $row['mdp']) && $newMdp == $confirmNewMdp) {
-        $res = updateUserPassword($conn, $id_user, $newMdp);
+        $newHashMdp = password_hash($newMdp, PASSWORD_DEFAULT);
+        $res = updateUserPassword($conn, $id_user, $newHashMdp);
+
         if ($res) {
             echo json_encode(true);
         } else {

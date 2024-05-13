@@ -8,7 +8,7 @@ import './css/App.scss';
 
 /* Components import */
 import Connection from "./components/connection/Connection";
-// import Inscription from "./components/connection/Inscription";
+import Inscription from "./components/connection/Inscription";
 import NavBar from "./components/NavBar";
 import ViewUsers from "./components/viewsAdmin/ViewUsers";
 import ViewObjects from "./components/viewsAdmin/ViewObjects"
@@ -16,7 +16,6 @@ import Calendar from "./components/calendar/Calendar"
 import Homepage from "./components/viewsUser/Homepage"
 import ListObjects from "./components/viewsUser/ListObjects";
 import Object from "./components/viewsUser/Object";
-import PopUpResasUser from "./components/viewsAdmin/PopupUser";
 
 function App() {
     const [admin, setAdmin] = useState(false)
