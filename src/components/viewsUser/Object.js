@@ -9,6 +9,8 @@ import '../../css/cssViewUser/Object.scss'
 /* components imports */
 import Button from '../Button'
 import {formatDate} from "@fullcalendar/core";
+import Calendar from "../calendar/Calendar";
+
 
 function Object(){
     const urlParams = useParams()
@@ -33,7 +35,7 @@ function Object(){
                     setObjectImage(objectImage + data.image)
                 })
         }
-        getObjectInfo()
+        getObjectInfo();
     }, []);
 
     return(
@@ -50,8 +52,9 @@ function Object(){
             </div>
 
             <div className={"rightSide"}>
-                <div className={"calendar"}></div>
-                <Button text={"Réserver"}></Button>
+                <div className={"calendar"}>
+                    <Calendar objectInfo={objectInfo} objectType={objectType}/>
+                </div>
             </div>
         </div>
     )
