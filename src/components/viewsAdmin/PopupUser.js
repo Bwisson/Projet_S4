@@ -7,11 +7,13 @@ import Button from "../Button";
 
 /* css imports */
 import "../../css/cssViewsAdmin/PopUpUser.scss"
+import {translateRect} from "@fullcalendar/core/internal";
 
-function PopUpUser({id, setShowPopUp, positionY}) {
+function PopupUser({id, setShowPopUp, positionY}) {
     const [listResasArticles, setListResasArticles] = useState([])
     const [listResasAteliers, setListResasAteliers] = useState([])
     const [listResasModeles, setListResasModeles] = useState([])
+    const [userInfo, setUserInfo] = useState([])
 
     useEffect(() => {
         function getUserResas(){
@@ -26,8 +28,19 @@ function PopUpUser({id, setShowPopUp, positionY}) {
                     setListResasModeles(data.modeles)
                 })
         }
+        function getUserInfo(){
+            let form_data = new FormData()
+            form_data.append("id", id)
+
+            axios.post("./php/select/selectUser.php", form_data)
+                .then(response => {
+                    let data = response.data
+                    setUserInfo(data)
+                })
+        }
 
         getUserResas()
+        getUserInfo()
     }, [id]);
 
 
@@ -138,12 +151,28 @@ function PopUpUser({id, setShowPopUp, positionY}) {
 
     if(popup[0] != undefined){
         let popupHeight = popup[0].clientHeight
-        positionY = positionY - popupHeight
+        positionY = positionY - (popupHeight/1.4)
     }
 
+    console.log(userInfo)
     return (
         <div className="PopUpUser" style={{top: positionY + 'px'}}>
             <Button onSmash={hidePopUp} text={"X"} bgColor={"#ff2828"}/>
+            <form>
+                <label htmlFor="login">Login :</label>
+                <input type="text" value={userInfo.login} disabled={true}/>
+
+                <label htmlFor="nom">Nom :</label>
+                <input type="text" value={userInfo.nom} disabled={true}/>
+
+                <label htmlFor="login">Prénom :</label>
+                <input type="text" value={userInfo.prenom} disabled={true}/>
+
+                <label htmlFor="login">Mail :</label>
+                <input type="text" value={userInfo.mail} disabled={true}/>
+            </form>
+
+
             <div className={"titleTab"}>
                 <h2>Articles</h2>
                 <MapResasArticles/>
@@ -162,4 +191,4 @@ function PopUpUser({id, setShowPopUp, positionY}) {
     )
 }
 
-export default PopUpUser;
+export default PopupUser;

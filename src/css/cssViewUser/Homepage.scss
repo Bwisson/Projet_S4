@@ -50,6 +50,17 @@ $gris : rgb(227, 227, 227);
       width: 100%;
       border-collapse: collapse;
 
+      .Buttons {
+        display: flex;
+        gap: 10px;
+        
+        Button {
+          flex-grow: 1;
+          justify-content: center;
+          margin: 2px; /* Légère marge autour des boutons */
+        }
+      }
+
       th{
         padding: 8px;
         border-bottom: 1.5px solid black;

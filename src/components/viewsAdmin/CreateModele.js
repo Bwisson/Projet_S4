@@ -9,7 +9,7 @@ import "../../css/cssViewsAdmin/formAddObject.scss"
 import "../../css/form.scss"
 
 
-function CreateAtelier({ setNewData, setShowingFormAddModele }){
+function CreateModele({ setNewData, setShowingFormAddModele }){
 
     function createAtelier(event){
         event.preventDefault()
@@ -71,4 +71,4 @@ function CreateAtelier({ setNewData, setShowingFormAddModele }){
     )
 }
 
-export default CreateAtelier;
+export default CreateModele;

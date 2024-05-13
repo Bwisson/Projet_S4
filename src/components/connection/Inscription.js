@@ -8,7 +8,7 @@ import Button from "../Button";
 /* css imports */
 import "../../css/form.scss"
 
-function Inscription(){
+function Inscription({setNewData}){
     const [login, setLogin] = useState( '')
     const [mdp, setMdp] = useState('')
     const [nom, setNom] = useState('')
@@ -33,14 +33,15 @@ function Inscription(){
             form_data.append("admin", admin)
 
             axios.post("./php/connection/inscription.php", form_data)
-                .then(response => {console.log("data response:", response.data)})
-            this.setState({
-                login: "",
-                mdp: "",
-                nom: "",
-                prenom: "",
-                mail: ""
-            })
+                .then(response => {setNewData(response.data)})
+
+            setLogin('')
+            setMdp('')
+            setNom('')
+            setPrenom('')
+            setMail('')
+            setAdmin(false)
+
         }
     }
 

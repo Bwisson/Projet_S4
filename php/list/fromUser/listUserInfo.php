@@ -6,7 +6,7 @@ include("../../crud/user.crud.php");
 
 $login = $_SESSION["login"];
 
-$listUser = selectUser($conn, $login);
+$listUser = selectUserByLogin($conn, $login);
 $strListUser = json_encode($listUser);
 
 echo $strListUser;

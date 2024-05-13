@@ -10,7 +10,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
     $mdp = htmlspecialchars($_POST['mdp']);
     $login = htmlspecialchars($_POST['login']);
 
-    $row = selectUser($conn, $login);
+    $row = selectUserByLogin($conn, $login);
 
     if ($row){
         if (password_verify($mdp, $row['mdp'])) {
