@@ -12,6 +12,7 @@ function ViewDemandesAnnulation() {
     const [reservationIdToCancel, setReservationIdToCancel] = useState(null);
     const [reservationTypeToCancel, setReservationTypeToCancel] = useState(null);
 
+    const [newData, setNewData] = useState(false);
     const handleAnnulationClick = (handleType, annulationId, reservationId, reservationType) => {
     setHandleType(handleType);
     setAnnulationId(annulationId);
@@ -33,11 +34,14 @@ function ViewDemandesAnnulation() {
         form_data.append("id_resa", reservationIdToCancel);
     }
     let req = "./php/delete/demandesAnnulation/" + reservationTypeToCancel + "/" + handleType + ".php";
-    axios.post(req, form_data);
+    axios.post(req, form_data)
+        .then(response => {
+        setNewData(response.data)
+    })
     setShowAnnulationPopup(false);
     setReservationIdToCancel(null);
     setReservationTypeToCancel(null);
-    };
+    }
 
     useEffect(() => {
         axios.get("./php/list/listDemandesAnnulation.php")
@@ -59,7 +63,8 @@ function ViewDemandesAnnulation() {
               modeles: null
             });
           })
-    }, []);
+        setNewData(false)
+    }, [newData]);
 
     function renderArticlesList(articles){
       if (articles != null) {
@@ -169,18 +174,17 @@ function ViewDemandesAnnulation() {
       <div className="ViewDemandesAnnulation">
         <div className="tab">
           <h3>Articles</h3>
-
-          {/*{renderArticlesList(demandesAnnulation.articles)}*/}
+          {demandesAnnulation != null && renderArticlesList(demandesAnnulation.articles)}
         </div>
 
         <div className="tab">
           <h3>Ateliers</h3>
-          {/*{renderAteliersList(demandesAnnulation.ateliers)}*/}
+          {demandesAnnulation != null && renderAteliersList(demandesAnnulation.ateliers)}
         </div>
 
         <div className="tab">
           <h3>Modeles</h3>
-          {/*{renderModelesList(demandesAnnulation.modeles)}*/}
+          {demandesAnnulation != null && renderModelesList(demandesAnnulation.modeles)}
         </div>
         {showAnnulationPopup && (
           <PopUpHandleAnnulationResa

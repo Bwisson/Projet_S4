@@ -8,6 +8,7 @@ function createResaArticle($conn, $id_article, $start, $end, $title, $groupId, $
 function deleteResaArticle($conn, $id) {
     $sql = "DELETE FROM `ResaArticle` WHERE `id`=$id";
     $res = mysqli_query($conn, $sql);
+    var_dump($sql);
     return $res;
 }
 
