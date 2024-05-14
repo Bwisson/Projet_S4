@@ -20,7 +20,7 @@ function selectAnnulationAtelier($conn, $id){
 
 function listAnnulationAtelier($conn)
 {
-    $sql = "SELECT a.id AS id, a.id_resa AS id_resa, r.start AS start, r.end AS end, ate.nom AS nom_atelier, u.nom AS nom_user, u.prenom AS prenom_user FROM `AnnulationAtelier` a JOIN `ResaAtelier` r ON a.id_resa=r.id JOIN `User` u ON r.id_user=u.id JOIN `Atelier` ate ON r.id_atelier=ate.id WHERE r.end > NOW()";
+    $sql = "SELECT a.id AS id, a.id_resaAtelier AS id_resa, r.start AS start, r.end AS end, ate.nom AS nom_atelier, u.nom AS nom_user, u.prenom AS prenom_user FROM `AnnulationAtelier` a JOIN `ResaAtelier` r ON a.id_resaAtelier=r.id JOIN `User` u ON r.id_user=u.id JOIN `Atelier` ate ON r.id_atelier=ate.id WHERE r.end > NOW()";
     $res = mysqli_query($conn, $sql);
     $rs = null;
 
@@ -29,4 +29,12 @@ function listAnnulationAtelier($conn)
     }
 
     return $rs;
+}
+
+function listAnnulationAtelierUser($conn, $id)
+{
+    $sql = "SELECT a.id AS id, a.id_resaAtelier AS id_resa, r.start AS start, r.end AS end, ate.nom AS nom_atelier, u.nom AS nom_user, u.prenom AS prenom_user FROM `AnnulationAtelier` a JOIN `ResaAtelier` r ON a.id_resaAtelier=r.id JOIN `User` u ON r.id_user=u.id JOIN `Atelier` ate ON r.id_atelier=ate.id WHERE r.end > NOW() AND r.id_user=$id";
+    $res = mysqli_query($conn, $sql);
+
+    return rs_to_table($res);
 }

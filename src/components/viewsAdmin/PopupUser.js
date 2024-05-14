@@ -214,14 +214,21 @@ function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
         let dialog = document.getElementById("favDialog")
         dialog.showModal();
     }
+
     function deleteUser(e){
-        /* TODO : supprimer toutes ses données résas + demandes d'annualtions */
         if (e.target.value === "true"){
             let form_data = new FormData()
             form_data.append("id", user.id)
-            console.log("utilisateur supprimer")
-            // axios.post("./php/delete/deleteUser.php", form_data)
-            //     .then(response => setDelUser(response.data))
+
+            axios.post("./php/delete/deleteUser.php", form_data)
+                .then(response => {
+                    let data = response.data
+                    setNewData(data)
+                    sendNewdata(data)
+                    if (data){
+                        setShowPopUp(false)
+                    }
+                })
         }
     }
 

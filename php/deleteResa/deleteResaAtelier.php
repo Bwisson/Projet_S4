@@ -1,7 +1,7 @@
 <?php
-include("../db/db_connect.php");
-include("../crud/function_rs_to_table.php");
-include("../crud/resaAtelier.crud.php");
+include_once ("../db/db_connect.php");
+include_once ("../crud/function_rs_to_table.php");
+include_once ("../crud/resaAtelier.crud.php");
 
 if(isset($_POST['id_resa'])){
 

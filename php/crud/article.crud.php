@@ -6,7 +6,8 @@ function createArticle($conn, $code_barre, $nom, $categorie, $couleur, $taille) 
 }
 
 function deleteArticle($conn, $id) {
-    $sql = "DELETE FROM `Article` WHERE `id`=$id"; $res = mysqli_query($conn, $sql);
+    $sql = "DELETE FROM `Article` WHERE `id`=$id";
+    $res = mysqli_query($conn, $sql);
     return $res;
 }
 

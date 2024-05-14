@@ -18,7 +18,7 @@ function getListResasUser($conn, $post){
             "modeles" => $listModeles,
         );
 
-        $res = json_encode($listObjets);
+        $res = $listObjets;
 
     }else{
         $res = "Erreur : POST['id'] non défini";
@@ -27,4 +27,4 @@ function getListResasUser($conn, $post){
     return $res;
 }
 
-echo getListResasUser($conn, $_POST);
+echo json_encode(getListResasUser($conn, $_POST));
