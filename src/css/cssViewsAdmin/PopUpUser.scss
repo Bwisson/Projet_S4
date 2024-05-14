@@ -29,10 +29,10 @@ $gris : rgb(227, 227, 227);
       box-shadow: none;
       display: flex;
       justify-content: space-between;
-
+      flex-wrap: wrap
 
       input{
-        padding: 5px;
+        padding: 5px 0 5px 5px;
         border: 1px solid $gris;
         border-radius: 5px;
       }
