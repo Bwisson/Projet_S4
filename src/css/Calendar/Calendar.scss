@@ -20,36 +20,24 @@ $blanc : #ffffff;
   --fc-bg-event-opacity : 100;    
 }
 
-#form_general{
+#fullResa{
   display: flex;
-  flex-direction: column;
-  width: 30%;
-  margin-right: 10px;
-  border: black solid 1px;
-  padding: 10px;
-  border-radius: 15px;
+  gap: 0px 1em;
+  justify-content: center;
 }
 
-#eventForm{
+#eventResa{
+  background: $mauve;
   display: flex;
-  align-items: center;
-}
-
-#form_general h2{
-  color: #0068e7;
-  padding: 5px;
-}
-
-#form_general input{
-  height: 2em;
-  margin: 5px;
-}
-
-#form_general button{
-  background-color: #C4A6FF;
   color: white;
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  margin: 5px;
+}
+
+#eventCours{
+  background: $mauve;
+  display: flex;
+  color: white;
+}
+
+.calendrier_comp{
+  height: 82vh;
 }

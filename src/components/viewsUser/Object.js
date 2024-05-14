@@ -41,7 +41,7 @@ function Object(){
     return(
         <div className="Object">
             <div className={"leftSide"}>
-                <Link to={"../info7/ListObjects/" + objectType}>Retour</Link>
+                <Link to={"../info7/ListObjects/" + objectType}><p className={"flèche"}>←</p></Link>
                 <img className={"imgCard"} src={objectImage} alt=""/>
                 <h2>{objectName}</h2>
                 <article>

@@ -12,14 +12,23 @@ $gris : rgb(227, 227, 227);
   padding: 20px;
 
   .leftSide{
+    width: 33%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 20px 0px;
 
     .imgCard{
-      width: 50%;
+      width: 80%;
       height: auto;
-      align-self: center;
+      align-self: center; 
+      background-color: $gris;
+      border-radius: 5%;
+    }
+
+    .flèche{
+      color: $mauve;
+      font-size: 2rem;
+      font-weight: bold;
     }
 
     h2{
@@ -34,15 +43,16 @@ $gris : rgb(227, 227, 227);
   }
 
   .rightSide{
+    width: 66%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 20px;
 
     .calendar{
-      width: 540px;
-      height: 390px;
-      border: 1px solid black;
+      border: 1px solid $gris;
+      height: 91vh;
+      padding: 15px;
+      border-radius: 3%;
     }
   }
 }
