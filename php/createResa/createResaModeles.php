@@ -3,6 +3,9 @@ include("../db/db_connect.php");
 include("../crud/function_rs_to_table.php");
 include("../crud/resaModele.crud.php");
 
+
+
+
 if(isset($_POST['start'])){
 
     $id_article = $_POST['id_article'];

@@ -10,6 +10,7 @@ $gris : rgb(227, 227, 227);
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
+  overflow-y : scroll;
 
   .leftSide{
     width: 33%;
@@ -47,6 +48,7 @@ $gris : rgb(227, 227, 227);
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow-y : hidden;
 
     .calendar{
       border: 1px solid $gris;

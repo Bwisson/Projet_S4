@@ -111,6 +111,8 @@ function CalendarComponent({ objectInfo , objectType }) {
           return;
       }
   
+
+      console.log("formData : ", formData);
       const response = axios.post(`./../../php/createResa/${endpoint}`, formData);
       console.log("Réservation mise à jour :", response.data);
 
@@ -210,12 +212,9 @@ function CalendarComponent({ objectInfo , objectType }) {
           const response = axios.post(`./../../php/deleteResa/${endpoint}`, formData);
           console.log("Element supprimer :", response.data);
 
-
         }
       }
     }
-
-
   }
 
   async function handleEventDrop(eventDropInfo) {
@@ -232,11 +231,8 @@ function CalendarComponent({ objectInfo , objectType }) {
     const formattedEventStart = eventStart.toISOString().slice(0, 19).replace('T', ' ');
     const formattedEventEnd = eventEnd.toISOString().slice(0, 19).replace('T', ' ');
 
-
     console.log("eventStart : ", eventStart);
     console.log("eventEnd : ", eventEnd);
-
-
 
     console.log("eventDropInfo.event._def.publicId : ", eventDropInfo.event._def.publicId);
     console.log("objectInfo.id : ", objectInfo.id);
@@ -276,11 +272,6 @@ function CalendarComponent({ objectInfo , objectType }) {
         console.error("Une erreur s'est produite lors de la mise à jour de la réservation :", error);
     }
   }
-
-
-
-
-
 
   return (
     <div>
