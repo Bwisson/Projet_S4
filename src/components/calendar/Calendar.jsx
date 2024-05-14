@@ -212,6 +212,7 @@ function CalendarComponent({ objectInfo , objectType }) {
           const response = axios.post(`./../../php/deleteResa/${endpoint}`, formData);
           console.log("Element supprimer :", response.data);
 
+          window.location.reload();
         }
       }
     }
