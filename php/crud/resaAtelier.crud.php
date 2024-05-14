@@ -1,7 +1,7 @@
 <?php
-function createResaAtelier($conn, $id_article, $start, $end, $title, $groupId, $color, $constrait, $display, $id_user) {
+function createResaAtelier($conn, $id_atelier, $start, $end, $title, $groupId, $color, $constrait, $display, $id_user) {
     $sql = "INSERT INTO `ResaAtelier` (`id_atelier`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`, `id_user`) VALUES ('$id_atelier', '$start', '$end', '$title', '$groupId', '$color', '$constrait', '$display', '$id_user')";
-     $res = mysqli_query($conn, $sql);
+    $res = mysqli_query($conn, $sql);
     return $res;
 }
 

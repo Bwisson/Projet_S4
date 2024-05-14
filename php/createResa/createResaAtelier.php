@@ -17,7 +17,7 @@ if(isset($_POST['start'])){
     $id_user = $_POST['id_user'];
     $id = NULL;
 
-    $updateResaArticle = createResaAtelier($conn, $id_article, $start, $end, $title, $groupId, $color, $constrait, $display, $id_user) ;
+    $updateResaArticle = createResaAtelier($conn, $id_article, $start, $end, $title, $groupId, $color, $constrait, $display, $id_user);
 } else {
     $updateResaArticle = "Erreur : POST['start'] non défini";
 }

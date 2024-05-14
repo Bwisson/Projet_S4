@@ -3,23 +3,13 @@ include("../db/db_connect.php");
 include("../crud/function_rs_to_table.php");
 include("../crud/resaAtelier.crud.php");
 
-if(isset($_POST['start'])){
+if(isset($_POST['id_resa'])){
 
-    $id_article = $_POST['id_article'];
-    $start = $_POST['start'];
-    $end = $_POST['end'];
-    $id_user = $_POST['id_user'];
-    $title = NULL;
-    $groupId = "cours";
-    $color = NULL;
-    $constrait = NULL;
-    $display = "background";
-    $id_user = $_POST['id_user'];
-    $id = NULL;
-    
-    $updateResaArticle = createResaAtelier($conn, $id_article, $start, $end, $title, $groupId, $color, $constrait, $display, $id_user) ;
+    $id_resa = $_POST['id_resa'];
+
+    $updateResaArticle = deleteResaAtelier($conn, $id_resa);
 } else {
-    $updateResaArticle = "Erreur : POST['start'] non défini";
+    $updateResaArticle = "Erreur : POST['id_resa'] non défini";
 }
 
 echo $updateResaArticle;
