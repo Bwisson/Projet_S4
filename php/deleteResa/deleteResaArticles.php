@@ -2,6 +2,7 @@
 include("../db/db_connect.php");
 include("../crud/function_rs_to_table.php");
 include("../crud/resaArticle.crud.php");
+include("../list/listUserResas.php");
 
 if(isset($_POST['id_resa'])){
 
