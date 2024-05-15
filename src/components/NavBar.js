@@ -56,7 +56,6 @@ function NavBar({ admin, setDeconnection }) {
                             <div id="divider"></div>
                             <ul id={"adminLink"}>
                                 <li><Link to={"info7/AdminViewObjects"}>OBJETS</Link></li>
-                                {/* TODO : rajouter info7/ avant de push */}
                                 <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
                                 <li><Link to={"info7/AdminViewDemandesAnnulation"}>DEMANDES D'ANNULATION ({nbDemandesAnnulation})</Link></li>
                             </ul>
