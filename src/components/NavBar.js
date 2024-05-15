@@ -51,7 +51,7 @@ function NavBar({ admin, setDeconnection }) {
                         <li><Link to={"info7/ListObjects/Modeles"}>MODÈLES</Link></li>
                         <li><Link to={"info7/ListObjects/Ateliers"}>ATELIERS</Link></li>
                     </ul>
-                    {admin ?
+                    {admin &&
                         <>
                             <div id="divider"></div>
                             <ul id={"adminLink"}>
@@ -60,9 +60,7 @@ function NavBar({ admin, setDeconnection }) {
                                 <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
                                 <li><Link to={"info7/AdminViewDemandesAnnulation"}>DEMANDES D'ANNULATION ({nbDemandesAnnulation})</Link></li>
                             </ul>
-                        </>
-                        : null}
-                    <li><Link to={"info7/Calendar"}>Calendrier</Link></li>
+                        </>}
                 </nav>
             </div>
         </div>
