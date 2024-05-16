@@ -77,7 +77,7 @@ function ViewObjects() {
         let list_modeles = null
         if(modeles != null){
             list_modeles = modeles.map(modele =>
-                <tr className={modele.id + " modele"} onClick={popupObjectVisible}>
+                <tr className={modele.id + " Modeles"} onClick={popupObjectVisible}>
                     <td>{modele.nom}</td>
                     <td>{modele.prenom}</td>
                     <td>{modele.genre}</td>
@@ -93,7 +93,7 @@ function ViewObjects() {
         let list_ateliers= null
         if(ateliers != null){
             list_ateliers = ateliers.map(atelier =>
-                <tr className={atelier.id + " atelier"} onClick={popupObjectVisible}>
+                <tr className={atelier.id + " Ateliers"} onClick={popupObjectVisible}>
                     <td>{atelier.nom}</td>
                     <td>{atelier.type}</td>
                 </tr>
@@ -106,13 +106,15 @@ function ViewObjects() {
         let list_articles = null
         if(articles != null){
             list_articles = articles.map(article =>
-                <tr className={article.id + " article"} onClick={popupObjectVisible}>
-                    <td>{article.code_barre}</td>
-                    <td>{article.nom}</td>
-                    <td>{article.categorie}</td>
-                    <td>{article.couleur}</td>
-                    <td>{article.taille}</td>
-                </tr>
+                <>
+                    <tr className={article.id + " Articles"} onClick={popupObjectVisible}>
+                        <td>{article.code_barre}</td>
+                        <td>{article.nom}</td>
+                        <td>{article.categorie}</td>
+                        <td>{article.couleur}</td>
+                        <td>{article.taille}</td>
+                    </tr>
+                </>
             );
         }
 
@@ -122,9 +124,11 @@ function ViewObjects() {
     function showFormCreateArticle() {
         setShowingFormAddArticle(!showingFormAddArticle)
     }
+
     function showFormCreateAtelier() {
         setShowingFormAddAtelier(!showingFormAddAtelier)
     }
+
     function showFormCreateModele() {
         setShowingFormAddModele(!showingFormAddModele)
     }

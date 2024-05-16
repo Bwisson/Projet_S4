@@ -9,7 +9,7 @@ if (isset($_POST['id']) && $_POST['type']){
     $id = $_POST['id'];
     $type = $_POST['type'];
 
-    if ($type == "Chevalets" || $type == "Peinture"){
+    if ($type == "Chevalets" || $type == "Peinture" || $type == "Articles"){
         $article = selectArticle($conn, $id);
         $res = json_encode($article);
 

@@ -25,7 +25,6 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
             axios.post("./php/select/selectObject.php", form_data)
                 .then(response => {
                     setObjectInfos(response.data)
-                    console.log(response.data)
                     setNewData(false)
                 })
         }
@@ -39,90 +38,92 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
     function CreateForm() {
         let res = <p>Aucunes données</p>
 
-        if (objectInfos != undefined && objectInfos != null){
-            if (objectInfos.legnth > 0) {
-                res =
-                    <form className={"formPopUser"}>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor={"nom"}>Nom : </label>
-                            <input id="nom" type="text" value={objectInfos.nom} disabled={true}/>
-                        </div>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor={"prenom"}>Prénom : </label>
-                            <input id="prenom" type="text" value={objectInfos.prenom} disabled={true}/>
-                        </div>
-                        <div className={"divFormPopUser"}>
-                            <label id="genre" htmlFor={"genre"}>Genre : </label>
-                            <select name="" id="select-genre">
-                                <option value="">-- choisir une option --</option>
-                                <option value="femme">femme</option>
-                                <option value="homme">Homme</option>
-                            </select>
-                        </div>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor={"age"}>Âge : </label>
-                            <input id="age" type="number" value={objectInfos.age} disabled={true}/>
-                        </div>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor={"tarif_horaire"}>Tarif horaire : </label>
-                            <input id="tarif_horaire" type="number" value={objectInfos.tarif_horaire}
-                                   disabled={true}/>
-                        </div>
-                    </form>
+        if (objectInfos != undefined) {
+            if (objectInfos.length > 0) {
+                if (type_objet === "Modeles") {
+                    res =
+                        <form className={"formPopUser"}>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor={"nom"}>Nom : </label>
+                                <input id="nom" type="text" value={objectInfos[0].nom} disabled={true}/>
+                            </div>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor={"prenom"}>Prénom : </label>
+                                <input id="prenom" type="text" value={objectInfos[0].prenom} disabled={true}/>
+                            </div>
+                            <div className={"divFormPopUser"}>
+                                <label id="genre" htmlFor={"genre"}>Genre : </label>
+                                <select name="" id="select-genre">
+                                    <option value="">-- choisir une option --</option>
+                                    <option value="femme">femme</option>
+                                    <option value="homme">Homme</option>
+                                </select>
+                            </div>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor={"age"}>Âge : </label>
+                                <input id="age" type="number" value={objectInfos[0].age} disabled={true}/>
+                            </div>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor={"tarif_horaire"}>Tarif horaire : </label>
+                                <input id="tarif_horaire" type="number" value={objectInfos[0].tarif_horaire}
+                                       disabled={true}/>
+                            </div>
+                        </form>
+                } else if (type_objet === "Articles") {
+                    res =
+                        <form className={"formPopUser"}>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor={"code_barre"}>Code barre : </label>
+                                <input id="code_barre" type="text" value={objectInfos[0].code_barre} disabled={true}/>
+                            </div>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor={"nom"}>Nom : </label>
+                                <input id="nom" type="text" value={objectInfos[0].prenom} disabled={true}/>
+                            </div>
+                            <div className={"divFormPopUser"}>
+                                <label id="select-categorie" htmlFor={"genre"}>Catégorie : </label>
+                                <select name="categorie" id="select-categorie">
+                                    <option value="">-- Choisir une catégorie --</option>
+                                    <option value="chevalet">Chevalet</option>
+                                    <option value="pinceaux_outils">Pinceaux et outils de peinture</option>
+                                </select>
+                            </div>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor={"couleur"}>Couleur : </label>
+                                <input id="couleur" type="text" value={objectInfos[0].couleur} disabled={true}/>
+                            </div>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor="taille_select">Taille :</label>
+                                <select name="taille" id="taille_select">
+                                    <option value="U">U</option>
+                                    <option value="petit">petit</option>
+                                    <option value="moyen">moyen</option>
+                                    <option value="grand">grand</option>
+                                </select>
+                            </div>
+                        </form>
 
-            } else if (type_objet == "article") {
-                res =
-                    <form className={"formPopUser"}>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor={"code_barre"}>Code barre : </label>
-                            <input id="code_barre" type="text" value={objectInfos.code_barre} disabled={true}/>
-                        </div>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor={"nom"}>Nom : </label>
-                            <input id="nom" type="text" value={objectInfos.prenom} disabled={true}/>
-                        </div>
-                        <div className={"divFormPopUser"}>
-                            <label id="select-categorie" htmlFor={"genre"}>Catégorie : </label>
-                            <select name="categorie" id="select-categorie">
-                                <option value="">-- Choisir une catégorie --</option>
-                                <option value="chevalet">Chevalet</option>
-                                <option value="pinceaux_outils">Pinceaux et outils de peinture</option>
-                            </select>
-                        </div>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor={"couleur"}>Couleur : </label>
-                            <input id="couleur" type="text" value={objectInfos.couleur} disabled={true}/>
-                        </div>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor="taille_select">Taille :</label>
-                            <select name="taille" id="taille_select">
-                                <option value="U">U</option>
-                                <option value="petit">petit</option>
-                                <option value="moyen">moyen</option>
-                                <option value="grand">grand</option>
-                            </select>
-                        </div>
-                    </form>
-
-            } else if (type_objet == "atelier") {
-                res =
-                    <form className={"formPopUser"}>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor={"nom"}>Nom : </label>
-                            <input id="nom" type="text" value={objectInfos.prenom} disabled={true}/>
-                        </div>
-                        <div className={"divFormPopUser"}>
-                            <label htmlFor="type_select">Type d'atelier :</label>
-                            <select name="type" id="type_select">
-                                <option value="">-- Choisir le type d'atelier --</option>
-                                <option value="photographie">Photographie</option>
-                                <option value="peinture">Peinture</option>
-                                <option value="sculputure">Sculpture</option>
-                            </select>
-                        </div>
-                    </form>
+                } else if (type_objet === "Ateliers") {
+                    res =
+                        <form className={"formPopUser"}>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor={"nom"}>Nom : </label>
+                                <input id="nom" type="text" value={objectInfos[0].prenom} disabled={true}/>
+                            </div>
+                            <div className={"divFormPopUser"}>
+                                <label htmlFor="type_select">Type d'atelier :</label>
+                                <select name="type" id="type_select">
+                                    <option value="">-- Choisir le type d'atelier --</option>
+                                    <option value="photographie">Photographie</option>
+                                    <option value="peinture">Peinture</option>
+                                    <option value="sculputure">Sculpture</option>
+                                </select>
+                            </div>
+                        </form>
+                }
             }
         }
+        return res
     }
 
     function modifObjectAvailable() {
