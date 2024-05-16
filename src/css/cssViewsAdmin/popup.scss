@@ -1,0 +1,61 @@
+$bleu1 : #0068e7;
+$bleu2 : #2882ff;
+$mauve : #c4a6ff;
+$rose : #ffd2ff;
+$gris : rgb(227, 227, 227);
+
+.popup{
+  z-index: 2;
+  width: 70vw;
+  height: 70vh;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  overflow: auto;
+
+  #btnClose{
+    min-width: 50px;
+    position: absolute;
+    border-radius: 0 0 0 5px;
+    top: 0;
+    right: 0;
+    padding: 0;
+  }
+
+  .containerFormPopUser{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 20px;
+
+    .formPopUser{
+      width: 100%;
+      padding: 0 0 20px 0;
+      box-shadow: none;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      input{
+        padding: 5px 0 5px 5px;
+        border: 1px solid $gris;
+        border-radius: 5px;
+      }
+
+      input:disabled{
+        cursor: not-allowed;
+        background-color: rgb(243, 243, 243);
+      }
+    }
+
+    .btnModifPopUpUser{
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+
+}

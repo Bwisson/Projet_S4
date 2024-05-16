@@ -4,10 +4,13 @@ $mauve : #c4a6ff;
 $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
+.adminTableObjects{
+  margin-bottom: 5%;
+}
+
 .adminTable{
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 5%;
 
   caption{
     caption-side: top;

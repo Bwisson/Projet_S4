@@ -2,8 +2,11 @@ $gris : rgb(227, 227, 227);
 $bleu : #2882ff;
 
 .ViewDemandesAnnulation {
+  width: calc(88vw - 40px);
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  padding: 20px;
 
   h3 {
     color: $bleu;
@@ -11,7 +14,6 @@ $bleu : #2882ff;
   }
 
   .tab {
-    margin: 20px;
     border: 1px solid black;
     border-radius: 15px;
     padding: 10px;

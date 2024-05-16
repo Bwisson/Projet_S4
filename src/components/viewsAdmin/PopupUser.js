@@ -7,9 +7,9 @@ import Button from "../Button";
 
 /* css imports */
 import "../../css/cssViewsAdmin/PopUpUser.scss"
-import {translateRect} from "@fullcalendar/core/internal";
+import "../../css/cssViewsAdmin/popup.scss"
 
-function PopupUser({id, setShowPopUp, positionY}) {
+function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
     const [listResasArticles, setListResasArticles] = useState([])
     const [listResasAteliers, setListResasAteliers] = useState([])
     const [listResasModeles, setListResasModeles] = useState([])
@@ -23,6 +23,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
     const [mailInput, setMailInput] = useState('')
 
     const [newData, setNewData] = useState(false)
+    sendNewdata(newData)
     const [delUser, setDelUser] = useState(false)
 
     useEffect(() => {
@@ -36,6 +37,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
                     setListResasArticles(data.articles)
                     setListResasAteliers(data.ateliers)
                     setListResasModeles(data.modeles)
+                    setNewData(false)
                 })
         }
         function getUserInfo(){
@@ -47,15 +49,16 @@ function PopupUser({id, setShowPopUp, positionY}) {
                     let data = response.data
                     setUser(data)
                     setLoginInput(data.login)
-                    setLoginInput(data.nom)
-                    setLoginInput(data.prenom)
-                    setLoginInput(data.mail)
+                    setNomInput(data.nom)
+                    setPrenomInput(data.prenom)
+                    setMailInput(data.mail)
+                    setNewData(false)
                 })
         }
 
         getUserResas()
         getUserInfo()
-    }, [id]);
+    }, [newData]);
 
 
     function MapResasArticles(){
@@ -177,7 +180,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
             list_inputs[i].disabled = true;
         }
 
-        setModifUserInfo(false) /* TODO : garder l'ancien texte si une modif a été faites puis annuler */
+        setModifUserInfo(false)
         setLoginInput(user.login)
         setNomInput(user.nom)
         setPrenomInput(user.prenom)
@@ -195,12 +198,15 @@ function PopupUser({id, setShowPopUp, positionY}) {
             form_data.append("mail", mailInput)
             form_data.append("admin", user.admin)
 
-            axios.post("./../php/update/updateUserInfo.php", form_data)
-                .then(response => {setNewData(response.data)})
+            axios.post("./php/update/updateUserInfo.php", form_data)
+                .then(response => {
+                    let data = response.data
+                    setNewData(data)
+                    if (data){
+                        cancelUserModif()
+                    }//else afficher un message erreur modif ne s'est pas faite
+                })
 
-            if (newData){
-                cancelUserModif()
-            }//else afficher un message erreur modif ne s'est pas faite
         }
     }
 
@@ -208,15 +214,21 @@ function PopupUser({id, setShowPopUp, positionY}) {
         let dialog = document.getElementById("favDialog")
         dialog.showModal();
     }
-    function deleteUser(e){
-        setDelUser(e.target.value)
 
-        if (delUser){
+    function deleteUser(e){
+        if (e.target.value === "true"){
             let form_data = new FormData()
             form_data.append("id", user.id)
 
-            axios.post("./../php/delete/deleteUser.php")
-                .then(response => setDelUser(response.data))
+            axios.post("./php/delete/deleteUser.php", form_data)
+                .then(response => {
+                    let data = response.data
+                    setNewData(data)
+                    sendNewdata(data)
+                    if (data){
+                        setShowPopUp(false)
+                    }
+                })
         }
     }
 
@@ -228,7 +240,7 @@ function PopupUser({id, setShowPopUp, positionY}) {
     }
 
     return (
-        <div className="PopUpUser" style={{top: positionY + 'px'}}>
+        <div className="PopUpUser popup" style={{top: positionY + 'px'}}>
             <Button id={"btnClose"} onSmash={hidePopUp} text={"X"} bgColor={"#ff2828"}/>
 
             <div className={"containerFormPopUser"}>
@@ -265,10 +277,8 @@ function PopupUser({id, setShowPopUp, positionY}) {
                     </div>
                     :
                     <div className={"btnModifPopUpUser"}>
-                        <Button id={"btnEditPopUpUser"} onSmash={modifUserAvailable} text={"Modifier"}
-                                bgColor={"#2882ff"}/>
-                        <Button id={"btnDeletePopUpUser"} onSmash={showDeleteDialog} text={"Supprimer l'utilisateur"}
-                                bgColor={"red"}/>
+                        <Button id={"btnEditPopUpUser"} onSmash={modifUserAvailable} text={"Modifier"} bgColor={"#2882ff"}/>
+                        <Button id={"btnDeletePopUpUser"} onSmash={showDeleteDialog} text={"Supprimer l'utilisateur"} bgColor={"red"}/>
                     </div>}
             </div>
 
@@ -279,8 +289,8 @@ function PopupUser({id, setShowPopUp, positionY}) {
                         Êtes-vous sûr ?
                     </p>
                     <menu>
-                        <Button id={"cancelBtn"} text={"Annuler"} bgColor={"#2882ff"} onSmash={deleteUser} value={"false"}/>
-                        <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"red"} onSmash={deleteUser} value={"true"}/>
+                        <Button id={"cancelBtn"} text={"Annuler"} bgColor={"#2882ff"} onSmash={deleteUser} value={false}/>
+                        <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"red"} onSmash={deleteUser} value={true}/>
                     </menu>
                 </form>
             </dialog>

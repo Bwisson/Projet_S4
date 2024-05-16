@@ -4,11 +4,11 @@ include("../../../crud/function_rs_to_table.php");
 include("../../../crud/annulationAtelier.crud.php");
 include("../../../crud/resaAtelier.crud.php");
 
-if(isset($_POST['id'], $_POST['id_atelier'])){
+if(isset($_POST['id'], $_POST['id_resa'])){
     $id = $_POST['id'];
-    $id_atelier = $_POST['id_atelier'];
-    $res = deleteResaAtelier($conn, $id_atelier);
+    $id_resa = $_POST['id_resa'];
     $res2 = deleteAnnulationAtelier($conn, $id);
+    $res = deleteResaAtelier($conn, $id_resa);
     if ($res && $res2) {
         echo json_encode(true);
     } else {

@@ -1,6 +1,6 @@
 <?php
-function createResaArticle($conn, $id_article, $start, $end, $id_user) {
-    $sql = "INSERT INTO `ResaArticle` (`id_article`, `start`, `end`, `id_user`) VALUES ('$id_article', '$start', '$end', '$id_user')";
+function createResaArticle($conn, $id_article, $start, $end, $title, $groupId, $color, $constrait, $display, $id_user) {
+    $sql = "INSERT INTO `ResaArticle` (`id_article`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`, `id_user`) VALUES ('$id_article', '$start', '$end', '$title', '$groupId', '$color', '$constrait', '$display', '$id_user')";
     $res = mysqli_query($conn, $sql);
     return $res;
 }
@@ -8,6 +8,7 @@ function createResaArticle($conn, $id_article, $start, $end, $id_user) {
 function deleteResaArticle($conn, $id) {
     $sql = "DELETE FROM `ResaArticle` WHERE `id`=$id";
     $res = mysqli_query($conn, $sql);
+    var_dump($sql);
     return $res;
 }
 

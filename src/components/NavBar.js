@@ -1,6 +1,7 @@
 /* Librairy import */
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom"
+import axios from "axios"
 
 /* css import */
 import '../css/NavBar.scss';
@@ -50,18 +51,15 @@ function NavBar({ admin, setDeconnection }) {
                         <li><Link to={"info7/ListObjects/Modeles"}>MODÈLES</Link></li>
                         <li><Link to={"info7/ListObjects/Ateliers"}>ATELIERS</Link></li>
                     </ul>
-                    {admin ?
+                    {admin &&
                         <>
                             <div id="divider"></div>
                             <ul id={"adminLink"}>
                                 <li><Link to={"info7/AdminViewObjects"}>OBJETS</Link></li>
-                                {/* TODO : rajouter info7/ avant de push */}
                                 <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
                                 <li><Link to={"info7/AdminViewDemandesAnnulation"}>DEMANDES D'ANNULATION ({nbDemandesAnnulation})</Link></li>
                             </ul>
-                        </>
-                        : null}
-                    <li><Link to={"info7/Calendar"}>Calendrier</Link></li>
+                        </>}
                 </nav>
             </div>
         </div>

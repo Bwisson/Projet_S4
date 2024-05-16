@@ -1,7 +1,7 @@
 <?php
 include("../db/db_connect.php");
 include("../crud/function_rs_to_table.php");
-include("../crud/resaModeles.crud.php");
+include("../crud/resaModele.crud.php");
 
 if(isset($_POST['id'], $_POST['id_article'], $_POST['start'], $_POST['end'], $_POST['id_user'])){
     $id = $_POST['id']; 
@@ -9,7 +9,7 @@ if(isset($_POST['id'], $_POST['id_article'], $_POST['start'], $_POST['end'], $_P
     $start = $_POST['start'];
     $end = $_POST['end'];
     $id_user = $_POST['id_user'];
-    $updateResaArticle = updateResaModeles($conn, $id, $id_article, $start, $end, $id_user); 
+    $updateResaArticle = updateResaModele($conn, $id, $id_article, $start, $end, $id_user); 
 } else {
     $updateResaArticle = "Erreur : POST['id'] non défini";
 }

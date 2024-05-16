@@ -15,7 +15,7 @@ function deleteUser($conn, $id)
 
 function updateUser($conn, $id, $login, $mdp, $nom, $prenom, $mail, $admin)
 {
-    $sql = "UPDATE `User` SET `login,`='$login', `mdp`='$mdp', `nom`='$nom', `prenom`='$prenom', `prenom`='$prenom', `mail`='$mail', `admin`=$admin WHERE `id` = $id";
+    $sql = "UPDATE `User` SET `login`='$login', `mdp`='$mdp', `nom`='$nom', `prenom`='$prenom', `prenom`='$prenom', `mail`='$mail', `admin`=$admin WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);
     return $res;
 }

@@ -1,0 +1,22 @@
+.PopupObjectInfo{
+  left: 40%;
+  transform: translate(-30%);
+
+  .containerFormPopUser{
+    height: calc(100% - 60px);
+    align-items: center;
+    justify-content: center;
+
+    .formPopUser{
+      width: 40%;
+      align-items: center;
+      gap: 10px;
+
+      .divFormPopUser{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

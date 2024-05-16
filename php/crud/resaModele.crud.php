@@ -1,6 +1,6 @@
 <?php
-function createResaModele($conn, $id_modele, $start, $end, $title, $groupId, $color, $constraint, $display) { 
-    $sql = "INSERT INTO `ResaModele` (`id_modele`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`) VALUES ('$id_modele', '$start', '$end', '$title', '$groupId', '$color', '$constraint', '$display')";
+function createResaModele($conn, $id_modele, $start, $end, $title, $groupId, $color, $constraint, $display, $id_user) { 
+    $sql = "INSERT INTO `ResaModele` (`id_modele`, `start`, `end`, `title`, `groupId`, `color`, `constraint`, `display`, `id_user`) VALUES ('$id_modele', '$start', '$end', '$title', '$groupId', '$color', '$constraint', '$display', '$id_user')";
     $res = mysqli_query($conn, $sql);
     return $res;
 }
@@ -11,8 +11,8 @@ function deleteResaModele($conn, $id) {
     return $res;
 }
 
-function updateResaModele($conn, $id, $id_modele, $start, $end, $title, $groupId, $color, $constraint, $display) {
-    $sql = "UPDATE `ResaModele` SET `id_modele`='$id_modele', `start`='$start', `end`='$end', `title`='$title', `groupId`='$groupId', `color`='$color', `constraint`='$constraint', `display`='$display' WHERE `id` = $id";
+function updateResaModele($conn, $id, $id_article, $start, $end, $id_user) {
+    $sql = "UPDATE `ResaModele` SET `id_article`='$id_article', `start`='$start', `end`='$end' , `id_user`='$id_user' WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);
     return $res;
 }
