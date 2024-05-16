@@ -7,16 +7,25 @@ $gris : rgb(227, 227, 227);
 .Object{
   width: calc(88vw - 39px);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   padding: 20px;
-  overflow-y : scroll;
 
   .leftSide{
-    width: 33%;
     display: flex;
-    flex-direction: column;
-    gap: 20px 0px;
+    gap: 20px;
+    padding-bottom: 30px;
+
+    .title{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
     .imgCard{
       width: 80%;
@@ -41,10 +50,13 @@ $gris : rgb(227, 227, 227);
     article{
       width: 540px;
     }
+
+    .code_barre{
+      align-self: center;
+    }
   }
 
   .rightSide{
-    width: 66%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -52,11 +64,8 @@ $gris : rgb(227, 227, 227);
 
     .calendar{
       border: 1px solid $gris;
-      height: 90vh;
       padding: 15px;
       border-radius: 3%;
-      overflow-y: scroll;
-      overflow-x: hidden;
     }
   }
 }
