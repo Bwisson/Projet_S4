@@ -1,16 +1,18 @@
 /* Librairy imports */
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, {useState, useEffect} from "react"
+import axios from "axios"
 
 /* components imports */
 import Button from "../Button";
 import CreateArticle from "./CreateArticle"
 import CreateAtelier from "./CreateAtelier"
-import CreateModele from "./CreateModele";
+import CreateModele from "./CreateModele"
+import PopupObjectInfo from './PopupObjectInfo'
 
 /* css imports */
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
+
 
 function ViewObjects() {
     const [modeles, setModeles] = useState(null)
@@ -24,8 +26,12 @@ function ViewObjects() {
     const [showingFormAddModele, setShowingFormAddModele] = useState(false)
 
     const [showPopupObject, setShowPopupObject] = useState(false)
+    const [objectIdClicked, setObjectIdClicked] = useState(null)
+    const [objectClassClicked, setObjectClassClicked] = useState(null)
+    const [popupPosition, setPopupPosition] = useState(null)
 
-    const svgPlus = "<svg width=\"800px\" height=\"800px\" viewBox=\"0 0 24 24\" fill=\"none\"\n xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M6 12H18M12 6V18\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round stroke-linejoin=\"round\"/></svg>"
+
+    // const svgPlus = "<svg width=\"800px\" height=\"800px\" viewBox=\"0 0 24 24\" fill=\"none\"\n xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M6 12H18M12 6V18\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round stroke-linejoin=\"round\"/></svg>"
 
     useEffect(() => {
         function getModeles() {
@@ -71,13 +77,12 @@ function ViewObjects() {
         let list_modeles = null
         if(modeles != null){
             list_modeles = modeles.map(modele =>
-                <tr>
+                <tr className={modele.id + " modele"} onClick={popupObjectVisible}>
                     <td>{modele.nom}</td>
                     <td>{modele.prenom}</td>
                     <td>{modele.genre}</td>
                     <td>{modele.age}</td>
                     <td>{modele.tarif_horaire} €/h</td>
-                    {/*<td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>*/}
                 </tr>
             );
         }
@@ -88,10 +93,9 @@ function ViewObjects() {
         let list_ateliers= null
         if(ateliers != null){
             list_ateliers = ateliers.map(atelier =>
-                <tr>
+                <tr className={atelier.id + " atelier"} onClick={popupObjectVisible}>
                     <td>{atelier.nom}</td>
                     <td>{atelier.type}</td>
-                    {/*<td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>*/}
                 </tr>
             );
         }
@@ -102,13 +106,12 @@ function ViewObjects() {
         let list_articles = null
         if(articles != null){
             list_articles = articles.map(article =>
-                <tr>
+                <tr className={article.id + " article"} onClick={popupObjectVisible}>
                     <td>{article.code_barre}</td>
                     <td>{article.nom}</td>
                     <td>{article.categorie}</td>
                     <td>{article.couleur}</td>
                     <td>{article.taille}</td>
-                    {/*<td id={user.id}><Button onSmash={showingPopUp} text={"Voir les réservations"} bgColor={"#2882ff"}/></td>*/}
                 </tr>
             );
         }
@@ -126,7 +129,15 @@ function ViewObjects() {
         setShowingFormAddModele(!showingFormAddModele)
     }
 
-    function popupObjectVisible(){
+    function popupObjectVisible(event){
+        console.log(event)
+        let objectClass = event.target.parentElement.classList
+        let scroll = event.view.scrollY
+
+        setObjectIdClicked(objectClass.item(0))
+        setObjectClassClicked(objectClass.item(1))
+        setPopupPosition(((event.view.screen.height)/2) + scroll)
+
         setShowPopupObject(true)
     }
 
@@ -134,7 +145,7 @@ function ViewObjects() {
         setShowPopupObject(false)
     }
 
-        return (
+    return (
         <div className="ViewObjects">
             <div className="tableForm">
                 {showingFormAddModele && <CreateModele setNewData={setNewData} setShowingFormAddModele={setShowingFormAddModele}/>}
@@ -199,6 +210,7 @@ function ViewObjects() {
                 </table>
                 {articles == null && <i>Aucun articles</i>}
             </div>
+            {showPopupObject && <PopupObjectInfo id_objet={objectIdClicked} type_objet={objectClassClicked} setPopupObjectVisible={setShowPopupObject} positionY={popupPosition} sendNewdata={setNewData}/>}
         </div>
     )
 }

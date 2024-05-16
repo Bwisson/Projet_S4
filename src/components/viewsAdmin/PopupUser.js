@@ -7,7 +7,7 @@ import Button from "../Button";
 
 /* css imports */
 import "../../css/cssViewsAdmin/PopUpUser.scss"
-import {translateRect} from "@fullcalendar/core/internal";
+import "../../css/cssViewsAdmin/popup.scss"
 
 function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
     const [listResasArticles, setListResasArticles] = useState([])
@@ -240,7 +240,7 @@ function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
     }
 
     return (
-        <div className="PopUpUser" style={{top: positionY + 'px'}}>
+        <div className="PopUpUser popup" style={{top: positionY + 'px'}}>
             <Button id={"btnClose"} onSmash={hidePopUp} text={"X"} bgColor={"#ff2828"}/>
 
             <div className={"containerFormPopUser"}>

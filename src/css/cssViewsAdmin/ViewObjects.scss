@@ -18,6 +18,12 @@
       thead{
         height: 8vh;
       }
+      tbody{
+        tr:hover{
+          background-color:  rgb(243, 243, 243);
+          cursor: pointer;
+        }
+      }
     }
   }
 }

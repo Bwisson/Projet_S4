@@ -3,18 +3,18 @@ import axios from 'axios'
 
 /* components imports */
 import Button from "../Button";
-import PopupUser from "./PopupUser";
 
 /* css imports */
-import "../../css/cssViewsAdmin/PopUpUser.scss"
+import "../../css/cssViewsAdmin/popup.scss"
 import "../../css/cssViewsAdmin/PopupObjectInfo.scss"
 
 
-function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible}){
+function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY, sendNewdata}){
     const [objectInfos, setObjectInfos] = useState([])
 
     const [modifObjectInfos, setModifObjectInfos] = useState(false)
     const [newData, setNewData] = useState(false)
+    sendNewdata(newData)
     const [delObject, setDelObject] = useState(false)
 
     useEffect(() => {
@@ -23,9 +23,14 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible}){
             form_data.append("id", id_objet)
             form_data.append("type", type_objet)
             axios.post("./php/select/selectObject.php", form_data)
-                .then(response => setObjectInfos(response.data))
+                .then(response => {
+                    setObjectInfos(response.data)
+                    console.log(response.data)
+                    setNewData(false)
+                })
         }
-    }, []);
+        getObjectInfo()
+    }, [newData]);
 
     function popupObjectUnvisible() {
         setPopupObjectVisible(false)
@@ -196,9 +201,15 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible}){
         }
     }
 
+    let popup = document.getElementsByClassName("PopupObjectInfo")
+
+    if (popup[0] != undefined){
+        let popupHeight = popup[0].clientHeight
+        positionY = positionY - (popupHeight/1.4)
+    }
 
     return (
-        <div className={"PopupObjectInfo PopUpUser"}>
+        <div className={"PopupObjectInfo popup"} style={{top: positionY + 'px'}}>
             <Button id={"btnClose"} onSmash={popupObjectUnvisible} text={"X"} bgColor={"#ff2828"}/>
 
             <div className={"containerFormPopUser"}>
