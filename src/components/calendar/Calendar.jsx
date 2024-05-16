@@ -11,6 +11,7 @@ function CalendarComponent({ objectInfo , objectType }) {
   const [listeCouleurEvent] = useState(["#0068e7","#2882ff","#c4a6ff","#ffd2ff"]);
   const [user, setUser] = useState(null); 
   const [resas, setResas] = useState([]);
+  const [newData, setNewData] = useState(false)
 
   useEffect(() => {
     getUser();
@@ -20,12 +21,13 @@ function CalendarComponent({ objectInfo , objectType }) {
             console.log(resas);
         });
     }
-}, [objectInfo, objectType]);
+}, [objectInfo, objectType, newData]);
 
   async function getUser() {
     try {
       const response = await axios.get("./../../php/list/fromUser/listUserInfo.php");
       setUser(response.data);
+      setNewData(false)
     } catch (error) {
       console.error("Une erreur s'est produite lors de la récupération des données de l'utilisateur :", error);
     }
@@ -46,7 +48,7 @@ function CalendarComponent({ objectInfo , objectType }) {
         }
         setResas(response.data);
         console.log("Resas mis à jour :", response.data); 
-
+        setNewData(false)
     } catch (error) {
         console.error("Une erreur s'est produite lors de la récupération des données de l'utilisateur :", error);
     }
@@ -110,13 +112,12 @@ function CalendarComponent({ objectInfo , objectType }) {
           console.error("Type d'objet non pris en charge pour la réservation");
           return;
       }
-  
 
       console.log("formData : ", formData);
       const response = axios.post(`./../../php/createResa/${endpoint}`, formData);
       console.log("Réservation mise à jour :", response.data);
-
-      window.location.reload();
+      setNewData(response.data)
+      // window.location.reload();
     }
   }
 
@@ -177,8 +178,8 @@ function CalendarComponent({ objectInfo , objectType }) {
 
       const response = axios.post(`./../../php/createCour/${endpoint}`, formData);
       console.log("Réservation mise à jour :", response.data);
-
-      window.location.reload();
+      setNewData(response.data)
+      // window.location.reload();
     }
   }
 
@@ -211,8 +212,8 @@ function CalendarComponent({ objectInfo , objectType }) {
 
           const response = axios.post(`./../../php/deleteResa/${endpoint}`, formData);
           console.log("Element supprimer :", response.data);
-
-          window.location.reload();
+          setNewData(response.data)
+          // window.location.reload();
         }
       }
     }
@@ -266,9 +267,10 @@ function CalendarComponent({ objectInfo , objectType }) {
         // Envoyer la requête HTTP avec FormData
         const response = await axios.post(`./../../php/deplace/${endpoint}`, formData);
         console.log("Réservation mise à jour :", response.data);
+        setNewData(response.data)
         // Recharger la page pour refléter les modifications
 
-        window.location.reload();
+        // window.location.reload();
     } catch (error) {
         console.error("Une erreur s'est produite lors de la mise à jour de la réservation :", error);
     }

@@ -101,26 +101,26 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
     function sendModifUser(){
         let form_data = new FormData()
         form_data.append("type_objet", type_objet)
-        if (type_objet == "modele"){
+        if (type_objet === "Modeles"){
             form_data.append("id", objectInfos.id)
-            form_data.append("nom", objectInfos.nom)
-            form_data.append("prenom", objectInfos.prenom)
-            form_data.append("genre", objectInfos.genre)
-            form_data.append("age", objectInfos.age)
-            form_data.append("tarif_horaire", objectInfos.tarif_horaire)
+            form_data.append("nom", nom)
+            form_data.append("prenom", prenom)
+            form_data.append("genre", genre)
+            form_data.append("age", age)
+            form_data.append("tarif_horaire", tarif_horaire)
 
-        }else if (type_objet == "article"){
+        }else if (type_objet === "Articles"){
             form_data.append("id", objectInfos.id)
-            form_data.append("code_barre", objectInfos.code_barre)
-            form_data.append("nom", objectInfos.nom)
-            form_data.append("categorie", objectInfos.categorie)
-            form_data.append("couleur", objectInfos.couleur)
-            form_data.append("taille", objectInfos.taille)
+            form_data.append("code_barre", codeBarre)
+            form_data.append("nom", nom)
+            form_data.append("categorie", categorie)
+            form_data.append("couleur", couleur)
+            form_data.append("taille", taille)
 
-        }else if (type_objet == "atelier"){
+        }else if (type_objet === "Ateliers"){
             form_data.append("id", objectInfos.id)
-            form_data.append("nom", objectInfos.nom)
-            form_data.append("type", objectInfos.type)
+            form_data.append("nom", nom)
+            form_data.append("type", type)
 
         }else {
             console.log("Type objet inconnu au batillon !")
@@ -233,7 +233,7 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                         </div>
                         <div className={"divFormPopUser"}>
                             <label htmlFor="type_select">Type d'atelier :</label>
-                            <select name="type" id="type_select">
+                            <select name="type" id="type_select" value={type} onChange={e => setType(e.target.value)}>
                                 <option value="">-- Choisir le type d'atelier --</option>
                                 <option value="photographie">Photographie</option>
                                 <option value="peinture">Peinture</option>
