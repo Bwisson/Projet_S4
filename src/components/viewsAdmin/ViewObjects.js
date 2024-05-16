@@ -138,7 +138,7 @@ function ViewObjects() {
         <div className="ViewObjects">
             <div className="tableForm">
                 {showingFormAddModele && <CreateModele setNewData={setNewData} setShowingFormAddModele={setShowingFormAddModele}/>}
-                <table className={"adminTable"}>
+                <table className={"adminTable adminTableObjects"}>
                     <caption>
                         Modèles <Button onSmash={showFormCreateModele} text={"+"} bgColor={"#2882ff"}/>
                     </caption>
@@ -160,7 +160,7 @@ function ViewObjects() {
 
             <div className="tableForm">
                 {showingFormAddAtelier && <CreateAtelier setNewData={setNewData} setShowingFormAddAtelier={setShowingFormAddAtelier}/>}
-                <table className={"adminTable"}>
+                <table className={"adminTable adminTableObjects"}>
                     <caption>
                         Ateliers <Button onSmash={showFormCreateAtelier} text={"+"} bgColor={"#2882ff"}/>
 
