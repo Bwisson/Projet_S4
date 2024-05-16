@@ -302,7 +302,7 @@ function CalendarComponent({ objectInfo , objectType }) {
 
       allDaySlot={false} // Permet de ne pas afficher la partie pour les jours entiers
 
-      height={700} // Hauteur du calendrier
+      height={"85vh"} // Hauteur du calendrier
 
       events={resas} // Evenements du calendrier
 

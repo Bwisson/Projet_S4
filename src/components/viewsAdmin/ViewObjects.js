@@ -133,7 +133,6 @@ function ViewObjects() {
     }
 
     function popupObjectVisible(event){
-        console.log(event)
         let objectClass = event.target.parentElement.classList
         let scroll = event.view.scrollY
 

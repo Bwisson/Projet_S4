@@ -36,20 +36,18 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                 .then(response => {
                     let datas = response.data
                     setObjectInfos(datas)
+                    setNom(datas[0].nom)
                     if (type_objet === "Modeles"){
-                        setNom(datas[0].nom)
                         setPrenom(datas[0].prenom)
                         setGenre(datas[0].genre)
                         setAge(datas[0].age)
                         setTarif_horaire(datas[0].tarif_horaire)
                     }else if (type_objet === "Articles") {
                         setCodeBarre(datas[0].code_barre)
-                        setNom(datas[0].nom)
                         setCategorie(datas[0].categorie)
                         setCouleur(datas[0].couleur)
                         setTaille(datas[0].taille)
                     }else if (type_objet === "Ateliers") {
-                        setNom(datas[0].nom)
                         setType(datas[0].type)
                     }
                     setNewData(false)
@@ -64,9 +62,14 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
 
     function modifObjectAvailable() {
         let list_inputs = document.getElementsByTagName("input")
+        let list_select = document.getElementsByTagName("select")
 
         for (let i = 0; i < list_inputs.length; i++) {
-            list_inputs[i].disabled = false;
+            list_inputs[i].disabled = false
+        }
+
+        for (let i = 0; i < list_select.length; i++) {
+            list_select[i].disabled = false
         }
 
         setModifObjectInfos(true)
@@ -74,64 +77,67 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
 
     function cancelObjectModif() {
         let list_inputs = document.getElementsByTagName("input")
+        let list_select = document.getElementsByTagName("select")
 
         for (let i = 0; i < list_inputs.length; i++) {
-            list_inputs[i].disabled = true;
+            list_inputs[i].disabled = true
+        }
+
+        for (let i = 0; i < list_select.length; i++) {
+            list_select[i].disabled = true
         }
 
         setModifObjectInfos(false)
+
+        setNom(objectInfos[0].nom)
         if (type_objet === "Modeles"){
-            setNom(objectInfos[0].nom)
             setPrenom(objectInfos[0].prenom)
             setGenre(objectInfos[0].genre)
             setAge(objectInfos[0].age)
             setTarif_horaire(objectInfos[0].tarif_horaire)
         }else if (type_objet === "Articles") {
             setCodeBarre(objectInfos[0].code_barre)
-            setNom(objectInfos[0].nom)
             setCategorie(objectInfos[0].categorie)
             setCouleur(objectInfos[0].couleur)
             setTaille(objectInfos[0].taille)
         }else if (type_objet === "Ateliers") {
-            setNom(objectInfos[0].nom)
             setType(objectInfos[0].type)
         }
     }
 
     function sendModifUser(){
         let form_data = new FormData()
+
+        form_data.append("id", objectInfos[0].id)
         form_data.append("type_objet", type_objet)
+        form_data.append("nom", nom)
+
         if (type_objet === "Modeles"){
-            form_data.append("id", objectInfos.id)
-            form_data.append("nom", nom)
             form_data.append("prenom", prenom)
             form_data.append("genre", genre)
             form_data.append("age", age)
             form_data.append("tarif_horaire", tarif_horaire)
 
         }else if (type_objet === "Articles"){
-            form_data.append("id", objectInfos.id)
             form_data.append("code_barre", codeBarre)
-            form_data.append("nom", nom)
             form_data.append("categorie", categorie)
             form_data.append("couleur", couleur)
             form_data.append("taille", taille)
 
         }else if (type_objet === "Ateliers"){
-            form_data.append("id", objectInfos.id)
-            form_data.append("nom", nom)
             form_data.append("type", type)
 
         }else {
             console.log("Type objet inconnu au batillon !")
         }
 
-        axios.post("./../php/update/updateUserInfo.php", form_data)
-            .then(response => {setNewData(response.data)})
-
-        if (newData){
-            cancelObjectModif()
-        }//else afficher un message erreur modif ne s'est pas faite
+        axios.post("./php/update/updateObject.php", form_data)
+            .then(response => {
+                setNewData(response.data)
+                if (response.data){
+                    cancelObjectModif()
+                }//else afficher un message erreur modif ne s'est pas faite
+            })
     }
 
     function showDeleteDialog(){
@@ -165,7 +171,6 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
             <div className={"containerFormPopUser"}>
                 {objectInfos.length > 0 && type_objet === "Modeles" &&
                     <form className={"formPopUser"}>
-                        {console.log(objectInfos)}
                         <div className={"divFormPopUser"}>
                             <label htmlFor={"nom"}>Nom : </label>
                             <input id="nom" type="text" value={nom} onChange={e => setNom(e.target.value)} disabled={true}/>
@@ -176,9 +181,8 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                         </div>
                         <div className={"divFormPopUser"}>
                             <label id="genre" htmlFor={"genre"}>Genre : </label>
-                            <select name="" id="select-genre">
-                                <option value="">-- choisir une option --</option>
-                                <option value="femme">femme</option>
+                            <select name="" id="select-genre" value={genre} onChange={e => setGenre(e.target.value)} disabled={true}>
+                                <option value="femme">Femme</option>
                                 <option value="homme">Homme</option>
                             </select>
                         </div>
@@ -204,8 +208,7 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                         </div>
                         <div className={"divFormPopUser"}>
                             <label id="select-categorie" htmlFor={"genre"}>Catégorie : </label>
-                            <select name="categorie" id="select-categorie">
-                                <option value="">-- Choisir une catégorie --</option>
+                            <select name="categorie" id="select-categorie" value={categorie} onChange={e => setCategorie(e.target.value)} disabled={true}>
                                 <option value="chevalet">Chevalet</option>
                                 <option value="pinceaux_outils">Pinceaux et outils de peinture</option>
                             </select>
@@ -216,11 +219,11 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                         </div>
                         <div className={"divFormPopUser"}>
                             <label htmlFor="taille_select">Taille :</label>
-                            <select name="taille" id="taille_select">
+                            <select name="taille" id="taille_select" value={taille} onChange={e => setTaille(e.target.value)} disabled={true}>
                                 <option value="U">U</option>
-                                <option value="petit">petit</option>
-                                <option value="moyen">moyen</option>
-                                <option value="grand">grand</option>
+                                <option value="petit">Petit</option>
+                                <option value="moyen">Moyen</option>
+                                <option value="grand">Grand</option>
                             </select>
                         </div>
                     </form>
@@ -233,11 +236,10 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                         </div>
                         <div className={"divFormPopUser"}>
                             <label htmlFor="type_select">Type d'atelier :</label>
-                            <select name="type" id="type_select" value={type} onChange={e => setType(e.target.value)}>
-                                <option value="">-- Choisir le type d'atelier --</option>
+                            <select name="type" id="type_select" value={type} onChange={e => setType(e.target.value)} disabled={true}>
                                 <option value="photographie">Photographie</option>
                                 <option value="peinture">Peinture</option>
-                                <option value="sculputure">Sculpture</option>
+                                <option value="sculpture">Sculpture</option>
                             </select>
                         </div>
                     </form>

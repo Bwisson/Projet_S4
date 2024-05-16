@@ -10,8 +10,8 @@ function deleteModele($conn, $id) {
     $res = mysqli_query($conn, $sql);
     return $res;
 }
-function updateModele($conn, $id, $nom, $prenom, $genre, $tarif_horaire) {
-    $sql = "UPDATE `Modele` SET `id`='$id', `nom`='$nom', `prenom`='$prenom', `genre`='$genre', `tarif_horaire`='$tarif_horaire' WHERE `id` = $id";
+function updateModele($conn, $id, $nom, $prenom, $genre, $age, $tarif_horaire) {
+    $sql = "UPDATE `Modele` SET `nom`='$nom', `prenom`='$prenom', `genre`='$genre', `age`=$age, `tarif_horaire`='$tarif_horaire' WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);
     return $res;
 }
