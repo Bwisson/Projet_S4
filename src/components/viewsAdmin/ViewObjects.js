@@ -13,7 +13,6 @@ import PopupObjectInfo from './PopupObjectInfo'
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
 
-
 function ViewObjects() {
     const [modeles, setModeles] = useState(null)
     const [ateliers, setAteliers] = useState(null)

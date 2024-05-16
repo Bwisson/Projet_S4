@@ -5,37 +5,37 @@ $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
 .PopUpUser{
-  .containerFormPopUser{
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    padding: 20px;
-
-    .formPopUser{
-      width: 100%;
-      padding: 0 0 20px 0;
-      box-shadow: none;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-
-      input{
-        padding: 5px 0 5px 5px;
-        border: 1px solid $gris;
-        border-radius: 5px;
-      }
-
-      input:disabled{
-        cursor: not-allowed;
-        background-color: rgb(243, 243, 243);
-      }
-    }
-
-    .btnModifPopUpUser{
-      display: flex;
-      gap: 20px;
-    }
-  }
+  //.containerFormPopUser{
+  //  display: flex;
+  //  flex-direction: column;
+  //  margin-top: 20px;
+  //  padding: 20px;
+  //
+  //  .formPopUser{
+  //    width: 100%;
+  //    padding: 0 0 20px 0;
+  //    box-shadow: none;
+  //    display: flex;
+  //    justify-content: space-between;
+  //    flex-wrap: wrap;
+  //
+  //    input{
+  //      padding: 5px 0 5px 5px;
+  //      border: 1px solid $gris;
+  //      border-radius: 5px;
+  //    }
+  //
+  //    input:disabled{
+  //      cursor: not-allowed;
+  //      background-color: rgb(243, 243, 243);
+  //    }
+  //  }
+  //
+  //  .btnModifPopUpUser{
+  //    display: flex;
+  //    gap: 20px;
+  //  }
+  //}
 
   dialog{
     position: absolute;
@@ -83,14 +83,5 @@ $gris : rgb(227, 227, 227);
 
   p {
     text-align: center;
-  }
-
-  #btnClose{
-    min-width: 50px;
-    position: absolute;
-    border-radius: 0 0 0 5px;
-    top: 0;
-    right: 0;
-    padding: 0;
   }
 }
