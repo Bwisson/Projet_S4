@@ -27,6 +27,8 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
     const [couleur, setCouleur] = useState(null)
     const [taille, setTaille] = useState(null)
 
+    const [invalidCodeBarre, setInvalidCodeBarre] = useState(false)
+
     useEffect(() => {
         function getObjectInfo(){
            let form_data = new FormData()
@@ -118,7 +120,7 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
             form_data.append("age", age)
             form_data.append("tarif_horaire", tarif_horaire)
 
-        }else if (type_objet === "Articles"){
+        }else if (type_objet === "Articles" && !invalidCodeBarre){
             form_data.append("code_barre", codeBarre)
             form_data.append("categorie", categorie)
             form_data.append("couleur", couleur)
@@ -154,6 +156,15 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
 
             axios.post("./php/delete/deleteObject.php", form_data)
                 .then(response => setDelObject(response.data))
+        }
+    }
+
+    function showInvalidCodeBarre(){
+        if (codeBarre.length > 7 || codeBarre.length < 7){
+            setInvalidCodeBarre(true)
+            console.log("erreur code barre")
+        }else {
+            setInvalidCodeBarre(false)
         }
     }
 
@@ -200,7 +211,8 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                     <form className={"formPopUser"}>
                         <div className={"divFormPopUser"}>
                             <label htmlFor={"code_barre"}>Code barre : </label>
-                            <input id="code_barre" type="text" value={codeBarre} onChange={e => setCodeBarre(e.target.value)} disabled={true}/>
+                            <input id="code_barre" type="text" value={codeBarre} onBlur={showInvalidCodeBarre} onChange={e => setCodeBarre(e.target.value)} disabled={true}/>
+                            {invalidCodeBarre && <p className={"formError"}>Le code barre doit faire 7 caractères</p>}
                         </div>
                         <div className={"divFormPopUser"}>
                             <label htmlFor={"nom"}>Nom : </label>
