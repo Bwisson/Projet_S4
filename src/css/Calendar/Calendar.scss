@@ -25,9 +25,6 @@ $blanc : #ffffff;
   --fc-button-hover-border-color: #0068e7;
   --fc-button-active-bg-color: #0068e7;
   --fc-button-active-border-color: #0068e7;
-
-  
-
 }
 
 #fullResa{
@@ -37,15 +34,21 @@ $blanc : #ffffff;
 }
 
 #eventResa{
-  background: $mauve;
+  width: 40%;
   display: flex;
+  justify-content: space-around;
+  padding: 2% 1% 2% 1%;
   color: white;
+  background-color: $mauve;
 }
 
 #eventCours{
-  background: $mauve;
+  width: 40%;
   display: flex;
+  justify-content: space-around;
+  padding: 2% 1% 2% 1%;
   color: white;
+  background-color: $mauve;
 }
 
 .calendrier_comp{

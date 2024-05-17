@@ -310,7 +310,7 @@ function CalendarComponent({ objectInfo , objectType }) {
     />
       <div id="fullResa">
         <form id="eventResa">
-          <label >Ajouter réservation</label>
+          <label >Ajouter réservation : </label>
           <input type="date" id="eventDate" />
           <input type="time" id="eventTimeDebut" />
           <input type="time" id="eventTimeFin" />
@@ -319,7 +319,7 @@ function CalendarComponent({ objectInfo , objectType }) {
 
         {user && user.admin === "1" && (
         <form id="eventCours">
-          <label >Bloquer un créneau</label>
+          <label >Bloquer un créneau : </label>
           <input type="date" id="coursEventDate" />
           <input type="time" id="coursEventTimeDebut" />
           <input type="time" id="coursEventTimeFin" />
