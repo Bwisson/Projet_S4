@@ -39,9 +39,12 @@ function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
                     let ateliers = data.ateliers
                     let modeles = data.modeles
 
-                    setListResasArticles(articles.filter(reservation => isCurrentReservation(reservation)))
-                    setListResasAteliers(ateliers.filter(reservation => isCurrentReservation(reservation)))
-                    setListResasModeles(modeles.filter(reservation => isCurrentReservation(reservation)))
+                    // setListResasArticles(articles.filter(reservation => isCurrentReservation(reservation)))
+                    // setListResasAteliers(ateliers.filter(reservation => isCurrentReservation(reservation)))
+                    // setListResasModeles(modeles.filter(reservation => isCurrentReservation(reservation)))
+                    setListResasArticles(articles)
+                    setListResasAteliers(ateliers)
+                    setListResasModeles(modeles)
                     setNewData(false)
                 })
         }
