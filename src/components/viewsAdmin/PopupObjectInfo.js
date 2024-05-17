@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from 'axios'
+import { Link } from "react-router-dom"
 
 /* components imports */
 import Button from "../Button";
@@ -175,6 +176,24 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
         }
     }
 
+    function generateUrlOfObject(){
+        let url = ""
+        if (objectInfos.length > 0){
+            if (type_objet === "Articles"){
+                if(objectInfos[0].categorie === "chevalet"){
+                    url = "ListObjects/Chevalets/" + objectInfos[0].id
+                }else{
+                    url = "ListObjects/Peinture/" + objectInfos[0].id
+                }
+            }else if (type_objet === "Ateliers"){
+                url = "ListObjects/Ateliers/" + objectInfos[0].id
+            }else if (type_objet === "Modeles"){
+                url = "ListObjects/Modeles/" + objectInfos[0].id
+            }
+        }
+        return url
+    }
+
     let popup = document.getElementsByClassName("PopupObjectInfo")
 
     if (popup[0] != undefined){
@@ -276,6 +295,7 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                         <Button id={"btnDeletePopUpUser"} onSmash={showDeleteDialog} text={"Supprimer l'objet"}
                                 bgColor={"red"}/>
                     </div>}
+                <Link to={"../info7/" + generateUrlOfObject()}><Button text={"Voir les détails de l'objet"} bgColor={"#2882ff"}/></Link>
             </div>
 
             <dialog id="favDialog">
