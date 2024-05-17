@@ -12,6 +12,13 @@ function deleteResaArticle($conn, $id) {
     return $res;
 }
 
+function deleteResaArticleByObjectId($conn, $id_article) {
+    $sql = "DELETE FROM `ResaArticle` WHERE `id_article`=$id_article";
+    $res = mysqli_query($conn, $sql);
+    var_dump($sql);
+    return $res;
+}
+
 function updateResaArticle($conn, $id, $id_article, $start, $end, $id_user) {
     $sql = "UPDATE `ResaArticle` SET `id_article`='$id_article', `start`='$start', `end`='$end' , `id_user`='$id_user' WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);

@@ -11,6 +11,12 @@ function deleteAnnulationArticle($conn, $id) {
     return $res;
 }
 
+//function deleteAnnulationArticleByObjectId($conn, $id) {
+//    $sql = "DELETE FROM `AnnulationArticle` WHERE `id`=$id";
+//    $res = mysqli_query($conn, $sql);
+//    return $res;
+//}
+
 function selectAnnulationArticle($conn, $id){
     $sql = "SELECT * FROM `AnnulationArticle` WHERE id=$id";
     $res = mysqli_query($conn, $sql);
@@ -20,7 +26,7 @@ function selectAnnulationArticle($conn, $id){
 
 function listAnnulationArticle($conn)
 {
-    $sql = "SELECT a.id AS id, a.id_resaArticle AS id_resa, r.start AS start, r.end AS end, art.nom AS nom_article, u.nom AS nom_user, u.prenom AS prenom_user FROM `AnnulationArticle` a JOIN `ResaArticle` r ON a.id_resaArticle=r.id JOIN `User` u ON r.id_user=u.id JOIN `Article` art ON r.id_article=art.id WHERE r.end > NOW()";
+    $sql = "SELECT a.id AS id, a.id_resaArticle AS id_resa, r.id_article AS id_article, r.start AS start, r.end AS end, art.nom AS nom_article, u.nom AS nom_user, u.prenom AS prenom_user FROM `AnnulationArticle` a JOIN `ResaArticle` r ON a.id_resaArticle=r.id JOIN `User` u ON r.id_user=u.id JOIN `Article` art ON r.id_article=art.id WHERE r.end > NOW()";
     $res = mysqli_query($conn, $sql);
 
     return rs_to_table($res);
