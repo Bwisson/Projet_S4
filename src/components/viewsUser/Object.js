@@ -57,6 +57,38 @@ function Object(){
         );
     }
 
+    function InfosObjet(){
+        let res = <i>Aucnes données disponible</i>
+        if (objectInfo != null){
+            if (objectType === "Chevalets" || objectType === "Peinture"){
+                res =
+                    <>
+                        <CodeBarre />
+                        <p>Nom : {objectInfo.nom}</p>
+                        <p>Catégorie : {objectInfo.categorie}</p>
+                        <p>Couleur : {objectInfo.couleur}</p>
+                        <p>Taille : {objectInfo.taille}</p>
+                    </>
+            }else if (objectType === "Ateliers"){
+                res =
+                    <>
+                        <p>Nom : {objectInfo.nom}</p>
+                        <p>Type : {objectInfo.type}</p>
+                    </>
+            }else if (objectType === "Modeles"){
+                res =
+                    <>
+                        <p>Nom : {objectInfo.nom}</p>
+                        <p>Prénom : {objectInfo.prenom}</p>
+                        <p>Genre : {objectInfo.genre}</p>
+                        <p>Âge : {objectInfo.age}</p>
+                        <p>Tarif horaire : {objectInfo.tarif_horaire}€/h</p>
+                    </>
+            }
+        }
+        return res
+    }
+
     return(
         <div className="Object">
             <div className={"leftSide"}>
@@ -65,10 +97,7 @@ function Object(){
                 <img className={"imgCard"} ref={objectImageRef} alt=""/>
                 <h2>{objectName}</h2></div>
                 <div className={"article"}>
-                    <p>
-                        {objectType}
-                    </p>
-                    <CodeBarre />
+                    <InfosObjet />
                 </div>
                 
             </div>
