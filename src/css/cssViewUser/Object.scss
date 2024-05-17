@@ -5,20 +5,38 @@ $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
 .Object{
+  position: relative;
   width: calc(88vw - 39px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
 
+  .flèche{
+    position: absolute;
+    top: 0;
+    color: $mauve;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
   .leftSide{
     display: flex;
+    align-items: center;
     gap: 20px;
     padding-bottom: 30px;
 
-    .title{
+    .divImg{
       display: flex;
       flex-direction: column;
+
+      .imgCard{
+        width: 60%;
+        height: auto;
+        align-self: center;
+        background-color: $gris;
+        border-radius: 5%;
+      }
     }
 
     .article{
@@ -27,19 +45,7 @@ $gris : rgb(227, 227, 227);
       gap: 20px;
     }
 
-    .imgCard{
-      width: 80%;
-      height: auto;
-      align-self: center; 
-      background-color: $gris;
-      border-radius: 5%;
-    }
 
-    .flèche{
-      color: $mauve;
-      font-size: 2rem;
-      font-weight: bold;
-    }
 
     h2{
       font-size: 3.5rem;

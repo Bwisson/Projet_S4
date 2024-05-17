@@ -63,23 +63,23 @@ function Object(){
             if (objectType === "Chevalets" || objectType === "Peinture"){
                 res =
                     <>
-                        <CodeBarre />
-                        <p>Nom : {objectInfo.nom}</p>
+
+                        <h2>{objectName}</h2>
                         <p>Catégorie : {objectInfo.categorie}</p>
                         <p>Couleur : {objectInfo.couleur}</p>
                         <p>Taille : {objectInfo.taille}</p>
+                        <CodeBarre/>
                     </>
-            }else if (objectType === "Ateliers"){
+            } else if (objectType === "Ateliers"){
                 res =
                     <>
-                        <p>Nom : {objectInfo.nom}</p>
+                        <h2>{objectName}</h2>
                         <p>Type : {objectInfo.type}</p>
                     </>
-            }else if (objectType === "Modeles"){
+            } else if (objectType === "Modeles"){
                 res =
                     <>
-                        <p>Nom : {objectInfo.nom}</p>
-                        <p>Prénom : {objectInfo.prenom}</p>
+                        <h2>{objectName} {objectInfo.prenom}</h2>
                         <p>Genre : {objectInfo.genre}</p>
                         <p>Âge : {objectInfo.age}</p>
                         <p>Tarif horaire : {objectInfo.tarif_horaire}€/h</p>
@@ -91,15 +91,16 @@ function Object(){
 
     return(
         <div className="Object">
+            <Link to={"../info7/ListObjects/" + objectType}><p className={"flèche"}>←</p></Link>
+
             <div className={"leftSide"}>
-                <Link to={"../info7/ListObjects/" + objectType}><p className={"flèche"}>←</p></Link>
-                <div className={"title"}> 
-                <img className={"imgCard"} ref={objectImageRef} alt=""/>
-                <h2>{objectName}</h2></div>
+                <div className={"divImg"}>
+                    <img className={"imgCard"} ref={objectImageRef} alt=""/>
+                </div>
+
                 <div className={"article"}>
                     <InfosObjet />
                 </div>
-                
             </div>
 
             <div className={"rightSide"}>
