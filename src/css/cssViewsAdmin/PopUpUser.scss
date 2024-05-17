@@ -5,60 +5,6 @@ $rose : #ffd2ff;
 $gris : rgb(227, 227, 227);
 
 .PopUpUser{
-  //.containerFormPopUser{
-  //  display: flex;
-  //  flex-direction: column;
-  //  margin-top: 20px;
-  //  padding: 20px;
-  //
-  //  .formPopUser{
-  //    width: 100%;
-  //    padding: 0 0 20px 0;
-  //    box-shadow: none;
-  //    display: flex;
-  //    justify-content: space-between;
-  //    flex-wrap: wrap;
-  //
-  //    input{
-  //      padding: 5px 0 5px 5px;
-  //      border: 1px solid $gris;
-  //      border-radius: 5px;
-  //    }
-  //
-  //    input:disabled{
-  //      cursor: not-allowed;
-  //      background-color: rgb(243, 243, 243);
-  //    }
-  //  }
-  //
-  //  .btnModifPopUpUser{
-  //    display: flex;
-  //    gap: 20px;
-  //  }
-  //}
-
-  dialog{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    border: none;
-    border-radius: 5px;
-    text-align: left;
-
-    .formDialogPopupUser{
-      width: auto;
-
-      menu{
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        gap: 20px;
-      }
-    }
-  }
-
   .titleTab{
     margin: 20px 0 40px 0;
 

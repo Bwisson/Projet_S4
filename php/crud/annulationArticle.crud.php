@@ -11,12 +11,6 @@ function deleteAnnulationArticle($conn, $id) {
     return $res;
 }
 
-//function deleteAnnulationArticleByObjectId($conn, $id) {
-//    $sql = "DELETE FROM `AnnulationArticle` WHERE `id`=$id";
-//    $res = mysqli_query($conn, $sql);
-//    return $res;
-//}
-
 function selectAnnulationArticle($conn, $id){
     $sql = "SELECT * FROM `AnnulationArticle` WHERE id=$id";
     $res = mysqli_query($conn, $sql);

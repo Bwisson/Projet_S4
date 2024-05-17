@@ -15,7 +15,6 @@ function deleteResaArticle($conn, $id) {
 function deleteResaArticleByObjectId($conn, $id_article) {
     $sql = "DELETE FROM `ResaArticle` WHERE `id_article`=$id_article";
     $res = mysqli_query($conn, $sql);
-    var_dump($sql);
     return $res;
 }
 

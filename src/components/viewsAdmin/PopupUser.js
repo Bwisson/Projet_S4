@@ -8,6 +8,7 @@ import Button from "../Button";
 /* css imports */
 import "../../css/cssViewsAdmin/PopUpUser.scss"
 import "../../css/cssViewsAdmin/popup.scss"
+import '../../css/cssViewsAdmin/dialog.scss'
 
 function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
     const [listResasArticles, setListResasArticles] = useState([])

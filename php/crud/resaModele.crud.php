@@ -11,6 +11,12 @@ function deleteResaModele($conn, $id) {
     return $res;
 }
 
+function deleteResaModeleByObjectId($conn, $id_modele) {
+    $sql = "DELETE FROM `ResaModele` WHERE `id_modele`=$id_modele";
+    $res = mysqli_query($conn, $sql);
+    return $res;
+}
+
 function updateResaModele($conn, $id, $id_article, $start, $end, $id_user) {
     $sql = "UPDATE `ResaModele` SET `id_article`='$id_article', `start`='$start', `end`='$end' , `id_user`='$id_user' WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);

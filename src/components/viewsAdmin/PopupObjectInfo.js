@@ -7,6 +7,7 @@ import Button from "../Button";
 /* css imports */
 import "../../css/cssViewsAdmin/PopupObjectInfo.scss"
 import "../../css/cssViewsAdmin/popup.scss"
+import '../../css/cssViewsAdmin/dialog.scss'
 
 function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY, sendNewdata}){
     const [objectInfos, setObjectInfos] = useState([])
@@ -147,15 +148,21 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
         dialog.showModal();
     }
     function deleteObject(e){
-        setDelObject(e.target.value)
 
-        if (delObject){
+        if (e.target.value === "true"){
             let form_data = new FormData()
             form_data.append("id_objet", objectInfos[0].id)
             form_data.append("type_objet", type_objet)
 
             axios.post("./php/delete/deleteObject.php", form_data)
-                .then(response => setDelObject(response.data))
+                .then(response => {
+                    let data = response.data
+                    setNewData(data)
+                    sendNewdata(data)
+                    if (data){
+                        popupObjectUnvisible()
+                    }
+                })
         }
     }
 
@@ -266,7 +273,7 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                     <div className={"btnModifPopUpUser"}>
                         <Button id={"btnEditPopUpUser"} onSmash={modifObjectAvailable} text={"Modifier"}
                                 bgColor={"#2882ff"}/>
-                        <Button id={"btnDeletePopUpUser"} onSmash={showDeleteDialog} text={"Supprimer l'utilisateur"}
+                        <Button id={"btnDeletePopUpUser"} onSmash={showDeleteDialog} text={"Supprimer l'objet"}
                                 bgColor={"red"}/>
                     </div>}
             </div>
@@ -278,10 +285,8 @@ function PopupObjectInfo({id_objet, type_objet, setPopupObjectVisible, positionY
                         Êtes-vous sûr ?
                     </p>
                     <menu>
-                        <Button id={"cancelBtn"} text={"Annuler"} bgColor={"#2882ff"} onSmash={deleteObject}
-                                value={false}/>
-                        <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"red"} onSmash={deleteObject}
-                                value={true}/>
+                        <Button id={"cancelBtn"} text={"Annuler"} bgColor={"#2882ff"} onSmash={deleteObject} value={false}/>
+                        <Button id={"confirmBtn"} text={"Confirmer"} bgColor={"red"} onSmash={deleteObject} value={true}/>
                     </menu>
                 </form>
             </dialog>
