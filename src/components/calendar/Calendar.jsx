@@ -54,54 +54,58 @@ function CalendarComponent({ objectInfo , objectType }) {
     }
 }
 
-  function handleEventResaSubmit(eventDateValue, eventTimeDebutValue, eventTimeFinValue) {
-    const eventStart = `${eventDateValue}T${eventTimeDebutValue}`;
-    const eventEnd = `${eventDateValue}T${eventTimeFinValue}`;
-    
-    const eventColor = listeCouleurEvent[Math.floor(Math.random() * listeCouleurEvent.length)];
-    const event_louer = "Louer par " + user.nom + " " + user.prenom; 
+function isEventOverlapping(start1, end1, start2, end2) {
+  return (new Date(start1) < new Date(end2) && new Date(end1) > new Date(start2));
+}
 
-    const isOverlapping = events.some(event => ( // Vérifie s'il y a un chevauchement avec un autre événement
-        (event.start < eventEnd && event.end > eventStart) ||
-        (event.start >= eventStart && event.start < eventEnd) ||
-        (event.end > eventStart && event.end <= eventEnd)
-    ));
 
-    if (isOverlapping) {
-        alert('L\'événement se chevauche avec un autre événement. Veuillez choisir une autre heure.');
-        return;
-    }
-    else if (eventStart === 'T' || eventEnd === 'T') {
-        alert('Veuillez remplir tous les champs');
-        return;
-    }
-    else if (eventStart >= eventEnd) {
-        alert('L\'heure de début doit être inférieure à l\'heure de fin');
-        return;
-    }
-    else if (eventStart === eventEnd) {
-        alert('L\'heure de début doit être différente de l\'heure de fin');
-        return;
-    }
-    else if (eventStart < eventDateValue + 'T07:59' || eventEnd > eventDateValue + 'T20:01') {
-        alert('Les réservations ne sont possibles qu\'entre 8h00 et 20h00');
-        return;
-    }
-    else{
+function handleEventResaSubmit(eventDateValue, eventTimeDebutValue, eventTimeFinValue) {
+  const eventStart = `${eventDateValue}T${eventTimeDebutValue}`;
+  const eventEnd = `${eventDateValue}T${eventTimeFinValue}`;
+
+  // Obtenez la date actuelle au format YYYY-MM-DD
+  const today = new Date().toISOString().split('T')[0];
+
+  // Vérifiez si la date de la réservation est avant aujourd'hui
+  if (eventDateValue < today) {
+      alert('Vous ne pouvez pas ajouter de réservation avant la date d\'aujourd\'hui.');
+      return;
+  }
+
+  const eventColor = listeCouleurEvent[Math.floor(Math.random() * listeCouleurEvent.length)];
+  const event_louer = "Louer par " + user.nom + " " + user.prenom; 
+
+  const isOverlapping = resas.some(event =>
+    isEventOverlapping(eventStart, eventEnd, event.start, event.end)
+  );
+
+  if (isOverlapping) {
+      alert('L\'événement se chevauche avec un autre événement. Veuillez choisir une autre heure.');
+      return;
+  } else if (eventStart === 'T' || eventEnd === 'T') {
+      alert('Veuillez remplir tous les champs');
+      return;
+  } else if (eventStart >= eventEnd) {
+      alert('L\'heure de début doit être inférieure à l\'heure de fin');
+      return;
+  } else if (eventStart === eventEnd) {
+      alert('L\'heure de début doit être différente de l\'heure de fin');
+      return;
+  } else if (eventStart < eventDateValue + 'T07:59' || eventEnd > eventDateValue + 'T20:01') {
+      alert('Les réservations ne sont possibles qu\'entre 8h00 et 20h00');
+      return;
+  } else {
 
       const formData = new FormData();
-
-      // Ajout des données à l'objet FormData
       formData.append('id_article', objectInfo.id);
       formData.append('title', event_louer);
       formData.append('start', eventStart);
       formData.append('end', eventEnd);
       formData.append('color', eventColor);
       formData.append('id_user', user.id);
-  
+
       let endpoint;
-  
-      // Déterminer le type d'objet et l'endpoint correspondant
+
       if (objectType === "Ateliers") {
           endpoint = "createResaAtelier.php";
       } else if (objectType === "Modeles") {
@@ -116,46 +120,45 @@ function CalendarComponent({ objectInfo , objectType }) {
       console.log("formData : ", formData);
       const response = axios.post(`./../../php/createResa/${endpoint}`, formData);
       console.log("Réservation mise à jour :", response.data);
-      setNewData(response.data)
-    }
+      setNewData(response.data);
+  }
+}
+
+function handleEventCourSubmit(eventDateValue, eventTimeDebutValue, eventTimeFinValue) {
+  const eventStart = `${eventDateValue}T${eventTimeDebutValue}`;
+  const eventEnd = `${eventDateValue}T${eventTimeFinValue}`;
+
+  // Obtenez la date actuelle au format YYYY-MM-DD
+  const today = new Date().toISOString().split('T')[0];
+
+  // Vérifiez si la date de la réservation est avant aujourd'hui
+  if (eventDateValue < today) {
+      alert('Vous ne pouvez pas bloquer un créneau avant la date d\'aujourd\'hui.');
+      return;
   }
 
+  const isOverlapping = resas.some(event =>
+    isEventOverlapping(eventStart, eventEnd, event.start, event.end)
+  );
 
-  function handleEventCourSubmit(eventDateValue, eventTimeDebutValue, eventTimeFinValue) {
-    const eventStart = `${eventDateValue}T${eventTimeDebutValue}`;
-    const eventEnd = `${eventDateValue}T${eventTimeFinValue}`;
-
-    const isOverlapping = events.some(event => ( // Vérifie s'il y a un chevauchement avec un autre événement
-      (event.start < eventEnd && event.end > eventStart) ||
-      (event.start >= eventStart && event.start < eventEnd) ||
-      (event.end > eventStart && event.end <= eventEnd)
-    ));
-
-    if (isOverlapping) {
-        alert('L\'événement se chevauche avec un autre événement. Veuillez choisir une autre heure.');
-        return;
-    }
-    else if (eventStart === 'T' || eventEnd === 'T') {
-        alert('Veuillez remplir tous les champs');
-        return;
-    }
-    else if (eventStart >= eventEnd) {
-        alert('L\'heure de début doit être inférieure à l\'heure de fin');
-        return;
-    }
-    else if (eventStart === eventEnd) {
-        alert('L\'heure de début doit être différente de l\'heure de fin');
-        return;
-    }
-    else if (eventStart < eventDateValue + 'T07:59' || eventEnd > eventDateValue + 'T20:01') {
-        alert('Les réservations ne sont possibles qu\'entre 8h00 et 20h00');
-        return;
-    }
-    else{
+  if (isOverlapping) {
+      alert('L\'événement se chevauche avec un autre événement. Veuillez choisir une autre heure.');
+      return;
+  } else if (eventStart === 'T' || eventEnd === 'T') {
+      alert('Veuillez remplir tous les champs');
+      return;
+  } else if (eventStart >= eventEnd) {
+      alert('L\'heure de début doit être inférieure à l\'heure de fin');
+      return;
+  } else if (eventStart === eventEnd) {
+      alert('L\'heure de début doit être différente de l\'heure de fin');
+      return;
+  } else if (eventStart < eventDateValue + 'T07:59' || eventEnd > eventDateValue + 'T20:01') {
+      alert('Les réservations ne sont possibles qu\'entre 8h00 et 20h00');
+      return;
+  } else {
 
       const formData = new FormData();
-
-      // Ajout des données à l'objet FormData
       formData.append('id_article', objectInfo.id);
       formData.append('start', eventStart);
       formData.append('end', eventEnd);
@@ -163,7 +166,6 @@ function CalendarComponent({ objectInfo , objectType }) {
 
       let endpoint;
 
-      // Déterminer le type d'objet et l'endpoint correspondant
       if (objectType === "Ateliers") {
           endpoint = "createCourAtelier.php";
       } else if (objectType === "Modeles") {
@@ -177,9 +179,10 @@ function CalendarComponent({ objectInfo , objectType }) {
 
       const response = axios.post(`./../../php/createCour/${endpoint}`, formData);
       console.log("Réservation mise à jour :", response.data);
-      setNewData(response.data)
-    }
+      setNewData(response.data);
   }
+}
+
 
 
   function handleEventClick(eventInfo) {
@@ -217,7 +220,7 @@ function CalendarComponent({ objectInfo , objectType }) {
   }
 
   async function handleEventDrop(eventDropInfo) {
-    console.log("Déplacement d'un événement :", eventDropInfo);
+
     const eventId = eventDropInfo.event._def.extendedProps.id_article;
     const id_object = eventDropInfo.event._def.publicId;
     
@@ -230,13 +233,13 @@ function CalendarComponent({ objectInfo , objectType }) {
     const formattedEventStart = eventStart.toISOString().slice(0, 19).replace('T', ' ');
     const formattedEventEnd = eventEnd.toISOString().slice(0, 19).replace('T', ' ');
 
-    console.log("eventStart : ", eventStart);
-    console.log("eventEnd : ", eventEnd);
-
-    console.log("eventDropInfo.event._def.publicId : ", eventDropInfo.event._def.publicId);
-    console.log("objectInfo.id : ", objectInfo.id);
-
     let endpoint;
+
+    const today = new Date().toISOString().split('T')[0];
+    if (eventStart < today) {
+        alert('Vous ne pouvez pas déplacer un événement avant la date d\'aujourd\'hui.');
+        return;
+    }
 
     // Déterminer le type d'objet et l'endpoint correspondant
     if (objectType === "Ateliers") {
