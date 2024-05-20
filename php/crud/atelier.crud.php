@@ -10,7 +10,7 @@ function deleteAtelier($conn, $id) {
     return $res;
 }
 function updateAtelier($conn, $id, $nom, $type) {
-    $sql = "UPDATE `Atelier` SET `id`='$id', `nom`='$nom', `type`='$type' WHERE `id` = $id";
+    $sql = "UPDATE `Atelier` SET `nom`='$nom', `type`='$type' WHERE `id` = $id";
     $res = mysqli_query($conn, $sql);
     return $res;
 }

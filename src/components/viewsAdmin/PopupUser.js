@@ -8,6 +8,7 @@ import Button from "../Button";
 /* css imports */
 import "../../css/cssViewsAdmin/PopUpUser.scss"
 import "../../css/cssViewsAdmin/popup.scss"
+import '../../css/cssViewsAdmin/dialog.scss'
 
 function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
     const [listResasArticles, setListResasArticles] = useState([])
@@ -34,9 +35,16 @@ function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
             axios.post("./php/list/listUserResas.php", form_data)
                 .then(response => {
                     let data = response.data
-                    setListResasArticles(data.articles)
-                    setListResasAteliers(data.ateliers)
-                    setListResasModeles(data.modeles)
+                    let articles = data.articles
+                    let ateliers = data.ateliers
+                    let modeles = data.modeles
+
+                    // setListResasArticles(articles.filter(reservation => isCurrentReservation(reservation)))
+                    // setListResasAteliers(ateliers.filter(reservation => isCurrentReservation(reservation)))
+                    // setListResasModeles(modeles.filter(reservation => isCurrentReservation(reservation)))
+                    setListResasArticles(articles)
+                    setListResasAteliers(ateliers)
+                    setListResasModeles(modeles)
                     setNewData(false)
                 })
         }
@@ -60,7 +68,25 @@ function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
         getUserInfo()
     }, [newData]);
 
+    const isCurrentReservation = (reservation) => {
+        const currentDate = new Date();
+        const reservationEndDate = new Date(reservation.end);
+        return reservationEndDate >= currentDate;
+    };
 
+    function cancelResa(e){
+        let idResa = e.target.id
+        let objecType = e.target.value
+
+        let form_data = new FormData()
+        form_data.append("id_resa", idResa)
+        form_data.append("type_objet", objecType)
+        axios.post("./php/delete/deleteResa.php", form_data)
+            .then(response => {
+                let data = response.data
+                setNewData(data)
+            })
+    }
     function MapResasArticles(){
         let res = <p>Aucune réservations</p>
         if (listResasArticles.length != 0) {
@@ -73,6 +99,7 @@ function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
                     <td>{resa.categorie}</td>
                     <td>{resa.categorie}</td>
                     <td>{resa.taille}</td>
+                    <td><Button id={resa.id} value={"Articles"} text={"Annuler"} bgColor={"#2882ff"}  onSmash={cancelResa} /></td>
                 </tr>
             );
             res =
@@ -105,6 +132,7 @@ function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
                     <td>{new Date(resa.start).toLocaleDateString()}</td>
                     <td>{new Date(resa.end).toLocaleDateString()}</td>
                     <td>{resa.type}</td>
+                    <td><Button id={resa.id} value={"Ateliers"} text={"Annuler"} bgColor={"#2882ff"}  onSmash={cancelResa} /></td>
                 </tr>
             );
             res =
@@ -137,6 +165,7 @@ function PopupUser({id, setShowPopUp, positionY, sendNewdata}) {
                     <td>{resa.genre}</td>
                     <td>{resa.age}</td>
                     <td>{resa.tarif_horaire}</td>
+                    <td><Button id={resa.id} value={"Modeles"} text={"Annuler"} bgColor={"#2882ff"}  onSmash={cancelResa} /></td>
                 </tr>
             );
             res =

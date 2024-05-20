@@ -24,7 +24,7 @@ function Connection({ setAdmin,  setIsConnect }){
         event.preventDefault()
         let form = event.currentTarget
 
-        if ((login.length >= 3 && login.length <= 10)){
+        if (!invalidLogin && !invalidMdp){
             let form_data = new FormData()
             form_data.append("login", login)
             form_data.append("mdp", mdp)
@@ -69,7 +69,7 @@ function Connection({ setAdmin,  setIsConnect }){
             <div className={"divForm"}>
                 <label htmlFor="mdp">Mot de passe :</label>
                 <input type="password" id="mdp" name="user_mdp" required={true} value={mdp} onBlur={showTextInvalidMdp} onChange={e => setMdp(e.target.value)}/>
-                {invalidMdp && <p className={"formError"}>Attention le mot de passe doit faire minimum 8 charactères !</p>}
+                {invalidMdp && <p className={"formError"}>Attention le mot de passe doit faire minimum 8 caractères !</p>}
             </div>
             {wrongLogin && <p className={"formError"}>Login inexistant</p>}
             {wrongMdp && <p className={"formError"}>Mauvais mot de passe</p>}
