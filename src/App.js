@@ -25,12 +25,12 @@ function App() {
     const [deconnection, setDeconnection] = useState(true)
 
     useEffect(() => { // Permet de garder la connexion activer lors d'un rechargement de la page
-        axios.get("./php/connection/isConnect.php")
+        axios.get("/info7/php/connection/isConnect.php")
             .then(response => {
                 setIsConnect(response.data)
             })
 
-        axios.get("./php/connection/isAdmin.php")
+        axios.get("/info7/php/connection/isAdmin.php")
             .then(response => {
                 setAdmin(response.data)
             })
