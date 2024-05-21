@@ -26,12 +26,13 @@ $gris : rgb(227, 227, 227);
         align-items: center;
 
         .profilMenu{
-          height: 100px;
+          height: fit-content;
           align-self: center;
           display: flex;
           flex-direction: column;
           justify-content: space-evenly;
           align-items: center;
+          gap: 20px;
           padding: 5%;
           border: 1px solid $gris;
           border-radius: 5px;

@@ -56,9 +56,6 @@ function App() {
                         <Route path={"info7/AdminViewObjects"} element={<ViewObjects isAdmin={admin}/>}/>
                         <Route path={"info7/AdminViewDemandesAnnulation"} element={<ViewDemandesAnnulation isAdmin={admin}/>}/>
                     </Routes>
-
-
-
                 </div>
             }
         </div>

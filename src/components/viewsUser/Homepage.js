@@ -24,7 +24,7 @@ function Homepage() {
     const [reservationIdToCancel, setReservationIdToCancel] = useState(null);
     const [reservationTypeToCancel, setReservationTypeToCancel] = useState(null);
 
-
+    console.log(showModifInfo)
     const toggleModifInfo = () => {
       setShowModifInfo(!showModifInfo);
     };
@@ -362,7 +362,7 @@ function Homepage() {
           <h2>Mes informations</h2>
             {<List/> != null && <List/>}
             <Button onSmash={toggleModifInfo} text={"Modifier mes informations"} bgColor={"#2882ff"} />
-            {showModifInfo && <ModifInfo setDataModified={setDataModified} />}
+            {showModifInfo && <ModifInfo setDataModified={setDataModified} setShowModifInfo={setShowModifInfo} />}
           </div>
         </div>
         {showAnnulationPopup && (

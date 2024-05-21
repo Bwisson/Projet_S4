@@ -214,9 +214,13 @@ function ViewObjects({isAdmin}) {
                         </table>
                         {articles == null && <i>Aucun articles</i>}
                     </div>
-                    {showPopupObject && <PopupObjectInfo id_objet={objectIdClicked} type_objet={objectClassClicked} setPopupObjectVisible={setShowPopupObject} positionY={popupPosition} sendNewdata={setNewData}/>}
-                </>:
-                <p>Désolé vous n'avez pas accès à cette page</p>
+                    {showPopupObject &&
+                        <>
+                            <div onClick={popupObjectUnvisible} className="foreground"></div>
+                            <PopupObjectInfo id_objet={objectIdClicked} type_objet={objectClassClicked} setPopupObjectVisible={setShowPopupObject} positionY={popupPosition} sendNewdata={setNewData}/>
+                        </>}
+                        </>:
+                        <p>Désolé vous n'avez pas accès à cette page</p>
             }
             </div>
     )
