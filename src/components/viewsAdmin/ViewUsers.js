@@ -13,7 +13,7 @@ import '../../css/cssViewsAdmin/tableAdmin.scss'
 
 
 
-function ViewUsers() {
+function ViewUsers({isAdmin}) {
     const [showPopupResas, setShowPopupResas] = useState(false)
     const [showPopupUser, setShowPopupUser] = useState(false)
     const [showAddUserForm, setShowAddUserForm] = useState(false)
@@ -70,28 +70,33 @@ function ViewUsers() {
 
     return (
         <div className="ViewUsers">
-            <table className={"adminTable"}>
-                <thead>
-                <tr>
-                    <th scope="col">Login</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Mail</th>
-                    <th scope="col">Réservations</th>
-                </tr>
-                </thead>
-                <tbody>
-                {<List/> != null && <List/> }
-                </tbody>
-            </table>
-            {showAddUserForm && <FormInscription setNewData={setNewData}/>}
-            <Button id={"btnAddUser"} onSmash={changeVisiblityForm} text={"+"} bgColor={"#2882ff"}/>
-            {<List/> == null && <i>Aucun utilisateurs</i>}
-            {showPopupResas &&
+            {isAdmin ?
                 <>
-                    <div onClick={hidePopUp} className="foreground"></div>
-                    <PopupUser id={idUserClicked} setShowPopUp={setShowPopupResas} positionY={popupPosition} sendNewdata={setNewData}/>
-                </>}
+                    <table className={"adminTable"}>
+                        <thead>
+                        <tr>
+                            <th scope="col">Login</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Mail</th>
+                            <th scope="col">Réservations</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {<List/> != null && <List/> }
+                        </tbody>
+                    </table>
+                    {showAddUserForm && <FormInscription setNewData={setNewData}/>}
+                    <Button id={"btnAddUser"} onSmash={changeVisiblityForm} text={"+"} bgColor={"#2882ff"}/>
+                    {<List/> == null && <i>Aucun utilisateurs</i>}
+                    {showPopupResas &&
+                        <>
+                            <div onClick={hidePopUp} className="foreground"></div>
+                            <PopupUser id={idUserClicked} setShowPopUp={setShowPopupResas} positionY={popupPosition} sendNewdata={setNewData}/>
+                        </>}
+                </> :
+                <p>Désolé vous n'avez pas accès à cette page</p>
+            }
         </div>
 
     )

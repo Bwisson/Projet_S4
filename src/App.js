@@ -51,10 +51,14 @@ function App() {
                         <Route path={"info7/"} element={<Homepage/>}/>
                         <Route path={"info7/ListObjects/:reservableObject"} element={<ListObjects/>}/>
                         <Route path={"info7/ListObjects/:reservableObject/:id"} element={<Object/>}/>
-                        <Route path={"info7/AdminViewUsers"} element={<ViewUsers/>}/>
-                        <Route path={"info7/AdminViewObjects"} element={<ViewObjects/>}/>
-                        <Route path={"info7/AdminViewDemandesAnnulation"} element={<ViewDemandesAnnulation/>}/>
+
+                        <Route path={"info7/AdminViewUsers"} element={<ViewUsers isAdmin={admin}/>}/>
+                        <Route path={"info7/AdminViewObjects"} element={<ViewObjects isAdmin={admin}/>}/>
+                        <Route path={"info7/AdminViewDemandesAnnulation"} element={<ViewDemandesAnnulation isAdmin={admin}/>}/>
                     </Routes>
+
+
+
                 </div>
             }
         </div>

@@ -13,7 +13,7 @@ import PopupObjectInfo from './PopupObjectInfo'
 import '../../css/cssViewsAdmin/ViewObjects.scss'
 import '../../css/cssViewsAdmin/tableAdmin.scss'
 
-function ViewObjects() {
+function ViewObjects({isAdmin}) {
     const [modeles, setModeles] = useState(null)
     const [ateliers, setAteliers] = useState(null)
     const [articles, setArticles] = useState(null)
@@ -149,71 +149,76 @@ function ViewObjects() {
 
     return (
         <div className="ViewObjects">
-            <div className="tableForm">
-                {showingFormAddModele && <CreateModele setNewData={setNewData} setShowingFormAddModele={setShowingFormAddModele}/>}
-                <table className={"adminTable adminTableObjects"}>
-                    <caption>
-                        Modèles <Button onSmash={showFormCreateModele} text={"+"} bgColor={"#2882ff"}/>
-                    </caption>
-                    <thead>
-                    <tr onClick={popupObjectVisible}>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Prénom</th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Âge</th>
-                        <th scope="col">Tarif horaire</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <ListModeles/>
-                    </tbody>
-                </table>
-            </div>
-            {modeles == null && <i>Aucun modèles</i>}
+            {isAdmin ?
+                <>
+                    <div className="tableForm">
+                        {showingFormAddModele && <CreateModele setNewData={setNewData} setShowingFormAddModele={setShowingFormAddModele}/>}
+                        <table className={"adminTable adminTableObjects"}>
+                            <caption>
+                                Modèles <Button onSmash={showFormCreateModele} text={"+"} bgColor={"#2882ff"}/>
+                            </caption>
+                            <thead>
+                            <tr onClick={popupObjectVisible}>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom</th>
+                                <th scope="col">Genre</th>
+                                <th scope="col">Âge</th>
+                                <th scope="col">Tarif horaire</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ListModeles/>
+                            </tbody>
+                        </table>
+                    </div>
+                    {modeles == null && <i>Aucun modèles</i>}
 
-            <div className="tableForm">
-                {showingFormAddAtelier && <CreateAtelier setNewData={setNewData} setShowingFormAddAtelier={setShowingFormAddAtelier}/>}
-                <table className={"adminTable adminTableObjects"}>
-                    <caption>
-                        Ateliers <Button onSmash={showFormCreateAtelier} text={"+"} bgColor={"#2882ff"}/>
+                    <div className="tableForm">
+                        {showingFormAddAtelier && <CreateAtelier setNewData={setNewData} setShowingFormAddAtelier={setShowingFormAddAtelier}/>}
+                        <table className={"adminTable adminTableObjects"}>
+                            <caption>
+                                Ateliers <Button onSmash={showFormCreateAtelier} text={"+"} bgColor={"#2882ff"}/>
 
-                    </caption>
-                    <thead>
-                    <tr onClick={popupObjectVisible}>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Type</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <ListAteliers/>
-                    </tbody>
-                </table>
-            </div>
-            {ateliers == null && <i>Aucun ateliers</i>}
+                            </caption>
+                            <thead>
+                            <tr onClick={popupObjectVisible}>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Type</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ListAteliers/>
+                            </tbody>
+                        </table>
+                    </div>
+                    {ateliers == null && <i>Aucun ateliers</i>}
 
-            <div className="tableForm">
-                {showingFormAddArticle && <CreateArticle setNewData={setNewData} setShowingFormAddArticle={setShowingFormAddArticle}/>}
-                <table className={"adminTable"}>
-                    <caption>
-                        Articles <Button onSmash={showFormCreateArticle} text={"+"} bgColor={"#2882ff"}/>
-                    </caption>
-                    <thead>
-                    <tr onClick={popupObjectVisible}>
-                        <th scope="col">Code barre</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Catégorie</th>
-                        <th scope="col">Couleur</th>
-                        <th scope="col">Taille</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <ListArticles/>
-                    </tbody>
-                </table>
-                {articles == null && <i>Aucun articles</i>}
+                    <div className="tableForm">
+                        {showingFormAddArticle && <CreateArticle setNewData={setNewData} setShowingFormAddArticle={setShowingFormAddArticle}/>}
+                        <table className={"adminTable"}>
+                            <caption>
+                                Articles <Button onSmash={showFormCreateArticle} text={"+"} bgColor={"#2882ff"}/>
+                            </caption>
+                            <thead>
+                            <tr onClick={popupObjectVisible}>
+                                <th scope="col">Code barre</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Catégorie</th>
+                                <th scope="col">Couleur</th>
+                                <th scope="col">Taille</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ListArticles/>
+                            </tbody>
+                        </table>
+                        {articles == null && <i>Aucun articles</i>}
+                    </div>
+                    {showPopupObject && <PopupObjectInfo id_objet={objectIdClicked} type_objet={objectClassClicked} setPopupObjectVisible={setShowPopupObject} positionY={popupPosition} sendNewdata={setNewData}/>}
+                </>:
+                <p>Désolé vous n'avez pas accès à cette page</p>
+            }
             </div>
-            {showPopupObject && <PopupObjectInfo id_objet={objectIdClicked} type_objet={objectClassClicked} setPopupObjectVisible={setShowPopupObject} positionY={popupPosition} sendNewdata={setNewData}/>}
-        </div>
     )
 }
 
