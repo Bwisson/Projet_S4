@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react"
 import axios from 'axios'
 import Button from '../Button.js'
 import PopUpHandleAnnulationResa from './PopUpHandleAnnulationResa.js';
-function ViewDemandesAnnulation() {
+
+function ViewDemandesAnnulation({isAdmin}) {
 
     const [demandesAnnulation, setDemandesAnnulation] = useState(null);
     const [showAnnulationPopup, setShowAnnulationPopup] = useState(false);
@@ -172,27 +173,33 @@ function ViewDemandesAnnulation() {
 
     return (
       <div className="ViewDemandesAnnulation">
-        <div className="tab">
-          <h3>Articles</h3>
-          {demandesAnnulation != null && renderArticlesList(demandesAnnulation.articles)}
-        </div>
+          {isAdmin ?
+            <>
+                <div className="tab">
+                    <h3>Articles</h3>
+                    {demandesAnnulation != null && renderArticlesList(demandesAnnulation.articles)}
+                </div>
 
-        <div className="tab">
-          <h3>Ateliers</h3>
-          {demandesAnnulation != null && renderAteliersList(demandesAnnulation.ateliers)}
-        </div>
+                <div className="tab">
+                    <h3>Ateliers</h3>
+                    {demandesAnnulation != null && renderAteliersList(demandesAnnulation.ateliers)}
+                </div>
 
-        <div className="tab">
-          <h3>Modeles</h3>
-          {demandesAnnulation != null && renderModelesList(demandesAnnulation.modeles)}
-        </div>
-        {showAnnulationPopup && (
-          <PopUpHandleAnnulationResa
-            handleType={handleType}
-            onCancel={handlePopUpCancel}
-            onConfirm={handlePopUpConfirm}
-          />
-        )}
+                <div className="tab">
+                    <h3>Modeles</h3>
+                    {demandesAnnulation != null && renderModelesList(demandesAnnulation.modeles)}
+                </div>
+                {showAnnulationPopup && (
+                    <PopUpHandleAnnulationResa
+                        handleType={handleType}
+                        onCancel={handlePopUpCancel}
+                        onConfirm={handlePopUpConfirm}
+                    />
+                )}
+            </>:
+            <p id={"txtNoAcces"}>Désolé vous n'avez pas accès à cette page</p>
+          }
+
       </div>
     );
 }

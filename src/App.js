@@ -25,12 +25,12 @@ function App() {
     const [deconnection, setDeconnection] = useState(true)
 
     useEffect(() => { // Permet de garder la connexion activer lors d'un rechargement de la page
-        axios.get("./php/connection/isConnect.php")
+        axios.get("/info7/php/connection/isConnect.php")
             .then(response => {
                 setIsConnect(response.data)
             })
 
-        axios.get("./php/connection/isAdmin.php")
+        axios.get("/info7/php/connection/isAdmin.php")
             .then(response => {
                 setAdmin(response.data)
             })
@@ -51,10 +51,14 @@ function App() {
                         <Route path={"info7/"} element={<Homepage/>}/>
                         <Route path={"info7/ListObjects/:reservableObject"} element={<ListObjects/>}/>
                         <Route path={"info7/ListObjects/:reservableObject/:id"} element={<Object/>}/>
-                        <Route path={"info7/AdminViewUsers"} element={<ViewUsers/>}/>
-                        <Route path={"info7/AdminViewObjects"} element={<ViewObjects/>}/>
-                        <Route path={"info7/AdminViewDemandesAnnulation"} element={<ViewDemandesAnnulation/>}/>
+
+                        <Route path={"info7/AdminViewUsers"} element={<ViewUsers isAdmin={admin}/>}/>
+                        <Route path={"info7/AdminViewObjects"} element={<ViewObjects isAdmin={admin}/>}/>
+                        <Route path={"info7/AdminViewDemandesAnnulation"} element={<ViewDemandesAnnulation isAdmin={admin}/>}/>
                     </Routes>
+
+
+
                 </div>
             }
         </div>
