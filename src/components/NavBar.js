@@ -17,19 +17,6 @@ function NavBar({ admin, setDeconnection }) {
         setProfilMenuVisible(!profilMenuVisible)
     }
 
-    const [nbDemandesAnnulation, setNbDemandesAnnulation] = useState(0)
-
-    useEffect(() => {
-        function getNbDemandesAnnulation() {
-            axios.get("./php/list/listDemandesAnnulation.php")
-            .then(response => {
-                const data = response.data
-                setNbDemandesAnnulation(Array.isArray(data) ? data.length : 0)
-            })
-        }
-        getNbDemandesAnnulation()
-    }, []);
-
     return (
         <div className="NavBar">
             <div className="contentNav">
@@ -57,7 +44,7 @@ function NavBar({ admin, setDeconnection }) {
                             <ul id={"adminLink"}>
                                 <li><Link to={"info7/AdminViewObjects"}>OBJETS</Link></li>
                                 <li><Link to={"info7/AdminViewUsers"}>UTILISATEURS</Link></li>
-                                <li><Link to={"info7/AdminViewDemandesAnnulation"}>DEMANDES D'ANNULATION ({nbDemandesAnnulation})</Link></li>
+                                <li><Link to={"info7/AdminViewDemandesAnnulation"}>DEMANDES D'ANNULATION</Link></li>
                             </ul>
                         </>}
                 </nav>
